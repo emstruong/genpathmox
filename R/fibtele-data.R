@@ -15,11 +15,13 @@
 #' \itemize{
 #' \item{\code{Image}}: Generic students perception of ICT schools: (internationally recognized, 
 #'      ranges of courses, leader in research).
-#' \item{\code{Qual.spec}}: Specific quality of achieved skills (technic or applied skills).
-#' \item{\code{Qual.gen}}: Generic quality of achieved skills (abilities in solving problem, communication skills).
-#' \item{\code{Value}}: Ihe advantage or profit that the student may draw from the school degree 
-#' (well paid job, motivated job, prospectives in improvement and promotion).
-#' \item{\code{Satis}}: Degree of students satisfaction about the schools and the actual work conditions.
+#' \item{\code{Qual.spec}}: Perception about the achieved quality on the specific skills in the school.
+#' \item{\code{Qual.gen}}: Perception about achieved quality on the  generic skills in 
+#' the school (abilities in solving problem, communication skills).
+#' \item{\code{Value}}: The advantage or profit that the alumni may draw from the school 
+#' degree (well paid job, motivated job, prospectives in improvement and promotion).
+#' \item{\code{Satis}}: Degree of alumni satisfaction about the formation in school respect to 
+#' their actual work conditions.
 #' }
 #'
 #' Manifest variables description
@@ -83,17 +85,23 @@ NULL
 #' @usage fibtelereg
 #' @format A data frame with 147 observations on the following 18 variables. The first ten variables 
 #' are segmentation variables. The rest of the variables refer to five variables 1) 
-#' \code{Image} = Image, 2) \code{Qual.spec} = Specific Quality, 3) \code{Qual.gen} = Generic Quality, 4) 
-#' \code{Value} = Value, 5) \code{Satis} = Satisfaction. 
+#' \code{Image} = Image, 2) \code{Exp.spec} = Specific Expectation, 3) \code{Exp.gen} = Generic Expectation,
+#' 4)\code{Qual.spec} = Specific Quality, 5) \code{Qual.gen} = Generic Quality, 6) \code{Value} = Value, 7) 
+#' \code{Satis} = Satisfaction. 
 #'  Variables description
 #' \itemize{
 #' \item{\code{Image}}: Generic students perception of ICT schools: (internationally recognized, 
 #'      ranges of courses, leader in research).
-#' \item{\code{Qual.spec}}: Specific quality of achieved skills (technic or applied skills).
-#' \item{\code{Qual.gen}}: Generic quality of achieved skills (abilities in solving problem, communication skills).
-#' \item{\code{Value}}: Ihe advantage or profit that the student may draw from the school degree 
-#' (well paid job, motivated job, prospectives in improvement and promotion).
-#' \item{\code{Satis}}: Degree of students satisfaction about the schools and the actual work conditions.
+#' \item{\code{Exp.spec}}: Specific Expectation on specific skills (technic or applied skills).
+#' \item{\code{Exp.gen}}: Generic Expectation on generic skills (abilities in problem solving, 
+#'  communication skills).
+#' \item{\code{Qual.spec}}: Perception about the achieved quality on the specific skills in the school.
+#' \item{\code{Qual.gen}}: Perception about achieved quality on the  generic skills in 
+#' the school (abilities in solving problem, communication skills).
+#' \item{\code{Value}}: The advantage or profit that the alumni may draw from the school 
+#' degree (well paid job, motivated job, prospectives in improvement and promotion).
+#' \item{\code{Satis}}: Degree of alumni satisfaction about the formation in school respect to 
+#' their actual work conditions.
 #' }
 #' 
 #' Segmentation Variables description 

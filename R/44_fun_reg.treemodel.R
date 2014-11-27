@@ -16,16 +16,17 @@
 #' for the output reults. when it is equal to \code{FALSE},the regression results are generated 
 #' for all nodes of the tree
 #' @param intercept if equal to \code{TRUE} also the intercept is considered in the estimation
+#' @param label is a boolean. tI is false for defect. If it is \code{TRUE}, label.nodes has to be fix. 
+#' @param label.nodes is a vector with the name of the nodes. It is null for defect. 
 #' @param \dots Further arguments passed on to \code{\link{reg.treemodel}}. 
 #' @return An object of class \code{"regtreemodel"}. Basically a list with the
 #' following results:
 #' @return \item{inner}{Matrix of the inner relationship between latent variables of the PLS-PM model}
 #' @return \item{method}{A string containing the used method ("lm" or "lad"}
 #' @return \item{coefficients}{Matrix coefficients for each terminal node}
-#' @return \item{d.estandard}{Matrix of estandard deviation of coefficients for each terminal node}
+#' @return \item{Std.}{Matrix of estandard deviation of coefficients for each terminal node}
 #' @return \item{pval.coef}{Matrix of p-value significance for each terminal node}
 #' @return \item{r2}{Matrix of r-squared coefficients for each terminal node}
-#' @return \item{test.dif}{results of test comparison}
 #'
 #' @author Giuseppe Lamberti
 #' 
@@ -34,7 +35,7 @@
 #' 
 #' @references Lamberti, G. (2014) \emph{Modeling with Heterogeneity.} PhD Dissertation. 
 #'
-#' @seealso \code{\link{pls.pathmox}},\code{\link{plot.xtree.pls}}
+#' @seealso \code{\link{pls.pathmox}}, \code{\link{plot.xtree.pls}}
 #' @export
 #' @examples
 #'  \dontrun{
@@ -43,10 +44,10 @@
 #' data(fibtelereg)
 #'
 #  #Identify the segmentation variables  
-#' segvar= datafib.reg[,2:11]
+#' segvar= fibtelereg[,2:11]
 #'
 #  #Select the variables
-#' data.fib=datafib.reg[,12:18]          
+#' data.fib= fibtelereg[,12:18]          
 #'
 #  #re-ordering those segmentation variables with ordinal scale
 #' segvar$Age 		= factor(segvar$Age, ordered=T)
@@ -59,14 +60,14 @@
 #'
 #  #Regression PATHMOX
 #' fib.reg.pathmox=reg.pathmox(Satisfact~.,data=data.fib,segvar,
-#' 			signif=0.05,deep=2,method="lm",size=0.15,df="mod1")
+#' 			signif=0.05,deep=2,method="lm",size=0.15)
 #'
 #' #terminal nodes comparison
 #' fib.node.comp=reg.treemodel(fib.reg.pathmox) 
 #'
 #'}
 		
-reg.treemodel 	<- function (xtree.reg,terminal=TRUE,intercept=FALSE,...)
+reg.treemodel 	<- function (xtree.reg,terminal=TRUE,intercept=FALSE,label=FALSE, label.nodes=NULL, ...)
 {
     if (class(xtree.reg) != "xtree.reg") 
         stop("Argument 'xtree.reg' must be an object of class 'xtree.reg'")
@@ -80,7 +81,7 @@ reg.treemodel 	<- function (xtree.reg,terminal=TRUE,intercept=FALSE,...)
 	if(terminal==FALSE) {elementos	=	xtree.reg$nodes}
 	
 	coefficients	=	NULL
-	d.estandard		=	NULL
+	d.standard		=	NULL
 	r2				=	NULL
 	pval.coef		=	NULL
 	
@@ -99,7 +100,7 @@ reg.treemodel 	<- function (xtree.reg,terminal=TRUE,intercept=FALSE,...)
 			
 			coefficients	=	round(cbind(coefficients,reg.node$coefficients),3)
 			pval.coef		=	round(cbind(pval.coef,coef(summary(reg.node))[,4]),3)
-			d.estandard		=	round(cbind(d.estandard,coef(summary(reg.node))[,2]),3)
+			d.standard		=	round(cbind(d.standard,coef(summary(reg.node))[,2]),3)
     		r2[i]			=	1-((sum((resp-reg.node$fitted.values)^2))/(sum((resp-mean(resp))^2)))
 		}
 		if(method=="lad")
@@ -120,19 +121,21 @@ reg.treemodel 	<- function (xtree.reg,terminal=TRUE,intercept=FALSE,...)
 			term.nodes <- which(MOX$Terminal == "yes") - 1
 			tn.labs <- paste("Node", MOX$Node[term.nodes + 1], sep = "_")
 			name.node=c("Root_Node", tn.labs)
+			if(label==TRUE){name.node= label.nodes} 
 		}
 		if(terminal==FALSE) 
 		{
 			term.nodes <- which(MOX$Depth> 0) - 1
 			tn.labs <- paste("Node", MOX$Node[term.nodes + 1], sep = "_")
 			name.node=c("Root_Node", tn.labs)
+			if(label==TRUE){name.node= label.nodes} 
 		}
-		colnames(coefficients)=colnames(d.estandard)=colnames(pval.coef)=names(r2)=name.node
+		colnames(coefficients)=colnames(d.standard)=colnames(pval.coef)=names(r2)=name.node
 		
-		res.p=list(method=method,coefficients=coefficients,d.estandard=d.estandard,pval.coef=pval.coef,r2=r2)
+		res.p=list(method=method,coefficients=coefficients,d.standard=d.standard,pval.coef=pval.coef,r2=r2)
 		
 		
-		res=list(method=method,coefficients=coefficients,d.estandard=d.estandard,pval.coef=pval.coef,r2=r2)
+		res=list(method=method,coefficients=coefficients, Std. =d.standard,pval.coef=pval.coef,r2=r2)
 	}
 	
 	if(method=="lad")
@@ -142,12 +145,14 @@ reg.treemodel 	<- function (xtree.reg,terminal=TRUE,intercept=FALSE,...)
 			term.nodes <- which(MOX$Terminal == "yes") - 1
 			tn.labs <- paste("Node", MOX$Node[term.nodes + 1], sep = "_")
 			name.node=c("Root_Node", tn.labs)
+			if(label==TRUE){name.node= label.nodes} 
 		}
 				if(terminal==FALSE) 
 		{
 			term.nodes <- which(MOX$Depth  > 0) - 1
 			tn.labs <- paste("Node", MOX$Node[term.nodes + 1], sep = "_")
 			name.node=c("Root_Node", tn.labs)
+			if(label==TRUE){name.node= label.nodes} 
 		}
 	
 		colnames(coefficients)=name.node

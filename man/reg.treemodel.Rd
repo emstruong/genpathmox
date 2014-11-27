@@ -3,7 +3,8 @@
 \alias{reg.treemodel}
 \title{Regression results of terminal nodes from the Pathmox Segmentation Trees}
 \usage{
-reg.treemodel(xtree.reg, terminal = TRUE, intercept = FALSE, ...)
+reg.treemodel(xtree.reg, terminal = TRUE, intercept = FALSE,
+  label = FALSE, label.nodes = NULL, ...)
 }
 \arguments{
 \item{xtree.reg}{An object of class \code{"xtree.reg"} returned by
@@ -14,6 +15,10 @@ for the output reults. when it is equal to \code{FALSE},the regression results a
 for all nodes of the tree}
 
 \item{intercept}{if equal to \code{TRUE} also the intercept is considered in the estimation}
+
+\item{label}{is a boolean. tI is false for defect. If it is \code{TRUE}, label.nodes has to be fix.}
+
+\item{label.nodes}{is a vector with the name of the nodes. It is null for defect.}
 
 \item{\dots}{Further arguments passed on to \code{\link{reg.treemodel}}.}
 }
@@ -27,13 +32,11 @@ following results:
 
 \item{coefficients}{Matrix coefficients for each terminal node}
 
-\item{d.estandard}{Matrix of estandard deviation of coefficients for each terminal node}
+\item{Std.}{Matrix of estandard deviation of coefficients for each terminal node}
 
 \item{pval.coef}{Matrix of p-value significance for each terminal node}
 
 \item{r2}{Matrix of r-squared coefficients for each terminal node}
-
-\item{test.dif}{results of test comparison}
 }
 \description{
 Calculates basic regression results for the terminal nodes of Pathmox Segmentation Trees: liner regression and LAD
@@ -49,9 +52,9 @@ The argument \code{xtree.reg} is an object of class \code{"xtree.reg"} returned 
 
 data(fibtelereg)
 
-segvar= datafib.reg[,2:11]
+segvar= fibtelereg[,2:11]
 
-data.fib=datafib.reg[,12:18]
+data.fib= fibtelereg[,12:18]
 
 segvar$Age 		= factor(segvar$Age, ordered=T)
 segvar$Salary 	= factor(segvar$Salary,
@@ -62,7 +65,7 @@ segvar$Grade 	= factor(segvar$Grade,
 		levels=c("<6.5note","6.5-7note","7-7.5note",">7.5note"), ordered=T)
 
 fib.reg.pathmox=reg.pathmox(Satisfact~.,data=data.fib,segvar,
-			signif=0.05,deep=2,method="lm",size=0.15,df="mod1")
+			signif=0.05,deep=2,method="lm",size=0.15)
 
 #terminal nodes comparison
 fib.node.comp=reg.treemodel(fib.reg.pathmox)
@@ -79,6 +82,6 @@ Partial Least Squares Path Modeling.} PhD Dissertation.
 Lamberti, G. (2014) \emph{Modeling with Heterogeneity.} PhD Dissertation.
 }
 \seealso{
-\code{\link{pls.pathmox}},\code{\link{plot.xtree.pls}}
+\code{\link{pls.pathmox}}, \code{\link{plot.xtree.pls}}
 }
 

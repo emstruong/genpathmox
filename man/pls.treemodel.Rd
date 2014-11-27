@@ -4,7 +4,7 @@
 \title{PLS-PM results of terminal nodes from the Pathmox Segmentation Trees}
 \usage{
 pls.treemodel(xpls, xtree, X = NULL, alpha = 0.05, terminal = TRUE,
-  scaled = FALSE, ...)
+  scaled = FALSE, label = FALSE, label.nodes = NULL, ...)
 }
 \arguments{
 \item{xpls}{An object of class \code{"plspm"} returned by \code{\link{plspm}}.}
@@ -21,7 +21,11 @@ pls.treemodel(xpls, xtree, X = NULL, alpha = 0.05, terminal = TRUE,
 for the output reults. when it is equal to \code{FALSE},the PLS-PM results are generated
 for all nodes of the tree}
 
-\item{scaled}{to stnadardize the latent variables or not}
+\item{scaled}{to standardize the latent variables or not}
+
+\item{label}{is a string. It is false for defect. If it is \code{TRUE}, label.nodes has to be fix.}
+
+\item{label.nodes}{is a vector with the name of the nodes. It is null for defect.}
 
 \item{\dots}{Further arguments passed on to \code{\link{pls.treemodel}}.}
 }
@@ -67,10 +71,10 @@ The argument \code{xtree} is an object of class \code{"xtree.pls"} returned by
 
  # define inner model matrix
  Image 			= rep(0,5)
-	Qual.spec		= rep(0,5)
-	Qual.gen			= rep(0,5)
-	Value			= c(1,1,1,0,0)
-	Satis			= c(1,1,1,1,0)
+	 Qual.spec		= rep(0,5)
+	 Qual.gen			= rep(0,5)
+	 Value			= c(1,1,1,0,0)
+	 Satis			= c(1,1,1,1,0)
  inner.fib <- rbind(Image,Qual.spec, Qual.gen, Value, Satis)
  colnames(inner.fib) <- rownames(inner.fib)
 
@@ -85,17 +89,17 @@ The argument \code{xtree} is an object of class \code{"xtree.pls"} returned by
  # re-ordering those segmentation variables with ordinal scale
   seg.fib= fibtele[,2:11]
 
-	seg.fib$Age = factor(seg.fib$Age, ordered=T)
-	seg.fib$Salary = factor(seg.fib$Salary,
+	 seg.fib$Age = factor(seg.fib$Age, ordered=T)
+	 seg.fib$Salary = factor(seg.fib$Salary,
 			levels=c("<18k","25k","35k","45k",">45k"), ordered=T)
-	seg.fib$Accgrade = factor(seg.fib$Accgrade,
+	 seg.fib$Accgrade = factor(seg.fib$Accgrade,
 			levels=c("accnote<7","7-8accnote","accnote>8"), ordered=T)
-	seg.fib$Grade = factor(seg.fib$Grade,
+	 seg.fib$Grade = factor(seg.fib$Grade,
 			levels=c("<6.5note","6.5-7note","7-7.5note",">7.5note"), ordered=T)
 
  # Pathmox Analysis
  fib.pathmox=pls.pathmox(pls.fib,seg.fib,signif=0.05,
-					deep=2,method="lm",size=0.2,n.node=20)
+					deep=2,size=0.2,n.node=20)
 
  fib.comp=pls.treemodel(pls.fib,fib.pathmox)
 

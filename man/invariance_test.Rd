@@ -76,10 +76,10 @@ The other parameters are the classical parameter of the fucntion \code{"plspm"}
 
  # define inner model matrix
  Image 			= rep(0,5)
-	Qual.spec		= rep(0,5)
-	Qual.gen			= rep(0,5)
-	Value			= c(1,1,1,0,0)
-	Satis			= c(1,1,1,1,0)
+	 Qual.spec	= rep(0,5)
+	 Qual.gen		= rep(0,5)
+	 Value			= c(1,1,1,0,0)
+	 Satis			= c(1,1,1,1,0)
  inner.fib <- rbind(Image,Qual.spec, Qual.gen, Value, Satis)
  colnames(inner.fib) <- rownames(inner.fib)
 
@@ -103,7 +103,7 @@ The other parameters are the classical parameter of the fucntion \code{"plspm"}
 		levels=c("<6.5note","6.5-7note","7-7.5note",">7.5note"), ordered=T)
 
  # Pathmox Analysis
- fib.pathmox=pls.pathmox(pls.fib,seg.fib,signif=0.05,deep=2,method="lm",size=0.2,n.node=20)
+ fib.pathmox=pls.pathmox(pls.fib,seg.fib,signif=0.05,deep=2,size=0.2,n.node=20)
 
  # Select the terminal nodes
  ls(fib.pathmox)
@@ -121,7 +121,5 @@ Giuseppe Lamberti, Tomas Aluja
 }
 \references{
 Lamberti, G. (2014) \emph{Modeling with Heterogeneity.} PhD Dissertation.
-
-\code{\link{pls.pathmox}},\code{\link{pls.treemodel}}
 }
 

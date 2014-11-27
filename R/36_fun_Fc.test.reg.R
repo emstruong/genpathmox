@@ -33,7 +33,7 @@ Fc.test.reg	<-	function(Y1,X1,var.f,var.p, method,...)
 		df1		=	(nrow(X1) - ncol(X1))                    
 	}	
 	
-	for (j in 2:k)
+	for (j in 1:k)
 	{
 		A		= X1	      
 		A[,j]	= as.matrix(A[,j]+A[,j+k])         
@@ -48,8 +48,8 @@ Fc.test.reg	<-	function(Y1,X1,var.f,var.p, method,...)
 	   		df0.c	= (nrow(X1.c)-ncol(X1.c))
             SSR0.c	= sum(abs(rq(Y1~X1.c-1,method="fn")$residuals))
 	    }     
-		Fc[j-1]	=	((SSR0.c-SSR1)/(df0.c-df1))/(SSR1/df1)             
-		pval.c[j-1]	=	pf(Fc[j-1],(df0.c-df1),df1,lower.tail=FALSE)     
+		Fc[j]	=	((SSR0.c-SSR1)/(df0.c-df1))/(SSR1/df1)             
+		pval.c[j]	=	pf(Fc[j],(df0.c-df1),df1,lower.tail=FALSE)     
 	}
 	names(Fc)<- var.f
 	names(pval.c)<- var.p

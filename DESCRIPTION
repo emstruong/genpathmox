@@ -1,6 +1,6 @@
 Package: genpathmox
 Title: Generalized PATHMOX Algorithm for PLS-PM, LS and LAD Regression
-Version: 0.1
+Version: 0.2
 Authors@R: "Giuseppe Lamberti <giuseppelamb@hotmail.com> [aut, cre]"
 Description: genpathmox provides a very interesting solution for handling
     segmentation variables in complex statistical methodology. It contains en
@@ -15,9 +15,9 @@ Description: genpathmox provides a very interesting solution for handling
 Depends: R (>= 3.1.1),plspm, quantreg,mice,diagram, methods
 License: GPL-3
 LazyData: true
-Packaged: 2014-10-30 14:37:42 UTC; giuseppelamberti
+Packaged: 2014-11-27 18:55:38 UTC; giuseppelamberti
 Author: "Giuseppe Lamberti" [aut, cre]
 Maintainer: "Giuseppe Lamberti" <giuseppelamb@hotmail.com>
 NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2014-10-30 19:35:26
+Date/Publication: 2014-11-27 20:55:35

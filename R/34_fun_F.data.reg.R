@@ -33,9 +33,15 @@ F.data.reg	<-	function(x,modtwo,...)
 	
 	for(i in 1: ncol(x)-1)
 	{
-		var.f[i]<- paste("f.",dimnames(x)[[2]][i+1],sep="")
-		var.p[i]<- paste("pv.",dimnames(x)[[2]][i+1],sep="")
+		var.f[i]<- paste(dimnames(x)[[2]][i+1],sep="")
+		var.p[i]<- paste(dimnames(x)[[2]][i+1],sep="")
 	}
+	var.f=c("Intercept",var.f)
+	var.p=c("Intercept",var.p)
+
+
 
 	list(Y0=Y0,X0=X0, Y1=Y1,X1=X1,var.f=var.f,var.p=var.p)
+
 }
+

@@ -29,7 +29,7 @@ mox.tree	<-	function(tree,...)
 			}
 			if(length(n@childs)==0)
 			{
-				type="least"
+				type="leaf"
 				terminal="yes"
 			}
 			if(n@father==0)

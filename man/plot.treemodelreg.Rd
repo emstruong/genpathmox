@@ -18,7 +18,7 @@ in \code{"names.nodes"}.}
 \item{names.nodes}{Optional vector of names for each the terminal node (must be a
 vector of length equal to the number of terminal nodes).}
 
-\item{eti}{t is string string. If it is TRUE the labal of each coefficients for all the terminal nodes
+\item{eti}{is string. If it is TRUE the label of each coefficients for all the terminal nodes
 must be  specify in  \code{"lab.vec"}. If it is false the labels are defined by the programe.}
 
 \item{lab.vec}{Optional vector of names for each coefficient of the terminal nodes (must be a
@@ -56,9 +56,9 @@ root node.
 
 data(fibtelereg)
 
-segvar= datafib.reg[,2:11]
+segvar= fibtelereg[,2:11]
 
-data.fib=datafib.reg[,12:18]
+data.fib=fibtelereg[,12:18]
 
 segvar$Age 		= factor(segvar$Age, ordered=T)
 segvar$Salary 	= factor(segvar$Salary,
@@ -69,7 +69,7 @@ segvar$Grade 	= factor(segvar$Grade,
 	levels=c("<6.5note","6.5-7note","7-7.5note",">7.5note"), ordered=T)
 
 fib.reg.pathmox=reg.pathmox(Satisfact~.,data=data.fib,segvar,
-	signif=0.05,deep=2,method="lm",size=0.15,df="mod1")
+	signif=0.05,deep=2,method="lm",size=0.15)
 
 #terminal nodes comparison
 fib.node.comp=reg.treemodel(fib.reg.pathmox)

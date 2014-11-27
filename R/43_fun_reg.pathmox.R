@@ -71,7 +71,6 @@
 #' Partial Least Squares Path Modeling.} PhD Dissertation. 
 #'
 #'
-#' \code{\link{pls.pathmox}}.
 #' @export
 #' @examples
 #'
@@ -81,10 +80,10 @@
 #' data(fibtelereg)
 #'
 #  #Identify the segmentation variables  
-#' segvar= datafib.reg[,2:11]
+#' segvar= fibtelereg[,2:11]
 #'
 #  #Select the variables
-#' data.fib=datafib.reg[,12:18]          
+#' data.fib=fibtelereg[,12:18]          
 #'
 #  #re-ordering those segmentation variables with ordinal scale
 #' segvar$Age 		= factor(segvar$Age, ordered=T)
@@ -97,7 +96,7 @@
 #'
 #  #Regression PATHMOX
 #' fib.reg.pathmox=reg.pathmox(Satisfact~.,data=data.fib,segvar,
-#'		signif=0.05,deep=2,method="lm",size=0.15,df="mod1")
+#'		signif=0.05,deep=2,method="lm",size=0.15)
 #'
 #'  
 #'

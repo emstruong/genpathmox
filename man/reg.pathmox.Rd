@@ -88,9 +88,9 @@ of elements inside a node).
 
 data(fibtelereg)
 
-segvar= datafib.reg[,2:11]
+segvar= fibtelereg[,2:11]
 
-data.fib=datafib.reg[,12:18]
+data.fib=fibtelereg[,12:18]
 
 segvar$Age 		= factor(segvar$Age, ordered=T)
 segvar$Salary 	= factor(segvar$Salary,
@@ -101,7 +101,7 @@ segvar$Grade 	= factor(segvar$Grade,
 		levels=c("<6.5note","6.5-7note","7-7.5note",">7.5note"), ordered=T)
 
 fib.reg.pathmox=reg.pathmox(Satisfact~.,data=data.fib,segvar,
-		signif=0.05,deep=2,method="lm",size=0.15,df="mod1")
+		signif=0.05,deep=2,method="lm",size=0.15)
 
 
 
@@ -115,8 +115,5 @@ Lamberti, G. (2014) \emph{Modeling with Heterogeneity.} PhD Dissertation.
 
 Sanchez, G. (2009) \emph{PATHMOX Approach: Segmentation Trees in
 Partial Least Squares Path Modeling.} PhD Dissertation.
-
-
-\code{\link{pls.pathmox}}.
 }
 

@@ -12,11 +12,13 @@ The rest of the variables refer to five latent concepts: 1) \code{Image}=Image, 
 \itemize{
 \item{\code{Image}}: Generic students perception of ICT schools: (internationally recognized,
      ranges of courses, leader in research).
-\item{\code{Qual.spec}}: Specific quality of achieved skills (technic or applied skills).
-\item{\code{Qual.gen}}: Generic quality of achieved skills (abilities in solving problem, communication skills).
-\item{\code{Value}}: Ihe advantage or profit that the student may draw from the school degree
-(well paid job, motivated job, prospectives in improvement and promotion).
-\item{\code{Satis}}: Degree of students satisfaction about the schools and the actual work conditions.
+\item{\code{Qual.spec}}: Perception about the achieved quality on the specific skills in the school.
+\item{\code{Qual.gen}}: Perception about achieved quality on the  generic skills in
+the school (abilities in solving problem, communication skills).
+\item{\code{Value}}: The advantage or profit that the alumni may draw from the school
+degree (well paid job, motivated job, prospectives in improvement and promotion).
+\item{\code{Satis}}: Degree of alumni satisfaction about the formation in school respect to
+their actual work conditions.
 }
 
 Manifest variables description

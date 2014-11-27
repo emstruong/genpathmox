@@ -52,8 +52,16 @@ invariance	<-	function(x,nodes,inner,outer,mode,scheme,scaling,scaled)
 		block.node	=	NULL
 		
 		for(i in 1:ncol(inner.node)){lat.node = rbind(lat.node,as.matrix(latent.node[,i]))}
-		for (k in 1:lvs) {block.node[[length(block.node)+1]] = as.matrix(cbind(1,x.node[, outer.node[[k]]]))}
-	 	
+		
+		if(scaled==TRUE)
+		{
+			for (k in 1:lvs) {block.node[[length(block.node)+1]] = as.matrix(cbind(1,scale(x.node[, outer.node[[k]]])))}
+		}
+		if(scaled==FALSE){
+		for (k in 1:lvs) 
+		{
+			block.node[[length(block.node)+1]] = as.matrix(cbind(1,x.node[, outer.node[[k]]]))}
+		} 	
  	
 	 	block.h0 = rbind(block.h0,blockdiag(block.node)) 	
 	 	
