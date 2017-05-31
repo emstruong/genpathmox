@@ -4,7 +4,7 @@
 #' @param x list of matrix used to build the Bart matrix
 #' @param \dots Further arguments passed on to \code{\link{blockdiag}}.
 #' @return Bart matrix
-#' @import diagram methods mice plspm quantreg
+#' @import stats graphics grDevices utils diagram methods mice plspm quantreg 
 #' @keywords internal
 #' @export
 

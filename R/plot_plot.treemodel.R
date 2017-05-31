@@ -1,51 +1,63 @@
 
-#'@title Comparative plot between nodes from the Pathmox Segmentation Trees: PLS-PM
+#' @title Comparative plot between nodes from the Pathmox Segmentation Trees: PLS-PM
 #'
-#'@description
-#'Plot method for objects of class \code{"treemodel"}. Barplots of path
-#'coefficients of terminal nodes with respect to those of the global (root)
-#'model
+#' @description
+#' Plot method for objects of class \code{"treemodel"}. Barplots of path
+#' coefficients of terminal nodes with respect to those of the global (root)
+#' model
 #'
-#'@details
-#'This function aims to visualize the comparison between path coefficients of
-#'the terminal nodes against the path coefficients of the global model in the
-#'root node. \cr When \code{comp.by="nodes"} a graphic window is displayed for
-#'each endogenous latent variable of the PLS model, and barplots of nodes are
-#'shown. \cr When \code{comp.by="latents"} a graphic window is displayed for
-#'each endogenous relationship of the PLS model, and barplots of independent
-#'latent variables are shown.
+#' @details
+#' This function aims to visualize the comparison between path coefficients of
+#' the terminal nodes against the path coefficients of the global model in the
+#' root node. \cr When \code{comp.by="nodes"} a graphic window is displayed for
+#' each endogenous latent variable of the PLS model, and barplots of nodes are
+#' shown. \cr When \code{comp.by="latents"} a graphic window is displayed for
+#' each endogenous relationship of the PLS model, and barplots of independent
+#' latent variables are shown.
 #'
-#'@param x An object of class \code{"treemodel"} returned by
-#'\code{\link{pls.treemodel}}.
-#'@param comp.by One of "nodes" or "latents". This argument indicates the type
-#'of barplots comparison.
-#'@param nodes.names Optional vector of names for the terminal nodes (must be a
-#'vector of length equal to the number of terminal nodes).
-#'@param ordered A logical value indicating whether the barplots are shown in
-#'increasing ordered.
-#'@param decreasing A logical value indicating if the sort order should be
-#'increasing or decreasing.
-#'@param color Optional vector of colors for the bars. When \code{color=NULL}
-#'rainbow colors are used.
-#'@param show.box A logical value indicating whether a box is drawn around each
-#'barplot.
-#'@param border The color to be used for the border of the bars. Use
-#'\code{border=NA} to omit borders.
-#'@param cex.names Expansion factor for axis names (bar labels).
-#'@param cex.axis Expansion factor for numeric axis labels.
-#'@param short.labs Logical value indicating if the labels of the barplots
-#'should be abbreviated (\code{TRUE} by default).
-#'@param short.min Integer number indicating the minimum length of the
-#'abbreviations for the labels. Only used when \code{short.labs=TRUE}.
-#'@param cex.main Allows to fix the size of the main. Equal to 1 to default 
+#' @param x An object of class \code{"treemodel"} returned by
+#' \code{\link{pls.treemodel}}.
+#' @param comp.by One of "nodes" or "latents". This argument indicates the type
+#' of barplots comparison.
+#' @param nodes.names Optional vector of names for the terminal nodes (must be a
+#' vector of length equal to the number of terminal nodes).
+#' @param ordered A logical value indicating whether the barplots are shown in
+#' increasing ordered.
+#' @param decreasing A logical value indicating if the sort order should be
+#' increasing or decreasing.
+#' @param color Optional vector of colors for the bars. When \code{color=NULL}
+#' rainbow colors are used.
+#' @param show.box A logical value indicating whether a box is drawn around each
+#' barplot.
+#' @param border The color to be used for the border of the bars. Use
+#' \code{border=NA} to omit borders.
+#' @param cex.names Expansion factor for axis names (bar labels).
+#' @param cex.axis Expansion factor for numeric axis labels.
+#' @param short.labs Logical value indicating if the labels of the barplots
+#' should be abbreviated (\code{TRUE} by default).
+#' @param short.min Integer number indicating the minimum length of the
+#' abbreviations for the labels. Only used when \code{short.labs=TRUE}.
+#' @param cex.main Allows to fix the size of the main. Equal to 1 to default 
 #' @param \dots Further arguments are ignored.
 #'
 #' @author Giuseppe Lamberti
-#' 
+#'
+#' @references Lamberti, G. et al. (2016) \emph{The Pathmox approach for PLS path modeling segmentation}. 
+#' Applied Stochastic Models in Business and Industry; doi: 10.1002/asmb.2168; 
+#'
+#' @references Aluja, T., Lamberti, G., Sanchez, G. (2013). Extending the PATHMOX approach 
+#' to detect which constructs differentiate segments. In   H., Abdi,  W. W., Chin,  V., Esposito Vinzi, 
+#' G., Russolillo,  and   L., Trinchera (Eds.), Book title: New Perspectives in Partial Least 
+#' Squares and Related Methods (pp.269-280). Springer.
+#'               
+#' @references Lamberti, G. (2014) \emph{Modeling with Heterogeneity.} PhD Dissertation.
+#'
 #' @references Sanchez, G. (2009) \emph{PATHMOX Approach: Segmentation Trees in
 #' Partial Least Squares Path Modeling.} PhD Dissertation. 
 #' 
-#' @references Lamberti, G. (2014) \emph{Modeling with Heterogeneity.} PhD Dissertation. 
+#' @references Tenenhaus M., Esposito Vinzi V., Chatelin Y.M., and Lauro C.
+#' (2005) PLS path modeling. \emph{Computational Statistics & Data Analysis},
+#' \bold{48}, pp. 159-205.
 #'
 #' @method plot treemodel
 #' @S3method plot treemodel
@@ -54,49 +66,114 @@
 #'  \dontrun{
 #'  ## example of PLS-PM in alumni satisfaction
 #'  
-#'  data(fibtele)
-#'  
 #'  # select manifest variables
 #'  data.fib <-fibtele[,12:35]
 #'  
 #'  # define inner model matrix
-#'  Image 			= rep(0,5)
-#'	 Qual.spec	= rep(0,5)
-#'	 Qual.gen		= rep(0,5)
-#'	 Value			= c(1,1,1,0,0)
-#'	 Satis			= c(1,1,1,1,0)
-#'  inner.fib <- rbind(Image,Qual.spec, Qual.gen, Value, Satis)
-#'  colnames(inner.fib) <- rownames(inner.fib)
+#'  Image     	= rep(0,5)
+#'	Qual.spec	  = rep(0,5)
+#'	Qual.gen		= rep(0,5)
+#'	Value			  = c(1,1,1,0,0)
+#'	Satis			  = c(1,1,1,1,0)
+#'  inner.fib = rbind(Image,Qual.spec, Qual.gen, Value, Satis)
+#'  colnames(inner.fib) = rownames(inner.fib)
 #'  
 #'  # blocks of indicators (outer model)
-#'  outer.fib <- list(1:8,9:11,12:16,17:20,21:24)
+#'  outer.fib  = list(1:8,9:11,12:16,17:20,21:24)
 #'  modes.fib  = rep("A", 5)
 #'  
 #'  # apply plspm
-#'  pls.fib <- plspm(data.fib, inner.fib, outer.fib, modes.fib)
+#'  pls.fib = plspm(data.fib, inner.fib, outer.fib, modes.fib)
 #'                  
-#'
 #'  # re-ordering those segmentation variables with ordinal scale 
 #'   seg.fib= fibtele[,2:11]
 #'  
 #'	 seg.fib$Age = factor(seg.fib$Age, ordered=T)
 #'	 seg.fib$Salary = factor(seg.fib$Salary, 
-#'		levels=c("<18k","25k","35k","45k",">45k"), ordered=T)
+#'			levels=c("<18k","25k","35k","45k",">45k"), ordered=T)
 #'	 seg.fib$Accgrade = factor(seg.fib$Accgrade, 
-#'		levels=c("accnote<7","7-8accnote","accnote>8"), ordered=T)
+#'			levels=c("accnote<7","7-8accnote","accnote>8"), ordered=T)
 #'	 seg.fib$Grade = factor(seg.fib$Grade, 
-#'		levels=c("<6.5note","6.5-7note","7-7.5note",">7.5note"), ordered=T)
+#'	    levels=c("<6.5note","6.5-7note","7-7.5note",">7.5note"), ordered=T)
 #'
 #'  # Pathmox Analysis
 #'  fib.pathmox=pls.pathmox(pls.fib,seg.fib,signif=0.05,
 #'				deep=2,size=0.2,n.node=20)
 #' 
 #'  fib.comp=pls.treemodel(pls.fib,fib.pathmox)
+#'  
 #'  plot(fib.comp)
 #'  
 #'  }
 #'
-
+#'  library(genpathmox)
+#'  data(fibtele)
+#'  
+#'  # select manifest variables
+#'  data.fib <-fibtele[1:50,12:35]
+#'  
+#'  # define inner model matrix
+#'  Image       = rep(0,5)
+#'	Qual.spec		= rep(0,5)
+#'	Qual.gen		= rep(0,5)
+#'	Value			  = c(1,1,1,0,0)
+#'	Satis			  = c(1,1,1,1,0)
+#'  inner.fib = rbind(Image,Qual.spec, Qual.gen, Value, Satis)
+#'  colnames(inner.fib) = rownames(inner.fib)
+#' 
+#'  # blocks of indicators (outer model)
+#'  outer.fib = list(1:8,9:11,12:16,17:20,21:24)
+#'  modes.fib = rep("A", 5)
+#'  
+#'  # apply plspm
+#'  pls.fib = plspm(data.fib, inner.fib, outer.fib, modes.fib)
+#'                  
+#'
+#'  # re-ordering those segmentation variables with ordinal scale 
+#'  seg.fib = fibtele[1:50,c(2,7)]
+#'	seg.fib$Salary = factor(seg.fib$Salary, 
+#'			levels=c("<18k","25k","35k","45k",">45k"), ordered=TRUE)
+#'
+#'  # Pathmox Analysis
+#' fib.pathmox = pls.pathmox(pls.fib,seg.fib,signif=0.5,
+#'					deep=1,size=0.01,n.node=10)
+#'
+#' fib.comp = pls.treemodel(pls.fib,fib.pathmox)
+#' plot(fib.comp)
+#'  library(genpathmox)
+#'  data(fibtele)
+#'  
+#'  # select manifest variables
+#'  data.fib <-fibtele[1:50,12:35]
+#'  
+#'  # define inner model matrix
+#'  Image       = rep(0,5)
+#'  Qual.spec  	= rep(0,5)
+#'	Qual.gen		= rep(0,5)
+#'	Value			  = c(1,1,1,0,0)
+#'	Satis			  = c(1,1,1,1,0)
+#'  inner.fib = rbind(Image,Qual.spec, Qual.gen, Value, Satis)
+#'  colnames(inner.fib) = rownames(inner.fib)
+#' 
+#'  # blocks of indicators (outer model)
+#'  outer.fib = list(1:8,9:11,12:16,17:20,21:24)
+#'  modes.fib = rep("A", 5)
+#'  
+#'  # apply plspm
+#'  pls.fib = plspm(data.fib, inner.fib, outer.fib, modes.fib)
+#'                  
+#'
+#'  # re-ordering those segmentation variables with ordinal scale 
+#'  seg.fib = fibtele[1:50,c(2,7)]
+#'	seg.fib$Salary = factor(seg.fib$Salary, 
+#'			levels=c("<18k","25k","35k","45k",">45k"), ordered=TRUE)
+#'
+#'  # Pathmox Analysis
+#' fib.pathmox = pls.pathmox(pls.fib,seg.fib,signif=0.5,
+#'					deep=1,size=0.01,n.node=10)
+#'
+#' plot(fib.pathmox)
+#'
 plot.treemodel	<- function (x, comp.by = "nodes", nodes.names = NULL, ordered = TRUE, 
     decreasing = FALSE, color = NULL, show.box = TRUE, border = NA, 
     cex.names = 0.75, cex.axis = 0.75, short.labs = TRUE, short.min = NULL,cex.main=1, 

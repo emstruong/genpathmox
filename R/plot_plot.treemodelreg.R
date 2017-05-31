@@ -1,23 +1,22 @@
-
-#'@title Comparative plot between nodes from or the Pathmox Segmentation Trees: linear and LAD regression
+#' @title Comparative plot between nodes from or the Pathmox Segmentation Trees: linear and LAD regression
 #'
-#'@description
-#'Plot method for objects of class \code{"treemodelreg"}. Barplots of path
-#'coefficients of terminal nodes with respect to those of the global (root)
-#'model
+#' @description
+#' Plot method for objects of class \code{"treemodelreg"}. Barplots of path
+#' coefficients of terminal nodes with respect to those of the global (root)
+#' model
 #'
-#'@details
-#'This function aims to visualize the comparison between coefficients of
-#'the terminal nodes against the coefficients coefficients of the global model in the
-#'root node. 
+#' @details
+#' This function aims to visualize the comparison between coefficients of
+#' the terminal nodes against the coefficients coefficients of the global model in the
+#' root node. 
 #'
-#'@param x An object of class \code{"treemodelreg"} returned by
-#'\code{\link{reg.treemodel}}.
-#'@param main.node It is string. If iequl to TRUE you have to inidcate the main of each barplot 
-#'in \code{"names.nodes"}.
+#' @param x An object of class \code{"treemodelreg"} returned by
+#' \code{\link{reg.treemodel}}.
+#' @param main.node It is string. If iequl to TRUE you have to inidcate the main of each barplot 
+#' in \code{"names.nodes"}.
 #'
-#'@param names.nodes Optional vector of names for each the terminal node (must be a
-#'vector of length equal to the number of terminal nodes).
+#' @param names.nodes Optional vector of names for each the terminal node (must be a
+#' vector of length equal to the number of terminal nodes).
 #'
 #' @param  eti  is string. If it is TRUE the label of each coefficients for all the terminal nodes 
 #' must be  specify in  \code{"lab.vec"}. If it is false the labels are defined by the programe. 
@@ -36,24 +35,28 @@
 #'
 #' @author Giuseppe Lamberti
 #' 
-#' @references Sanchez, G. (2009) \emph{PATHMOX Approach: Segmentation Trees in
-#' Partial Least Squares Path Modeling.} PhD Dissertation. 
+#' @references Aluja, T. Lamberti, G. Sanchez, G. (2013). Modeling with heterogeneity. 
+#' Meetings of Italian Statistical Society, Advances in Latent Variables - Methods, 
+#' Models and Applications. Brescia.
 #' 
 #' @references Lamberti, G. (2014) \emph{Modeling with Heterogeneity.} PhD Dissertation. 
+#' 
+#' @references Sanchez, G. (2009) \emph{PATHMOX Approach: Segmentation Trees in
+#' Partial Least Squares Path Modeling.} PhD Dissertation. 
 #'
 #' @method plot treemodelreg
 #' @S3method plot treemodelreg
 #'@examples
 #'  \dontrun{
-#' #example of LM in alumni satisfaction
+#' ##example of LM in alumni satisfaction
 #'  
 #' data(fibtelereg)
 #'
-#  #Identify the segmentation variables  
-#' segvar= fibtelereg[,2:11]
+#  #identify the segmentation variables  
+#' segvar = fibtelereg[,2:11]
 #'
-#  #Select the variables
-#' data.fib=fibtelereg[,12:18]          
+#' #select the variables
+#' data.fib = fibtelereg[,12:18]          
 #'
 #  #re-ordering those segmentation variables with ordinal scale
 #' segvar$Age 		= factor(segvar$Age, ordered=T)
@@ -64,20 +67,35 @@
 #' segvar$Grade 	= factor(segvar$Grade, 
 #'	levels=c("<6.5note","6.5-7note","7-7.5note",">7.5note"), ordered=T)
 #'
-#  #Regression PATHMOX
-#' fib.reg.pathmox=reg.pathmox(Satisfact~.,data=data.fib,segvar,
+#' #regression PATHMOX
+#' fib.reg.pathmox = reg.pathmox(Satisfact~.,data=data.fib,segvar,
 #'	signif=0.05,deep=2,method="lm",size=0.15)
 #'
 #' #terminal nodes comparison
-#' fib.node.comp=reg.treemodel(fib.reg.pathmox) 
+#' fib.node.comp = reg.treemodel(fib.reg.pathmox) 
 #' 
-#  #Drawing the bar-plots
+#'  #Drawing the bar-plots
 #' plot(fib.node.comp)
 #'
 #'
 #'}
-
-
+#'
+#' data(fibtelereg)
+#'
+#' #identify the segmentation variables  
+#' segvar= fibtelereg[1:50,3:4]
+#'
+#' #select the variables
+#' data.fib=fibtelereg[1:50,12:18]
+#'           
+#  rRegression PATHMOX
+#' fib.reg.pathmox=reg.pathmox(Satisfact~.,data=data.fib,segvar,
+#'		signif=0.05,deep=1,method="lm",size=0.15)
+#'
+#' fib.node.comp=reg.treemodel(fib.reg.pathmox) 
+#' 
+#' plot(fib.node.comp)
+#'
 plot.treemodelreg	<- function (x,main.node=FALSE,names.nodes = NULL,eti=FALSE,lab.vec=NULL,short.min = NULL,cex.names=1,cex.axis=1.2,cex.main=1,lim=c(-0.5,0.5),short.labs = TRUE,...) 
 {	
 	if (class(x) != "treemodelreg") 

@@ -52,13 +52,14 @@ root node.
 }
 \examples{
 \dontrun{
-#example of LM in alumni satisfaction
+##example of LM in alumni satisfaction
 
 data(fibtelereg)
 
-segvar= fibtelereg[,2:11]
+segvar = fibtelereg[,2:11]
 
-data.fib=fibtelereg[,12:18]
+#select the variables
+data.fib = fibtelereg[,12:18]
 
 segvar$Age 		= factor(segvar$Age, ordered=T)
 segvar$Salary 	= factor(segvar$Salary,
@@ -68,24 +69,45 @@ segvar$Accgrade = factor(segvar$Accgrade,
 segvar$Grade 	= factor(segvar$Grade,
 	levels=c("<6.5note","6.5-7note","7-7.5note",">7.5note"), ordered=T)
 
-fib.reg.pathmox=reg.pathmox(Satisfact~.,data=data.fib,segvar,
+#regression PATHMOX
+fib.reg.pathmox = reg.pathmox(Satisfact~.,data=data.fib,segvar,
 	signif=0.05,deep=2,method="lm",size=0.15)
 
 #terminal nodes comparison
-fib.node.comp=reg.treemodel(fib.reg.pathmox)
+fib.node.comp = reg.treemodel(fib.reg.pathmox)
 
+ #Drawing the bar-plots
 plot(fib.node.comp)
 
 
 }
+
+data(fibtelereg)
+
+#identify the segmentation variables
+segvar= fibtelereg[1:50,3:4]
+
+#select the variables
+data.fib=fibtelereg[1:50,12:18]
+
+fib.reg.pathmox=reg.pathmox(Satisfact~.,data=data.fib,segvar,
+		signif=0.05,deep=1,method="lm",size=0.15)
+
+fib.node.comp=reg.treemodel(fib.reg.pathmox)
+
+plot(fib.node.comp)
 }
 \author{
 Giuseppe Lamberti
 }
 \references{
-Sanchez, G. (2009) \emph{PATHMOX Approach: Segmentation Trees in
-Partial Least Squares Path Modeling.} PhD Dissertation.
+Aluja, T. Lamberti, G. Sanchez, G. (2013). Modeling with heterogeneity.
+Meetings of Italian Statistical Society, Advances in Latent Variables - Methods,
+Models and Applications. Brescia.
 
 Lamberti, G. (2014) \emph{Modeling with Heterogeneity.} PhD Dissertation.
+
+Sanchez, G. (2009) \emph{PATHMOX Approach: Segmentation Trees in
+Partial Least Squares Path Modeling.} PhD Dissertation.
 }
 

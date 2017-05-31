@@ -24,20 +24,32 @@
 #' @param cex.main The magnification to be used for the main title.
 #' @param lwd The line width, a positive number, defaulting to 1.
 #' @param \dots Further arguments are ignored.
+#' 
+#' @author Giuseppe Lamberti
+#'  
+#' @references Aluja, T. Lamberti, G. Sanchez, G. (2013). Modeling with heterogeneity. 
+#' Meetings of Italian Statistical Society, Advances in Latent Variables - Methods, 
+#' Models and Applications. Brescia.
+#' 
+#' @references Lamberti, G. (2014) \emph{Modeling with Heterogeneity.} PhD Dissertation. 
+#' 
+#' @references Sanchez, G. (2009) \emph{PATHMOX Approach: Segmentation Trees in
+#' Partial Least Squares Path Modeling.} PhD Dissertation. 
+#' 
 #' @method plot xtree.reg
 #' @S3method plot xtree.reg
 #' @examples
 #'
 #'  \dontrun{
-#'  # example of LM in alumni satisfaction
+#' ## example of LM in alumni satisfaction
 #'  
 #' data(fibtelereg)
 #'
-#  #Identify the segmentation variables  
-#' segvar= fibtelereg[,2:11]
+#' #identify the segmentation variables  
+#' segvar = fibtelereg[,2:11]
 #'
-#  #Select the variables
-#' data.fib=fibtelereg[,12:18]          
+#  #select the variables
+#' data.fib = fibtelereg[,12:18]          
 #'
 #  #re-ordering those segmentation variables with ordinal scale
 #' segvar$Age 		= factor(segvar$Age, ordered=T)
@@ -48,15 +60,27 @@
 #' segvar$Grade 	= factor(segvar$Grade, 
 #' 		levels=c("<6.5note","6.5-7note","7-7.5note",">7.5note"), ordered=T)
 #'
-#  #Regression PATHMOX
+#'  #regression PATHMOX
 #' fib.reg.pathmox=reg.pathmox(Satisfact~.,data=data.fib,segvar,
 #'			signif=0.05,deep=2,method="lm",size=0.15)
 #'
 #' plot(fib.reg.pathmox)
 #'
 #'}
-
-
+#' data(fibtelereg)
+#'
+#' #identify the segmentation variables  
+#' segvar= fibtelereg[1:50,3:4]
+#'
+#' #select the variables
+#' data.fib=fibtelereg[1:50,12:18]          
+#'
+#  #regression PATHMOX
+#' fib.reg.pathmox=reg.pathmox(Satisfact~.,data=data.fib,segvar,
+#'		signif=0.05,deep=1,method="lm",size=0.15)
+#'
+#' plot(fib.reg.pathmox)
+#'
 plot.xtree.reg	<-	function (x, root.col = "grey", node.col = "orange", leaf.col = "green2", 
     shadow.size = 0.003, node.shadow = "red", leaf.shadow = "darkgreen", 
     cex = 0.7, seg.col = "blue3", lwd = 1, show.pval = TRUE, 

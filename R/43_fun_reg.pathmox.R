@@ -4,7 +4,7 @@
 #' 
 #' @description
 #' The function \code{reg.pathmox} calculates a binary segmentation tree in the context 
-#' of linear regression following the PATHMOX algorithm. This function generalizes the Pathmox 
+#' of linear regression following the PATHMOX algorithm. This function also generalizes the Pathmox 
 #' algorithm introduced by Sanchez in 2009 to the context of linear and LAD regression.
 #' 
 #' @details
@@ -64,45 +64,56 @@
 #' 
 #' @author Giuseppe Lamberti
 #'  
+#' @references Aluja, T. Lamberti, G. Sanchez, G. (2013). Modeling with heterogeneity. 
+#' Meetings of Italian Statistical Society, Advances in Latent Variables - Methods, 
+#' Models and Applications. Brescia.
+#' 
 #' @references Lamberti, G. (2014) \emph{Modeling with Heterogeneity.} PhD Dissertation. 
-#'
-#'
+#' 
 #' @references Sanchez, G. (2009) \emph{PATHMOX Approach: Segmentation Trees in
 #' Partial Least Squares Path Modeling.} PhD Dissertation. 
-#'
 #'
 #' @export
 #' @examples
 #'
 #'  \dontrun{
-#' #example of LM in alumni satisfaction
+#' ##example of LM in alumni satisfaction
 #'  
 #' data(fibtelereg)
 #'
-#  #Identify the segmentation variables  
-#' segvar= fibtelereg[,2:11]
+#' #identify the segmentation variables  
+#' segvar = fibtelereg[,2:11]
 #'
-#  #Select the variables
-#' data.fib=fibtelereg[,12:18]          
+#' #select the variables
+#' data.fib = fibtelereg[,12:18]          
 #'
-#  #re-ordering those segmentation variables with ordinal scale
-#' segvar$Age 		= factor(segvar$Age, ordered=T)
-#' segvar$Salary 	= factor(segvar$Salary, 
+#' #re-ordering those segmentation variables with ordinal scale
+#' segvar$Age     = factor(segvar$Age, ordered=T)
+#' segvar$Salary   = factor(segvar$Salary, 
 #'		levels=c("<18k","25k","35k","45k",">45k"), ordered=T)
 #' segvar$Accgrade = factor(segvar$Accgrade, 
 #'		levels=c("accnote<7","7-8accnote","accnote>8"), ordered=T)
 #' segvar$Grade 	= factor(segvar$Grade, 
 #'		levels=c("<6.5note","6.5-7note","7-7.5note",">7.5note"), ordered=T)
 #'
-#  #Regression PATHMOX
-#' fib.reg.pathmox=reg.pathmox(Satisfact~.,data=data.fib,segvar,
+#' #regression PATHMOX
+#' fib.reg.pathmox = reg.pathmox(Satisfact~.,data=data.fib,segvar,
 #'		signif=0.05,deep=2,method="lm",size=0.15)
 #'
-#'  
-#'
 #'}
-
-
+#'  
+#' data(fibtelereg)
+#'
+#' #identify the segmentation variables  
+#' segvar= fibtelereg[1:50,3:4]
+#'
+#' #select the variables
+#' data.fib=fibtelereg[1:50,12:18]          
+#'
+#  #regression PATHMOX
+#' fib.reg.pathmox=reg.pathmox(Satisfact~.,data=data.fib,segvar,
+#'		signif=0.05,deep=1,method="lm",size=0.15)
+#'
 reg.pathmox	<- function(formula,SVAR,signif,deep,method,size,tree=TRUE,data=NULL,...)
 {
 	x <- as.matrix(model.frame(formula,data=data,na.action=NULL))

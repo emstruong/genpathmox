@@ -62,14 +62,24 @@ for each node partition}
 \item{model}{Informations about the internal paramenters}
 }
 \description{
-The function \code{pathmox.pls} calculates a binary segmentation tree in the context
-PLS-PM following the PATHMOX algorithm. This function extends the pathmox algorithm
-introduced by Sanchez in 2009 including the two new test: the F-block test (to detect
-the responsible latent endogenous equations of the difference), the F-coefficient test
-(to detect the path coefficients responsible of the difference).The F-tests used in the
-split process are implemented following the classic lest square estimation. An implementation
-of the tests following the LAD regression also are proposed to overcome the parametric
-hypothesis of the F-test.
+The function \code{pathmox.pls} calculates a binary segmentation tree in
+the context PLS-PM  following the PATHMOX algorithm.
+The procedure can be resumed in the following way. It starts with the
+estimation of the global PLS Path Model at the root node. Then, using
+the segmentation variables, all possible binary splits of data are produced,
+and for each partition local models are calculated. Among all the splits,
+the best one is selected by means of the F-test comparing the inner models.
+This process is recursively applied for each child node. The stop criterion
+is based on the significance level of the p-value associated with the F statistic.
+Additionally, two stop parameters are also considered: the number
+of individuals in a node and the growing level of the depth of the tree.
+This function extends the pathmox algorithm introduced by Sanchez in 2009
+including the two new test: the F-block test (to detect the responsible latent
+endogenous equations of the difference), the F-coefficient test
+(to detect the path coefficients responsible of the difference).The F-tests
+used in the split process are implemented following the classic lest square
+estimation. An implementation of the tests following the LAD regression also
+are proposed to overcome the parametric hypothesis of the F-test.
 }
 \details{
 The argument \code{xpls} is object of class \code{"plspm"} returned by \code{\link{plspm}}.
@@ -111,20 +121,19 @@ When the object \code{pls} does not contain a data matrix (i.e.
 
  # define inner model matrix
  Image 			= rep(0,5)
-	 Qual.spec	= rep(0,5)
-	 Qual.gen		= rep(0,5)
-	 Value			= c(1,1,1,0,0)
-	 Satis			= c(1,1,1,1,0)
- inner.fib <- rbind(Image,Qual.spec, Qual.gen, Value, Satis)
- colnames(inner.fib) <- rownames(inner.fib)
+	Qual.spec	  = rep(0,5)
+	Qual.gen		= rep(0,5)
+	Value			  = c(1,1,1,0,0)
+	Satis			  = c(1,1,1,1,0)
+ inner.fib = rbind(Image,Qual.spec, Qual.gen, Value, Satis)
+ colnames(inner.fib) = rownames(inner.fib)
 
  # blocks of indicators (outer model)
- outer.fib <- list(1:8,9:11,12:16,17:20,21:24)
+ outer.fib  = list(1:8,9:11,12:16,17:20,21:24)
  modes.fib  = rep("A", 5)
 
  # apply plspm
- pls.fib <- plspm(data.fib, inner.fib, outer.fib, modes.fib)
-
+ pls.fib = plspm(data.fib, inner.fib, outer.fib, modes.fib)
 
  # re-ordering those segmentation variables with ordinal scale
   seg.fib= fibtele[,2:11]
@@ -135,21 +144,65 @@ When the object \code{pls} does not contain a data matrix (i.e.
 	 seg.fib$Accgrade = factor(seg.fib$Accgrade,
 			levels=c("accnote<7","7-8accnote","accnote>8"), ordered=T)
 	 seg.fib$Grade = factor(seg.fib$Grade,
-	levels=c("<6.5note","6.5-7note","7-7.5note",">7.5note"), ordered=T)
+	    levels=c("<6.5note","6.5-7note","7-7.5note",">7.5note"), ordered=T)
 
  # Pathmox Analysis
  fib.pathmox=pls.pathmox(pls.fib,seg.fib,signif=0.05,
 					deep=2,size=0.2,n.node=20)
 
  }
+
+ library(genpathmox)
+ data(fibtele)
+
+ # select manifest variables
+ data.fib <-fibtele[1:50,12:35]
+
+ # define inner model matrix
+ Image       = rep(0,5)
+	Qual.spec		= rep(0,5)
+	Qual.gen		= rep(0,5)
+	Value			  = c(1,1,1,0,0)
+	Satis			  = c(1,1,1,1,0)
+ inner.fib = rbind(Image,Qual.spec, Qual.gen, Value, Satis)
+ colnames(inner.fib) = rownames(inner.fib)
+
+ # blocks of indicators (outer model)
+ outer.fib = list(1:8,9:11,12:16,17:20,21:24)
+ modes.fib = rep("A", 5)
+
+ # apply plspm
+ pls.fib = plspm(data.fib, inner.fib, outer.fib, modes.fib)
+
+
+ # re-ordering those segmentation variables with ordinal scale
+ seg.fib = fibtele[1:50,c(2,7)]
+	seg.fib$Salary = factor(seg.fib$Salary,
+			levels=c("<18k","25k","35k","45k",">45k"), ordered=TRUE)
+
+ # Pathmox Analysis
+ fib.pathmox = pls.pathmox(pls.fib,seg.fib,signif=0.5,
+					deep=1,size=0.01,n.node=10)
 }
 \author{
 Giuseppe Lamberti
 }
 \references{
+Lamberti, G. et al. (2016) \emph{The Pathmox approach for PLS path modeling segmentation}.
+Applied Stochastic Models in Business and Industry; doi: 10.1002/asmb.2168;
+
+Aluja, T., Lamberti, G., Sanchez, G. (2013). Extending the PATHMOX approach
+to detect which constructs differentiate segments. In   H., Abdi,  W. W., Chin,  V., Esposito Vinzi,
+G., Russolillo,  and   L., Trinchera (Eds.), Book title: New Perspectives in Partial Least
+Squares and Related Methods (pp.269-280). Springer.
+
 Lamberti, G. (2014) \emph{Modeling with Heterogeneity.} PhD Dissertation.
 
 Sanchez, G. (2009) \emph{PATHMOX Approach: Segmentation Trees in
 Partial Least Squares Path Modeling.} PhD Dissertation.
+
+Tenenhaus M., Esposito Vinzi V., Chatelin Y.M., and Lauro C.
+(2005) PLS path modeling. \emph{Computational Statistics & Data Analysis},
+\bold{48}, pp. 159-205.
 }
 

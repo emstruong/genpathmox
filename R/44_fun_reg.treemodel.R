@@ -1,4 +1,3 @@
-	
 #' @title Regression results of terminal nodes from the Pathmox Segmentation Trees
 #' 
 #' @description
@@ -8,7 +7,7 @@
 #' @details
 #' 
 #' The argument \code{xtree.reg} is an object of class \code{"xtree.reg"} returned by 
-#'\code{\link{reg.pathmox}}.
+#' \code{\link{reg.pathmox}}.
 #'
 #' @param xtree.reg An object of class \code{"xtree.reg"} returned by
 #' \code{\link{reg.pathmox}}.
@@ -30,23 +29,27 @@
 #'
 #' @author Giuseppe Lamberti
 #' 
-#' @references Sanchez, G. (2009) \emph{PATHMOX Approach: Segmentation Trees in
-#' Partial Least Squares Path Modeling.} PhD Dissertation. 
+#' @references Aluja, T. Lamberti, G. Sanchez, G. (2013). Modeling with heterogeneity. 
+#' Meetings of Italian Statistical Society, Advances in Latent Variables - Methods, 
+#' Models and Applications. Brescia.
 #' 
 #' @references Lamberti, G. (2014) \emph{Modeling with Heterogeneity.} PhD Dissertation. 
+#' 
+#' @references Sanchez, G. (2009) \emph{PATHMOX Approach: Segmentation Trees in
+#' Partial Least Squares Path Modeling.} PhD Dissertation. 
 #'
 #' @seealso \code{\link{pls.pathmox}}, \code{\link{plot.xtree.pls}}
 #' @export
 #' @examples
-#'  \dontrun{
+#' \dontrun{
 #' #example of LM in alumni satisfaction
 #'  
 #' data(fibtelereg)
 #'
-#  #Identify the segmentation variables  
+#' #identify the segmentation variables  
 #' segvar= fibtelereg[,2:11]
 #'
-#  #Select the variables
+#' #select the variables
 #' data.fib= fibtelereg[,12:18]          
 #'
 #  #re-ordering those segmentation variables with ordinal scale
@@ -58,7 +61,7 @@
 #' segvar$Grade 	= factor(segvar$Grade, 
 #'		levels=c("<6.5note","6.5-7note","7-7.5note",">7.5note"), ordered=T)
 #'
-#  #Regression PATHMOX
+#' #regression PATHMOX
 #' fib.reg.pathmox=reg.pathmox(Satisfact~.,data=data.fib,segvar,
 #' 			signif=0.05,deep=2,method="lm",size=0.15)
 #'
@@ -66,7 +69,21 @@
 #' fib.node.comp=reg.treemodel(fib.reg.pathmox) 
 #'
 #'}
-		
+#'
+#' data(fibtelereg)
+#'
+#' #identify the segmentation variables  
+#' segvar= fibtelereg[1:50,3:4]
+#'
+#' #select the variables
+#' data.fib=fibtelereg[1:50,12:18]          
+#'
+#  #regression PATHMOX
+#' fib.reg.pathmox=reg.pathmox(Satisfact~.,data=data.fib,segvar,
+#'		signif=0.05,deep=1,method="lm",size=0.15)
+#'
+#' fib.node.comp=reg.treemodel(fib.reg.pathmox) 
+#'		
 reg.treemodel 	<- function (xtree.reg,terminal=TRUE,intercept=FALSE,label=FALSE, label.nodes=NULL, ...)
 {
     if (class(xtree.reg) != "xtree.reg") 

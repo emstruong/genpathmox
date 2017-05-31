@@ -15,16 +15,19 @@ The function \code{print.xtree.reg} print the \code{reg.pathmox} tree
 }
 \examples{
 \dontrun{
-#example of LM in alumni satisfaction
+##example of LM in alumni satisfaction
 
 data(fibtelereg)
 
-segvar= fibtelereg[,2:11]
+#identify the segmentation variables
+segvar = fibtelereg[,2:11]
 
-data.fib=fibtelereg[,12:18]
+#select the variables
+data.fib = fibtelereg[,12:18]
 
-segvar$Age 		= factor(segvar$Age, ordered=T)
-segvar$Salary 	= factor(segvar$Salary,
+#re-ordering those segmentation variables with ordinal scale
+segvar$Age     = factor(segvar$Age, ordered=T)
+segvar$Salary   = factor(segvar$Salary,
 		levels=c("<18k","25k","35k","45k",">45k"), ordered=T)
 segvar$Accgrade = factor(segvar$Accgrade,
 		levels=c("accnote<7","7-8accnote","accnote>8"), ordered=T)
@@ -37,13 +40,31 @@ fib.reg.pathmox=reg.pathmox(Satisfact~.,data=data.fib,segvar,
  print(fib.reg.pathmox)
 
 }
+data(fibtelereg)
+
+#Identify the segmentation variables
+segvar= fibtelereg[1:50,3:4]
+
+#Select the variables
+data.fib=fibtelereg[1:50,12:18]
+
+fib.reg.pathmox=reg.pathmox(Satisfact~.,data=data.fib,segvar,
+		signif=0.05,deep=1,method="lm",size=0.15)
+
+print(fib.reg.pathmox)
 }
 \author{
 Giuseppe Lamberti
 }
 \references{
+Aluja, T. Lamberti, G. Sanchez, G. (2013). Modeling with heterogeneity.
+Meetings of Italian Statistical Society, Advances in Latent Variables - Methods,
+Models and Applications. Brescia.
+
 Lamberti, G. (2014) \emph{Modeling with Heterogeneity.} PhD Dissertation.
 
+Sanchez, G. (2009) \emph{PATHMOX Approach: Segmentation Trees in
+Partial Least Squares Path Modeling.} PhD Dissertation.
 
 \code{\link{summary.xtree.pls}}.
 }
