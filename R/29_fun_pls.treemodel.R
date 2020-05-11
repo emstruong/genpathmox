@@ -56,7 +56,7 @@
 #' (2005) PLS path modeling. \emph{Computational Statistics & Data Analysis},
 #' \bold{48}, pp. 159-205.
 #' 
-#' @seealso \code{\link{pls.pathmox}},\code{\link{plot.xtree.pls}}
+#' @seealso \code{\link{pls.pathmox}}
 #' @export
 #' @examples
 #'  \dontrun{

@@ -38,7 +38,7 @@
 #' @references Sanchez, G. (2009) \emph{PATHMOX Approach: Segmentation Trees in
 #' Partial Least Squares Path Modeling.} PhD Dissertation. 
 #'
-#' @seealso \code{\link{pls.pathmox}}, \code{\link{plot.xtree.pls}}
+#' @seealso \code{\link{pls.pathmox}}
 #' @export
 #' @examples
 #' \dontrun{

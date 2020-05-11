@@ -42,8 +42,6 @@
 #' @param size A numeric value indicating the minimum size of elements inside a
 #' node.
 #'
-#' @param tree A logical value indicating if the tree should be displayed
-#' (\code{TRUE} by default).
 #' @param data an optional data frame.
 #'
 #' @param \dots Further arguments passed on to \code{\link{reg.pathmox}}. 
@@ -114,7 +112,7 @@
 #' fib.reg.pathmox=reg.pathmox(Satisfact~.,data=data.fib,segvar,
 #'		signif=0.05,deep=1,method="lm",size=0.15)
 #'
-reg.pathmox	<- function(formula,SVAR,signif,deep,method,size,tree=TRUE,data=NULL,...)
+reg.pathmox	<- function(formula,SVAR,signif,deep,method,size,data=NULL,...)
 {
 	x <- as.matrix(model.frame(formula,data=data,na.action=NULL))
 	
@@ -240,8 +238,6 @@ reg.pathmox	<- function(formula,SVAR,signif,deep,method,size,tree=TRUE,data=NULL
 		res=list(MOX=MOX,terminal=terminal,nodes=nodes,candidates=candidates,Fg.r=Fg.r,Fc.r=Fc.r,model=model)
 
 	class(res)="xtree.reg"
-	if (tree) 
-        plot(res)
-    }
+}
 res
 }

@@ -62,8 +62,6 @@
 #' node.
 #' @param X Optional dataset (matrix or data frame) used when argument
 #' \code{dataset=NULL} inside \code{pls}.
-#' @param tree A logical value indicating if the tree should be displayed
-#' (\code{TRUE} by default).
 #' @param n.node It is the minimum number of individuals to consider a candidate 
 #' partition (\code{30} by default).
 #' 
@@ -182,7 +180,7 @@
 #'					deep=1,size=0.01,n.node=10)
 #'
 #'
-pls.pathmox = function(xpls,SVAR,signif,deep,method="lm",size,X = NULL,tree = TRUE,n.node=30,...)
+pls.pathmox = function(xpls,SVAR,signif,deep,method="lm",size,X = NULL,n.node=30,...)
 {
     if (class(xpls) != "plspm") 
         stop("Argument 'pls' must be an object of class 'plspm'")
@@ -353,8 +351,6 @@ pls.pathmox = function(xpls,SVAR,signif,deep,method="lm",size,X = NULL,tree = TR
 				Fc.r=Fc.r,
 				model=model)
 	class(res) = "xtree.pls"
-	if (tree) 
-        plot(res)
-	}
+}
  res
 }
