@@ -1,5 +1,5 @@
-1ee44dc7d7f9440aefb37b12c0692f5e *DESCRIPTION
-65c346ba85c2aa428036d54f8b49e7a4 *NAMESPACE
+ab02acb4d259f22ebbd99334e4cca9bb *DESCRIPTION
+c3568ebe1a4ddf599b126aa89a354c4c *NAMESPACE
 5ecae8632cc3665886b35836760220a4 *R/10_fun_partopt.pls.R
 6bcad431fbbef385dad2584d490ffcbe *R/11_fun_F.data.pls.R
 903bb6bc22ada902ba6d1e61f5f4c125 *R/12_fun_Fg.test.pls.R
@@ -10,7 +10,7 @@ cda10387ed4acd9b8132ff6e2634f2b5 *R/15_fun_test.partition.pls.R
 4ec0efbde0f61ecc9cb276374d12ef1f *R/17_fun_showDeepth.R
 b1bfcc986617128910af05273f7750a4 *R/18_fun_root.tree.R
 255a4ac0e4a362b246d671eb3b54c4ae *R/19_fun_terminal.tree.R
-33f41d3a1b9db8b1bcdc077924ab9c30 *R/1_fun_blockdiag.R
+3adf1552e0c9ba2c5c257b8b126bd2e7 *R/1_fun_blockdiag.R
 06fa73494213cf98ccd54cbf819c2f14 *R/20_fun_nodes.tree.R
 91aee97c45c127bc80ad13c096b01a49 *R/21_fun_candidates.tree.R
 56edb855c7669f6207902d3b98cfe552 *R/22_fun_fglobal.tree.pls.R
@@ -18,11 +18,11 @@ c67edb97a0d5411652cfdfeabc6e7280 *R/23_fun_fblock.tree.pls.R
 6c01e5dccaa4a8c7e08996baac08df64 *R/24_fun_fcoef.tree.pls.R
 4b0ee4bf360aa97f8b3dcceab11ca81b *R/25_fun_mox.tree.pls.R
 abc9ad4eb71a20c2d049535eea1f18ac *R/26_fun_info.mox.pls.R
-eca41794bcacf4e10dbe83a243e32d5e *R/27_fun_pls.pathmox.R
+417cca8e857c0509b294dab243d8f62a *R/27_fun_pls.pathmox.R
 e855b370b3ca4c88e9745fbf9a4f4dab *R/28_fun_invariance.R
-815819161f09002fdf07295c70a9cab4 *R/29_fun_pls.treemodel.R
+fca81d80a778919f91173c25c7e757e5 *R/29_fun_pls.treemodel.R
 44456bfc02bac0fcf7328eec0fe0fb27 *R/2_fun_comb.R
-077a160749d78d2c524825ad358ce342 *R/30_fun_invariance_test.R
+bbec97d6c0dbaa13e3e61ffd293f38eb *R/30_fun_invariance_test.R
 e015e8ae9267862b72ff5154ea413cb6 *R/31_fun_splitopt.reg.R
 2c547442eb38ccd709f02e4589db5d56 *R/32_fun_all.part.reg.R
 e1d40d21eff9e2fdd606f86c1ef67ae2 *R/33_fun_partopt.reg.R
@@ -36,7 +36,7 @@ d853c0ea7ef7fcbb4f287e4c953471e4 *R/3_fun_partition.R
 0e337668d6d55df3bb6fff8e6a8fd218 *R/40_fun_fcoef.tree.reg.R
 d7690de48fb3e8158f9bee82a0c647d3 *R/41_fun_mox.tree.R
 4a56599d8805e3f9bba0613656325bbd *R/42_fun_info.mox.reg.R
-9cdabe897f9271d509f963fe14e8dc46 *R/43_fun_reg.pathmox.R
+d71ff569e025a59ef8e3b814d31f15c8 *R/43_fun_reg.pathmox.R
 08f81c88829a8243ca3178e573a61ba9 *R/44_fun_reg.treemodel.R
 f476b84e617bc493c8868f7b98a721af *R/4_fun_build.block.R
 40b236dd1714be5842582c9db9bacc87 *R/5_fun_bin.levels.R
@@ -57,9 +57,9 @@ fc6e03bd87db8c6e96868e48b53d8b2e *R/method1_xtree.pls.R
 0be2470064b907592c399da3b2c77c07 *R/method2_treemodel.R
 9274a2bcf5d8f0184fe3e451f3ca4857 *R/method3_xtree.reg.R
 52447d286d238ee76c9176640b8f7ed2 *R/method4_treemodelreg.R
-aae636a5954de93c9c346c99eb63e1dc *R/print_print.xtree.pls.R
+22cda682bad563ebed3720b180c8fa4f *R/print_print.xtree.pls.R
 9bc0dfe6915a0604688ae699ae6bc4d9 *R/print_print.xtree.reg.R
-4ce6535d8c7f6cd683b45e3df747c38d *R/summary_summary.xtree.pls.R
+483642ed12b5e0b7d371256549bcf48a *R/summary_summary.xtree.pls.R
 a80036899e5ed615df1045de916d2ba5 *R/summary_summary.xtree.reg.R
 208340fd4057c956ac5c478ffa8734b6 *data/fibtele.rda
 992c14ca9a945dc9d95b5927bb1e2616 *data/fibtelereg.rda
@@ -140,7 +140,7 @@ f44bfa3112ba9cb5dacad202ba00e4a4 *man/info.mox.reg.Rd
 7aea90a076aa67e5bfc3deb79bab4569 *man/info.pls_class.Rd
 50dbd4d1a599eeee12cdd76bc5da28ef *man/info.reg_class.Rd
 6c7221e66e2c7dc6d515c1ad0c4e80e8 *man/invariance.Rd
-81dbc055dda71850488b734bf3a1b744 *man/invariance_test.Rd
+caedf05624a4c3f87f0d9152dbe83c3e *man/invariance_test.Rd
 c8e6f0647d6b08fdfe5a5796ea07d78e *man/is_class.Rd
 dc11737197cafc906a470fb9697830e1 *man/is_dataframe.Rd
 0475d0f18cbac64aed6031a93d715a9f *man/is_decimal.Rd
@@ -205,10 +205,10 @@ d9b882837db921762b4ddcc17f3b3c01 *man/normalize.Rd
 681e88e736c3fd6dbf95f98b501fb802 *man/partopt.pls.Rd
 cd59abe3e64551ed3decb45dde5d2eab *man/partopt.reg.Rd
 90924c7bd68779dd7d5756c9db1110ff *man/percent.node.Rd
-1b2102d43a04f6454906c05d9e50066c *man/pls.pathmox.Rd
-da45becd2951f0d7f5ca31ff76296310 *man/pls.treemodel.Rd
+81c0f0eaf5b5f52a2bf99971c11795e7 *man/pls.pathmox.Rd
+cde130ac13a670590e2c05e2ca1eb10a *man/pls.treemodel.Rd
 17c4115b16b9c01d25ff2e5231b21e39 *man/plspm.Rd
-d78e7c1a5eac701e20863967bd259d5c *man/print.xtree.pls.Rd
+12af6c78383500f4acf6ef94e2d63979 *man/print.xtree.pls.Rd
 f373773f62e7bba8cce1f0a273ee168c *man/print.xtree.reg.Rd
 ea6f4dad7271878c2a277a9437a82c37 *man/printTree.Rd
 d32618f86a8ac308c637f16ac3b5d319 *man/prodlist.Rd
@@ -225,7 +225,7 @@ ff12b8059b130283e25602ed85c9734c *man/same_type.Rd
 edf8f849f6661e511a4c246dc1e7570e *man/splitopt.pls.Rd
 ef2a3f95fa2cab60678eb191e6c51272 *man/splitopt.reg.Rd
 bc2f3b85332995b5467d1707aee97d33 *man/sumlist.Rd
-87405024b3ca3f995ce2782794006d3f *man/summary.xtree.pls.Rd
+96222336ebdc6ae9934afbeb097d2cf3 *man/summary.xtree.pls.Rd
 9e9a82f63efe6493c0f9154f8fa340d3 *man/summary.xtree.reg.Rd
 bbe42c18e5c973e9e1cde96bc4063567 *man/terminal.tree.Rd
 46ebabf934bc75eb82995bf8d0329126 *man/test.particion.reg.Rd

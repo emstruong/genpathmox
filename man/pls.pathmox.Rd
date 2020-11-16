@@ -3,10 +3,16 @@
 \name{pls.pathmox}
 \alias{pls.pathmox}
 \title{PATHMOX-PLS: Extended Segmentation Trees in 
-Partial Least Squares Path Modeling}
+Partial Least Squares Structutal Equation Modeling (PLS-SEM)}
 \usage{
 pls.pathmox(
-  xpls,
+  x,
+  inner,
+  outer,
+  mode,
+  scheme = "path",
+  scaling = NULL,
+  scaled = TRUE,
   SVAR,
   signif,
   deep,
@@ -18,7 +24,35 @@ pls.pathmox(
 )
 }
 \arguments{
-\item{xpls}{An object of class \code{"plspm"} returned by \code{\link{plspm}}.}
+\item{x}{matrix or data frame containing the manifest variables.}
+
+\item{inner}{A square (lower triangular) boolean matrix representing 
+the inner model (i.e. the path relationships between latent variables).}
+
+\item{outer}{list of vectors with column indices or column names
+from \code{x} indicating the sets of manifest variables forming 
+each block (i.e. which manifest variables correspond to each block).}
+
+\item{mode}{character vector indicating the type of measurement for each
+block. Possible values are: \code{"A", "B", "newA", "PLScore", "PLScow"}. 
+The length of \code{mode} must be equal to the length of \code{outer}.}
+
+\item{scheme}{string indicating the type of inner weighting
+scheme. Possible values are \code{"centroid"}, \code{"factorial"}, or
+\code{"path"}.}
+
+\item{scaling}{optional argument for runing the non-metric approach; 
+it is a list of string vectors indicating the type of 
+measurement scale for each manifest variable specified in \code{outer}.
+\code{scaling} must be specified when working with non-metric variables.
+Possible values: \code{"num"} (linear transformation, 
+suitable for numerical variables), \code{"raw"} (no transformation), 
+\code{"nom"} (non-monotonic transformation, suitable for nominal variables), 
+and \code{"ord"} (monotonic transformation, suitable for ordinal variables).}
+
+\item{scaled}{whether manifest variables should be standardized. 
+Only used when \code{scaling = NULL}. By the default (\code{TRUE}, data is 
+scaled to standardized values (mean=0 and variance=1).}
 
 \item{SVAR}{A data frame of factors contaning the segmentation variables.}
 
@@ -67,12 +101,14 @@ for each node partition}
 for each node partition}
 
 \item{model}{Informations about the internal paramenters}
+
+\item{hybrid}{a hybird categorical factor defined according to the final segments idenfied by pathmox}
 }
 \description{
 The function \code{pathmox.pls} calculates a binary segmentation tree in 
-the context PLS-PM  following the PATHMOX algorithm.
+the context PLS-SEM  following the PATHMOX algorithm.
 The procedure can be resumed in the following way. It starts with the 
-estimation of the global PLS Path Model at the root node. Then, using 
+estimation of the global PLS-SEM Model at the root node. Then, using 
 the segmentation variables, all possible binary splits of data are produced, 
 and for each partition local models are calculated. Among all the splits, 
 the best one is selected by means of the F-test comparing the inner models. 
@@ -89,12 +125,18 @@ estimation. An implementation of the tests following the LAD regression also
 are proposed to overcome the parametric hypothesis of the F-test.
 }
 \details{
-The argument \code{xpls} is object of class \code{"plspm"} returned by \code{\link{plspm}}.
+The argument \code{x} must be a data frame containing the manifest variables of the 
+PLS-SEM model
+
+The argument \code{inner} is a matrix of zeros and ones that indicates
+the structural relationships between latent variables. \code{inner} 
+must be a lower triangular matrix; it contains a 1 when column \code{j}
+affects row \code{i}, 0 otherwise. \cr
 
 The argument \code{SVAR} must be a data frame containing segmentation
 variables as factors. The number of rows in
 \code{SVAR} must be the same as the number of rows in the data used in
-\code{pls}. 
+\code{x}. 
  
 The argument \code{signif} represent the p-value level takes as reference  
 to stop the tree partitions. 
@@ -112,10 +154,6 @@ of elements inside a node).
 The argument \code{n.node} is the minimum number of individuals to consider a candidate 
 partition. If the candidate split produces a partition where the number of individuals is less  
 then \code{n.node}, the partition is not considered.
-
-When the object \code{pls} does not contain a data matrix (i.e.
-\code{pls$data=NULL}), the user must provide the data matrix or data frame in
-\code{X}.
 }
 \examples{
 
@@ -140,8 +178,6 @@ Satis			  = c(1,1,1,1,0)
  outer.fib  = list(1:8,9:11,12:16,17:20,21:24)
  modes.fib  = rep("A", 5)
  
- # apply plspm
- pls.fib = plspm(data.fib, inner.fib, outer.fib, modes.fib)
                  
  # re-ordering those segmentation variables with ordinal scale 
   seg.fib= fibtele[,2:11]
@@ -155,7 +191,7 @@ Satis			  = c(1,1,1,1,0)
     levels=c("<6.5note","6.5-7note","7-7.5note",">7.5note"), ordered=T)
 
  # Pathmox Analysis
- fib.pathmox=pls.pathmox(pls.fib,seg.fib,signif=0.05,
+ fib.pathmox=pls.pathmox(data.fib, inner.fib, outer.fib, modes.fib,SVAR=seg.fib,signif=0.05,
 				deep=2,size=0.2,n.node=20)
  
  }
@@ -179,8 +215,6 @@ Satis			  = c(1,1,1,1,0)
  outer.fib = list(1:8,9:11,12:16,17:20,21:24)
  modes.fib = rep("A", 5)
  
- # apply plspm
- pls.fib = plspm(data.fib, inner.fib, outer.fib, modes.fib)
                  
 
  # re-ordering those segmentation variables with ordinal scale 
@@ -189,28 +223,20 @@ seg.fib$Salary = factor(seg.fib$Salary,
 		levels=c("<18k","25k","35k","45k",">45k"), ordered=TRUE)
 
  # Pathmox Analysis
- fib.pathmox = pls.pathmox(pls.fib,seg.fib,signif=0.5,
-				deep=1,size=0.01,n.node=10)
+ fib.pathmox=pls.pathmox(data.fib, inner.fib, outer.fib, modes.fib,SVAR=seg.fib,signif=0.05,
+				deep=2,size=0.2,n.node=20)
 
 
 }
 \references{
+Lamberti, G. et al. (2017) \emph{The Pathmox approach for PLS path modeling: 
+Discovering which constructs differentiate segments}.Applied Stochastic Models in Business and Industry; 
+doi: 10.1002/asmb.2270;
+
 Lamberti, G. et al. (2016) \emph{The Pathmox approach for PLS path modeling segmentation}. 
 Applied Stochastic Models in Business and Industry; doi: 10.1002/asmb.2168;
 
-Aluja, T., Lamberti, G., Sanchez, G. (2013). Extending the PATHMOX approach 
-to detect which constructs differentiate segments. In   H., Abdi,  W. W., Chin,  V., Esposito Vinzi, 
-G., Russolillo,  and   L., Trinchera (Eds.), Book title: New Perspectives in Partial Least 
-Squares and Related Methods (pp.269-280). Springer.
-
 Lamberti, G. (2014) \emph{Modeling with Heterogeneity.} PhD Dissertation.
-
-Sanchez, G. (2009) \emph{PATHMOX Approach: Segmentation Trees in
-Partial Least Squares Path Modeling.} PhD Dissertation.
-
-Tenenhaus M., Esposito Vinzi V., Chatelin Y.M., and Lauro C.
-(2005) PLS path modeling. \emph{Computational Statistics & Data Analysis},
-\bold{48}, pp. 159-205.
 }
 \author{
 Giuseppe Lamberti

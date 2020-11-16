@@ -5,9 +5,7 @@
 \title{PLS-PM results of terminal nodes from the Pathmox Segmentation Trees}
 \usage{
 pls.treemodel(
-  xpls,
   xtree,
-  X = NULL,
   alpha = 0.05,
   terminal = TRUE,
   scaled = FALSE,
@@ -17,13 +15,8 @@ pls.treemodel(
 )
 }
 \arguments{
-\item{xpls}{An object of class \code{"plspm"} returned by \code{\link{plspm}}.}
-
 \item{xtree}{An object of class \code{"xtree.pls"} returned by
 \code{\link{pls.pathmox}}.}
-
-\item{X}{Optional dataset (matrix or data frame) used when argument
-\code{dataset=NULL} inside \code{xpls}.}
 
 \item{alpha}{is numeric value indicating the significance threshold of the invariance test}
 
@@ -56,17 +49,14 @@ following results:
 \item{r2}{Matrix of r-squared coefficients for each terminal node}
 
 \item{sign}{list of matrix with the significance for each terminal node}
+
+\item{total_effects}{list of matrix with the terminal effects for each terminal node}
 }
 \description{
 Calculates basic PLS-PM results for the terminal nodes of PATHMOX
 trees
 }
 \details{
-The argument \code{xpls} must be the same used for calculating the
-\code{xtree} object.  When the object \code{xpls} does not contain a data
-matrix (i.e. \code{pls$data=NULL}), the user must provide the data matrix or
-data frame in \code{X}.
-
 The argument \code{xtree} is an object of class \code{"xtree.pls"} returned by 
 \code{\link{pls.pathmox}}.
 }
@@ -92,8 +82,6 @@ Satis			  = c(1,1,1,1,0)
  outer.fib  = list(1:8,9:11,12:16,17:20,21:24)
  modes.fib  = rep("A", 5)
  
- # apply plspm
- pls.fib = plspm(data.fib, inner.fib, outer.fib, modes.fib)
                  
  # re-ordering those segmentation variables with ordinal scale 
   seg.fib= fibtele[,2:11]
@@ -107,10 +95,10 @@ Satis			  = c(1,1,1,1,0)
     levels=c("<6.5note","6.5-7note","7-7.5note",">7.5note"), ordered=T)
 
  # Pathmox Analysis
- fib.pathmox=pls.pathmox(pls.fib,seg.fib,signif=0.05,
+ fib.pathmox=pls.pathmox(data.fib, inner.fib, outer.fib, modes.fib,SVAR=seg.fib,signif=0.05,
 				deep=2,size=0.2,n.node=20)
 
- fib.comp=pls.treemodel(pls.fib,fib.pathmox)
+ fib.comp=pls.treemodel(fib.pathmox)
  
  }
 
@@ -133,9 +121,6 @@ Satis			  = c(1,1,1,1,0)
  outer.fib = list(1:8,9:11,12:16,17:20,21:24)
  modes.fib = rep("A", 5)
  
- # apply plspm
- pls.fib = plspm(data.fib, inner.fib, outer.fib, modes.fib)
-                 
 
  # re-ordering those segmentation variables with ordinal scale 
  seg.fib = fibtele[1:50,c(2,7)]
@@ -143,9 +128,10 @@ seg.fib$Salary = factor(seg.fib$Salary,
 		levels=c("<18k","25k","35k","45k",">45k"), ordered=TRUE)
 
  # Pathmox Analysis
-fib.pathmox = pls.pathmox(pls.fib,seg.fib,signif=0.5,
+fib.pathmox = pls.pathmox(data.fib, inner.fib, outer.fib, modes.fib,SVAR=seg.fib,signif=0.5,
 				deep=1,size=0.01,n.node=10)
 
+fib.comp=pls.treemodel(fib.pathmox)
 
 }
 \references{
@@ -158,13 +144,6 @@ G., Russolillo,  and   L., Trinchera (Eds.), Book title: New Perspectives in Par
 Squares and Related Methods (pp.269-280). Springer.
 
 Lamberti, G. (2014) \emph{Modeling with Heterogeneity.} PhD Dissertation.
-
-Sanchez, G. (2009) \emph{PATHMOX Approach: Segmentation Trees in
-Partial Least Squares Path Modeling.} PhD Dissertation.
-
-Tenenhaus M., Esposito Vinzi V., Chatelin Y.M., and Lauro C.
-(2005) PLS path modeling. \emph{Computational Statistics & Data Analysis},
-\bold{48}, pp. 159-205.
 }
 \seealso{
 \code{\link{pls.pathmox}}

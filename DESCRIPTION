@@ -1,6 +1,6 @@
 Package: genpathmox
 Title: Generalized Pathmox Approach Segmentation Tree Analysis
-Version: 0.4
+Version: 0.5
 Authors@R: person("Giuseppe", "Lamberti", email = "giuseppelamb@hotmail.com",
     role = c("aut", "cre"))
 Description: Provides a very interesting solution for
@@ -16,13 +16,13 @@ Description: Provides a very interesting solution for
     different methodologies: linear regression and least absolute regression
     models.
 Depends: R (>= 3.1.2), stats, graphics, grDevices, utils, diagram,
-        methods, mice, quantreg
+        methods, quantreg
 License: GPL-3
 LazyData: true
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 NeedsCompilation: no
-Packaged: 2020-05-11 14:49:54 UTC; giuseppelamberti
+Packaged: 2020-11-16 09:43:14 UTC; giuseppelamberti
 Author: Giuseppe Lamberti [aut, cre]
 Maintainer: Giuseppe Lamberti <giuseppelamb@hotmail.com>
 Repository: CRAN
-Date/Publication: 2020-05-11 15:20:13 UTC
+Date/Publication: 2020-11-16 10:00:03 UTC

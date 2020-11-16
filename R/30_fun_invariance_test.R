@@ -74,8 +74,6 @@
 #' #efine de mode
 #' modes.fib  = rep("A", 5)
 #' 
-#' #apply plspm
-#' pls.fib = plspm(data.fib, inner.fib, outer.fib, modes.fib)
 #' 
 # re-ordering those segmentation variables with ordinal scale 
 #' seg.fib = fibtele[,2:11]
@@ -89,9 +87,10 @@
 #'                        levels=c("<6.5note","6.5-7note","7-7.5note",">7.5note"), ordered=TRUE)
 #' 
 #' #pathmox Analysis
-#' fib.pathmox=pls.pathmox(pls.fib,seg.fib,signif=0.05,deep=2,size=0.2,n.node=20)
+#'  fib.pathmox=pls.pathmox(data.fib, inner.fib, outer.fib, modes.fib,seg.fib,signif=0.05,
+#'					deep=2,size=0.2,n.node=20)
 #' 
-#' #pelect the terminal nodes
+#' #select the terminal nodes
 #' ls(fib.pathmox)
 #' 
 #' terminal.nodes=fib.pathmox$terminal[-1] 
@@ -124,8 +123,6 @@
 #' #efine de mode
 #' modes.fib  = rep("A", 5)
 #' 
-#' #apply plspm
-#' pls.fib = plspm(data.fib, inner.fib, outer.fib, modes.fib)
 #' 
 # re-ordering those segmentation variables with ordinal scale 
 #' seg.fib = fibtele[,2:11]
@@ -139,7 +136,8 @@
 #'                        levels=c("<6.5note","6.5-7note","7-7.5note",">7.5note"), ordered=TRUE)
 #' 
 #' #pathmox Analysis
-#' fib.pathmox=pls.pathmox(pls.fib,seg.fib,signif=0.05,deep=2,size=0.2,n.node=20)
+#'  fib.pathmox=pls.pathmox(data.fib, inner.fib, outer.fib, modes.fib,SVAR=seg.fib,signif=0.05,
+#'					deep=2,size=0.2,n.node=20)
 #'  
 #' terminal.nodes=fib.pathmox$terminal[-1] 
 #' 

@@ -118,8 +118,7 @@ reg.pathmox	<- function(formula,SVAR,signif,deep,method,size,data=NULL,...)
 	
 	if (any(is.na(x)))
 	{
-        warning("Data contains NA: missing values are imputed by the Chained Equations method")
-		x=as.matrix(complete(mice(x,m=1,seed=30,printFlag=FALSE)))
+	    stop("Data contains NA: please provide a complete data-set")
     }
     if (!is.data.frame(SVAR))
     {
@@ -127,8 +126,7 @@ reg.pathmox	<- function(formula,SVAR,signif,deep,method,size,data=NULL,...)
     }
     if (any(is.na(SVAR)))
     {
-        warning("data factors contains NA: missing values are imputed by the Chained Equations method")
-		SVAR=complete(mice(SVAR,m=1,seed=30,printFlag=FALSE))
+      stop("Data factors contains NA: please provide a complete data factor")
     }
     for (j in 1:ncol(SVAR)) if (!is.factor(SVAR[, j]))
     { 

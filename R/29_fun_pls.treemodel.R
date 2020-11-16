@@ -6,19 +6,11 @@
 #' trees
 #' 
 #' @details
-#' The argument \code{xpls} must be the same used for calculating the
-#' \code{xtree} object.  When the object \code{xpls} does not contain a data
-#' matrix (i.e. \code{pls$data=NULL}), the user must provide the data matrix or
-#' data frame in \code{X}.
-#' 
 #' The argument \code{xtree} is an object of class \code{"xtree.pls"} returned by 
 #' \code{\link{pls.pathmox}}.
 #'
-#' @param xpls An object of class \code{"plspm"} returned by \code{\link{plspm}}.
 #' @param xtree An object of class \code{"xtree.pls"} returned by
 #' \code{\link{pls.pathmox}}.
-#' @param X Optional dataset (matrix or data frame) used when argument
-#' \code{dataset=NULL} inside \code{xpls}.
 #' @param alpha is numeric value indicating the significance threshold of the invariance test
 #' @param terminal is string, if equal to \code{TRUE}, just the terminal nodes are considered 
 #' for the output reults. when it is equal to \code{FALSE},the PLS-PM results are generated 
@@ -36,6 +28,7 @@
 #' @return \item{paths}{Matrix of path coefficients for each terminal node}
 #' @return \item{r2}{Matrix of r-squared coefficients for each terminal node}
 #' @return \item{sign}{list of matrix with the significance for each terminal node}
+#' @return \item{total_effects}{list of matrix with the terminal effects for each terminal node}
 #'
 #' @author Giuseppe Lamberti
 #' 
@@ -49,12 +42,7 @@
 #'               
 #' @references Lamberti, G. (2014) \emph{Modeling with Heterogeneity.} PhD Dissertation.
 #'
-#' @references Sanchez, G. (2009) \emph{PATHMOX Approach: Segmentation Trees in
-#' Partial Least Squares Path Modeling.} PhD Dissertation. 
 #' 
-#' @references Tenenhaus M., Esposito Vinzi V., Chatelin Y.M., and Lauro C.
-#' (2005) PLS path modeling. \emph{Computational Statistics & Data Analysis},
-#' \bold{48}, pp. 159-205.
 #' 
 #' @seealso \code{\link{pls.pathmox}}
 #' @export
@@ -80,8 +68,6 @@
 #'  outer.fib  = list(1:8,9:11,12:16,17:20,21:24)
 #'  modes.fib  = rep("A", 5)
 #'  
-#'  # apply plspm
-#'  pls.fib = plspm(data.fib, inner.fib, outer.fib, modes.fib)
 #'                  
 #'  # re-ordering those segmentation variables with ordinal scale 
 #'   seg.fib= fibtele[,2:11]
@@ -95,10 +81,10 @@
 #'	    levels=c("<6.5note","6.5-7note","7-7.5note",">7.5note"), ordered=T)
 #'
 #'  # Pathmox Analysis
-#'  fib.pathmox=pls.pathmox(pls.fib,seg.fib,signif=0.05,
+#'  fib.pathmox=pls.pathmox(data.fib, inner.fib, outer.fib, modes.fib,SVAR=seg.fib,signif=0.05,
 #'					deep=2,size=0.2,n.node=20)
 #' 
-#'  fib.comp=pls.treemodel(pls.fib,fib.pathmox)
+#'  fib.comp=pls.treemodel(fib.pathmox)
 #'  
 #'  }
 #'
@@ -121,9 +107,6 @@
 #'  outer.fib = list(1:8,9:11,12:16,17:20,21:24)
 #'  modes.fib = rep("A", 5)
 #'  
-#'  # apply plspm
-#'  pls.fib = plspm(data.fib, inner.fib, outer.fib, modes.fib)
-#'                  
 #'
 #'  # re-ordering those segmentation variables with ordinal scale 
 #'  seg.fib = fibtele[1:50,c(2,7)]
@@ -131,47 +114,33 @@
 #'			levels=c("<18k","25k","35k","45k",">45k"), ordered=TRUE)
 #'
 #'  # Pathmox Analysis
-#' fib.pathmox = pls.pathmox(pls.fib,seg.fib,signif=0.5,
+#' fib.pathmox = pls.pathmox(data.fib, inner.fib, outer.fib, modes.fib,SVAR=seg.fib,signif=0.5,
 #'					deep=1,size=0.01,n.node=10)
 #'
+#' fib.comp=pls.treemodel(fib.pathmox)
 #'
-pls.treemodel <- function (xpls,xtree,X=NULL,alpha=0.05,terminal=TRUE,scaled=FALSE, label=FALSE, label.nodes=NULL, ...)
+pls.treemodel <- function (xtree,alpha=0.05,terminal=TRUE,scaled=FALSE, label=FALSE, label.nodes=NULL, ...)
 {
-  if (class(xpls) != "plspm") 
-    stop("Argument 'pls' must be an object of class 'plspm'")
+  
   if (class(xtree) != "xtree.pls") 
     stop("Argument 'xtree' must be an object of class 'xtree.pls'")
-  if (nrow(xpls$scores) != xtree$MOX$Size[1]) 
-    stop("Arguments 'xpls' and 'xtree' are incompatible. Different number of observations")
-  if (!is.null(X)) {
-    if (is.null(xpls$data)) {
-      if (!is.matrix(X) && !is.data.frame(X)) 
-        stop("Invalid object 'X'. Must be a numeric matrix or data frame.")
-      if (nrow(X) != nrow(xpls$latents)) 
-        stop("Argument 'pls' and 'X' are incompatible. Different number of rows.")
-    }
-  }
-  else {
-    if (is.null(xpls$data)) 
-      stop("Argument 'X' is missing. No dataset available.")
-  }  
-    
-  x			=	xtree$model$data
-  inner   	=	xpls$model$IDM
-  outer	  	=	xpls$model$blocks
-  mode		=	xpls$model$specs$modes
-  scaling 	= 	xpls$model$specs$scaling
-  scaled		=	xpls$model$specs$scaled
-  scheme		=  	xpls$model$specs$scheme	
-  MOX			=   xtree$MOX
+  
+  x		      =	  xtree$model$data
+  
+  inner   	=	  as.matrix(xtree$model$inner)
+  outer	  	=	  xtree$model$outer
+  mode		  =	  xtree$model$mode
+  scaling 	= 	xtree$model$scaling
+  scaled		=	  xtree$model$scaled
+  scheme		=  	xtree$model$scheme	
+  MOX			  =   xtree$MOX
   
   
   if(terminal==TRUE)	{nodes	=	xtree$terminal}
   if(terminal==FALSE) {nodes	=	xtree$nodes}
   
-  latent		=  	xpls$scores
-  
-  inv = invariance(x,xtree$terminal,inner,outer,mode,scheme,scaling,scaled)
+  pls.global=plspm(x,inner,outer,mode,scaling,scheme,scaled=scaled)
+  latent		=  	pls.global$scores
   
   
   lvs			=	ncol(inner)
@@ -184,25 +153,25 @@ pls.treemodel <- function (xpls,xtree,X=NULL,alpha=0.05,terminal=TRUE,scaled=FAL
     term.nodes <- which(MOX$Terminal == "yes") - 1
     tn.labs <- paste("Node", MOX$Node[term.nodes + 1], sep = "_")
     name.node=c("Root_Node", tn.labs)
-  	if(label==TRUE){name.node= label.nodes} 
+    if(label==TRUE){name.node= label.nodes} 
   }
   if(terminal==FALSE) 
   {
     term.nodes <- which(MOX$Depth> 0) - 1
     tn.labs <- paste("Node", MOX$Node[term.nodes + 1], sep = "_")
     name.node=c("Root_Node", tn.labs)
-  	if(label==TRUE){name.node= label.nodes} 
-  
+    if(label==TRUE){name.node= label.nodes} 
+    
   }
-  
   
   weights=NULL
   loadings=NULL
   paths=NULL
   effect=NULL
   r2=NULL
+  total = NULL
   significo=list()
-
+  
   for (i in 1 : length(nodes))
   {
     x.node	= 	x[nodes[[i]],]
@@ -211,10 +180,11 @@ pls.treemodel <- function (xpls,xtree,X=NULL,alpha=0.05,terminal=TRUE,scaled=FAL
     
     weights		=	round(cbind(weights,pls.node$outer_model[,3]),3)
     loadings	=	round(cbind(loadings,pls.node$outer_model[,4]),3)
-    paths		=	round(cbind(paths,pls.node$path_coefs[pls.node$path_coefs!=0]),3)
+    paths		  =	round(cbind(paths,pls.node$path_coefs[pls.node$path_coefs!=0]),3)
     effect		=	round(cbind(effect,pls.node$effects[,4]),3)
     rownames(effect)=pls.node$effects[,1]
-    r2			=	round(cbind(r2,pls.node$inner_summary$R2),3)
+    r2			  =	round(cbind(r2,pls.node$inner_summary$R2),3)
+    total= round(cbind(total,pls.node$effects[,4]),3)
     
     signific=NULL
     signific=list()
@@ -234,17 +204,16 @@ pls.treemodel <- function (xpls,xtree,X=NULL,alpha=0.05,terminal=TRUE,scaled=FAL
   }
   names(p2)=names(pls.node$inner_model)
   
-  colnames(weights)=colnames(loadings)=colnames(paths)=colnames(r2)=colnames(effect)=name.node
+  
+  colnames(weights)=colnames(loadings)=colnames(paths)=colnames(r2)=colnames(effect)= colnames(total) = name.node
   rownames(paths)=path.labs
   rownames(weights)=pls.node$outer_model[,1]
   rownames(loadings)=pls.node$outer_model[,1]
   rownames(r2)=rownames(pls.node$inner_summary)
+  rownames(total)=pls.global$effects[,1]
   
-  if(inv$p.value>alpha){
-    weights=cbind(weights,inv$avg.weights)
-  }
   
-  res=list(IDM=inner,invariance.test=inv$test,weights=weights,loadings=loadings,paths=paths,r2=r2,sign=p2)
+  res=list(weights=weights,loadings=loadings,path_coef=paths,path_sgnificance=p2, predictive_power_R2=r2, total_effects=total)
   class(res)="treemodel"
   res
 }
