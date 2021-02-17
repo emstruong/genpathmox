@@ -13,28 +13,28 @@
 
 Fg.test.pls	<-	function(Y0,X0,Y1,X1,method,...)
 {
-	if (method == "lm")
-	{
-		reg0	=	lm(Y0~X0-1)                   	
-		SSR0	=	sum(reg0$residuals^2)    
-		df0	=	(nrow(X0) - ncol(X0))
-
-		reg1	=	lm(Y1~X1-1)                   	
-		SSR1	=	sum(reg1$residuals^2)    
-		df1	=	(nrow(X1) - ncol(X1))                        
-	}
-	if (method == "lad")
-	{
-		reg0	=	rq(Y0~X0-1,method="fn")                   	
-		SSR0	=	sum(abs(reg0$residuals))    
-		df0	=	(nrow(X0) - ncol(X0))
-			
-		reg1	=	rq(Y1~X1-1,method="fn")                   	
-		SSR1	=	sum(abs(reg1$residuals))    
-		df1	=	(nrow(X1) - ncol(X1))                                              
-	}
-	Fg		=	((SSR0-SSR1)/(df0-df1))/(SSR1/df1)             
-	pval.g	=	pf(Fg,(df0-df1),df1,lower.tail=FALSE)     
-
-	list(Fg=Fg ,pvg=pval.g)
+  if (method == "lm")
+  {
+    reg0	=	lm(Y0~X0-1)                   	
+    SSR0	=	sum(reg0$residuals^2)    
+    df0	=	(nrow(X0) - ncol(X0))
+    
+    reg1	=	lm(Y1~X1-1)                   	
+    SSR1	=	sum(reg1$residuals^2)    
+    df1	=	(nrow(X1) - ncol(X1))                        
+  }
+  if (method == "lad")
+  {
+    reg0	=	rq(Y0~X0-1,method="fn")                   	
+    SSR0	=	sum(abs(reg0$residuals))    
+    df0	=	(nrow(X0) - ncol(X0))
+    
+    reg1	=	rq(Y1~X1-1,method="fn")                   	
+    SSR1	=	sum(abs(reg1$residuals))    
+    df1	=	(nrow(X1) - ncol(X1))                                              
+  }
+  Fg		=	((SSR0-SSR1)/(df0-df1))/(SSR1/df1)             
+  pval.g	=	pf(Fg,(df0-df1),df1,lower.tail=FALSE)     
+  
+  list(Fg=Fg ,pvg=pval.g)
 }

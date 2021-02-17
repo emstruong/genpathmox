@@ -5,5 +5,5 @@
 \alias{tree-class}
 \title{tree class}
 \description{
-tree is a S4 class that contains info on the binary segmentation tree
+tree is an S4 class that contains info on the binary segmentation tree
 }

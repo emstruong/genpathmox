@@ -5,5 +5,5 @@
 \alias{node-class}
 \title{node class}
 \description{
-node is a S4 class that contains info on each node of the binary segmentation tree
+node is an S4 class that contains info  on each node of the binary segmentation tree
 }

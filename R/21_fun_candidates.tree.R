@@ -9,26 +9,26 @@
 
 candidates.tree	<-	function(tree,...)
 {
-	candidates = list()
-	id = list()
-
-	if (length(tree@nodes) > 1)
-	{
-		for (n in tree@nodes)
-		{
-			if (length(n@childs)>0)
-			{
-			candidates[[length(candidates)+1]] = n@info@candidates
-			id[[length(id)+1]] = n@id
-			}
-		}
-		for (i in 1:length(candidates))	{names(candidates) = paste("node",id)}
-	
-		candidates
-	}
-	else
-	{
-		candidates = NULL
-	}
-	candidates
+  candidates = list()
+  id = list()
+  
+  if (length(tree@nodes) > 1)
+  {
+    for (n in tree@nodes)
+    {
+      if (length(n@childs)>0)
+      {
+        candidates[[length(candidates)+1]] = n@info@candidates
+        id[[length(id)+1]] = n@id
+      }
+    }
+    for (i in 1:length(candidates))	{names(candidates) = paste("node",id)}
+    
+    candidates
+  }
+  else
+  {
+    candidates = NULL
+  }
+  candidates
 }	

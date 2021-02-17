@@ -30,28 +30,20 @@
 
 test.partition.pls <- function(x,inner,outer,mode,scheme,scaling,scaled,modtwo,signif,method,...) 
 {
-	d.info	=	F.data.pls(x,inner,outer,mode,scheme,scaling,scaled,modtwo)
-	
-	FG		=	Fg.test.pls(d.info$Y0,d.info$X0,d.info$Y1,d.info$X1,method)
-
-	if(FG$pvg > signif)
-	{
-		list(Fg=FG$Fg ,pvg=FG$pvg,Fb=NULL ,pvb=NULL,Fc=list(),pvc=list())
-	}
-	else
-	{
-		FB		=	Fb.test.pls(d.info$Y1,d.info$X1,d.info$info.block,method)
-		
-		if(length(FB$pvb[FB$pvb<=signif] != 0))
-		{
-			FC		=	Fc.test.pls(d.info$Y1,d.info$X1,d.info$path.name,d.info$info.block,method)
-
-			list(Fg=FG$Fg ,pvg=FG$pvg,Fb=FB$Fb ,pvb=FB$pvb,Fc=FC$Fc,pvc=FC$pvc) 	
-		}
-		else
-		{
-			list(Fg=FG$Fg ,pvg=FG$pvg,Fb=FB$Fb ,pvb=FB$pvb,Fc=list(),pvc=list())
-		}
-	}
+  d.info	=	F.data.pls(x,inner,outer,mode,scheme,scaling,scaled,modtwo)
+  
+  FG		  =	Fg.test.pls(d.info$Y0,d.info$X0,d.info$Y1,d.info$X1,method)
+  
+  if(FG$pvg > signif)
+  {
+    list(Fg=FG$Fg ,pvg=FG$pvg,Fc=list(),pvc=list())
+  }
+  else
+  {
+    
+    FC	=	Fc.test.pls(d.info$Y1,d.info$X1,d.info$path.name,d.info$info.block,method)
+    
+    list(Fg=FG$Fg ,pvg=FG$pvg,Fc=FC$Fc,pvc=FC$pvc) 	
+  }
 }
 

@@ -4,7 +4,7 @@
 \alias{element}
 \title{Defining labels of a path coefficient.}
 \usage{
-element(x, ...)
+element(x, l, ...)
 }
 \arguments{
 \item{x}{matrix containing information of casual relationship of latent variables.}

@@ -9,18 +9,17 @@
 
 f.min	<-	function(x,...)
 {
-	if(!is.null(x))
-	{
-		v.min	=	min(x[!is.na(x)])
-		all.v	=	which(!is.na(x))
-		p.min	=	match(v.min,x)
-	}
-	else
-	{
-		v.min	=	NULL
-		all.v	=	NULL
-		p.min	=	NULL
-	}	
-	list(v.min=v.min,all.v=all.v,p.min=p.min)
+  if(!is.null(x))
+  {
+    v.min	=	max(x[!is.na(x)])
+    all.v	=	which(!is.na(x))
+    p.min	=	match(v.min,x)
+  }
+  else
+  {
+    v.min	=	NULL
+    all.v	=	NULL
+    p.min	=	NULL
+  }	
+  list(v.min=v.min,all.v=all.v,p.min=p.min)
 }
-

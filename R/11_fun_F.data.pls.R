@@ -29,47 +29,42 @@
 
 F.data.pls	<-	function(x,inner,outer,mode,scheme,scaling,scaled,modtwo,...)
 {
-
-	pls	=	plspm(x,inner,outer,mode,scaling,scheme,scaled=scaled)
-
-	
-	pls 		=	plspm(x,inner,outer,mode,scaling,scheme,scaled=scaled)
-	
-	LV = pls$scores
-	
-	path.name		=	element(pls$path_coefs)
-	
-	global		=	build.block(inner=inner,latent=LV)
-
-	Y0			=	global$resp
-	X0			=	global$x.block
-	info.block	=	global$constructs.label
-
-	g1.latent = subset(LV,modtwo==1)                    
-	g2.latent = subset(LV,modtwo==2)
-	
-	g1=build.block(inner,latent=g1.latent)
-	g2=build.block(inner,latent=g2.latent)
-		
-	g1.resp	=	g1$resp
-	g1.pred	=	g1$x.block
-
-	g2.resp	=	g2$resp
-	g2.pred	=	g2$x.block
-
-	Y.alt	=	rbind(g1.resp,g2.resp)
-	X.alt	=	blockdiag(g1.pred,g2.pred)
-	
-	n.col	=	ncol(X.alt)/2
-	
-	colnames(X.alt)[1:n.col]	=	paste("g1 -",colnames(X0),sep=" ")
-	colnames(X.alt)[(n.col+1):(2*n.col)]	=	paste("g2 -",colnames(X0),sep=" ")
-	
-	list(Y0=Y0,
-		X0=X0,
-		Y1=Y.alt,
-		X1=X.alt,
-		path.name=path.name,
-		info.block=info.block)	
+  pls 		=	plspm(x,inner,outer,mode,scaling,scheme,scaled)
+  
+  LV      = pls$scores
+  
+  path.name		=	element(pls$path_coefs)
+  
+  global		  =	build.block(inner=inner,latent=LV)
+  
+  Y0			    =	global$resp
+  X0			    =	global$x.block
+  info.block	=	global$constructs.label
+  
+  g1.latent = subset(LV,modtwo==1)                    
+  g2.latent = subset(LV,modtwo==2)
+  
+  g1=build.block(inner,latent=g1.latent)
+  g2=build.block(inner,latent=g2.latent)
+  
+  g1.resp	=	g1$resp
+  g1.pred	=	g1$x.block
+  
+  g2.resp	=	g2$resp
+  g2.pred	=	g2$x.block
+  
+  Y.alt	=	rbind(g1.resp,g2.resp)
+  X.alt	=	blockdiag(g1.pred,g2.pred)
+  
+  n.col	=	ncol(X.alt)/2
+  
+  colnames(X.alt)[1:n.col]	=	paste("g1 -",colnames(X0),sep=" ")
+  colnames(X.alt)[(n.col+1):(2*n.col)]	=	paste("g2 -",colnames(X0),sep=" ")
+  
+  list(Y0=Y0,
+       X0=X0,
+       Y1=Y.alt,
+       X1=X.alt,
+       path.name=path.name,
+       info.block=info.block)	
 }
-

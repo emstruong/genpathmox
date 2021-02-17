@@ -9,8 +9,8 @@
 
 percent.node	<-	function(x,size,...)
 {
-	indiv		=	nrow(x)
-	min.n.ind 	= trunc(indiv*size)
-	
-	list(min.n.ind=min.n.ind)	
+  indiv		=	nrow(x)
+  min.n.ind 	= trunc(indiv*size)
+  
+  list(min.n.ind=min.n.ind)	
 }

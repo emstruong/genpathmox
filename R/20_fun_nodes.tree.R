@@ -9,23 +9,23 @@
 
 nodes.tree	<-	function(tree,...)
 {
-	nodes 	= list()
-	id 		= list()
-	
-	if (length(tree@nodes) > 1)
-	{
-		for (n in tree@nodes)
-		{
-			nodes[[length(nodes)+1]] = n@elements
-			id[[length(id)+1]] = n@id
-		}
-		for (i in 1:length(nodes))	{names(nodes) = paste("node",id)}
-	
-		nodes
-	}
-	else
-	{
-		nodes = NULL
-	}
-	nodes
+  nodes 	= list()
+  id 		= list()
+  
+  if (length(tree@nodes) > 1)
+  {
+    for (n in tree@nodes)
+    {
+      nodes[[length(nodes)+1]] = n@elements
+      id[[length(id)+1]] = n@id
+    }
+    for (i in 1:length(nodes))	{names(nodes) = paste("node",id)}
+    
+    nodes
+  }
+  else
+  {
+    nodes = NULL
+  }
+  nodes
 }	

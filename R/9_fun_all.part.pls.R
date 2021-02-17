@@ -30,50 +30,49 @@
 
 all.part.pls <- function(x,y,inner,outer,mode,scheme,scaling,scaled,method,n.node,...) 
 {
-	part			=	partition(y)
-	                                 
-	p.bin		=	list()                                     
-	level		=	list()                                    
-	modtwo		=	list() 
-	                                   
-	length(p.bin)	=	length(level)	=	length(modtwo)	=	ncol(y) 
-	
-	Ftest      	= NULL
-	df0        	= NULL
-	df1        	= NULL
-	pvl        	= NULL 
-	g1.ind    	= NULL
-	g2.ind		= NULL
-	
-	for (j in 1:ncol(y))
-	{                              
-		if (is.null(part$split[[j]])) next
-		
-		jpart	=	splitopt.pls(x,inner,outer,mode,scheme,scaling,scaled,splits=part$split[[j]],fact=y[,j],method,n.node) 
-		
-		if (is.null(jpart$pval)) next
-		
-		p.bin[[j]]			=	jpart$partition                   
-		level[[j]]			=	unlist(jpart$mod)
-		pvl[j]				=	jpart$pval
-		Ftest[j]				=	jpart$F
-		g1.ind[j]				=	jpart$g1.ind
-		g2.ind[j]				=	jpart$g2.ind
-		modtwo[[j]]			=	jpart$modtwo
-		df0[j]				=	jpart$df.num
-		df1[j]				=	jpart$df.den
-	}
-	variable					=	names(y)
-	
-	list(p.bin=p.bin,
-		variable=variable,
-		level=level,
-		Ftest=Ftest,
-		pvl=pvl,
-		g1.ind=g1.ind,
-		g2.ind=g2.ind,
-		df0=df0,
-		df1=df1,
-		modtwo=modtwo)	
+  part			=	partition(y)
+  
+  p.bin		  =	list()                                     
+  level		  =	list()                                    
+  modtwo		=	list() 
+  
+  length(p.bin)	=	length(level)	=	length(modtwo)	=	ncol(y) 
+  
+  Ftest      	= NULL
+  df0        	= NULL
+  df1        	= NULL
+  pvl        	= NULL 
+  g1.ind    	= NULL
+  g2.ind		  = NULL
+  
+  for (j in 1:ncol(y))
+  {                              
+    if (is.null(part$split[[j]])) next
+    
+    jpart	=	splitopt.pls(x,inner,outer,mode,scheme,scaling,scaled,splits=part$split[[j]],fact=y[,j],method,n.node) 
+    
+    if (is.null(jpart$pval)) next
+    
+    p.bin[[j]]			=	jpart$partition                   
+    level[[j]]			=	unlist(jpart$mod)
+    pvl[j]				  =	jpart$pval
+    Ftest[j]				=	jpart$F
+    g1.ind[j]				=	jpart$g1.ind
+    g2.ind[j]				=	jpart$g2.ind
+    modtwo[[j]]			=	jpart$modtwo
+    df0[j]				  =	jpart$df.num
+    df1[j]				  =	jpart$df.den
+  }
+  variable					=	names(y)
+  
+  list(p.bin=p.bin,
+       variable=variable,
+       level=level,
+       Ftest=Ftest,
+       pvl=pvl,
+       g1.ind=g1.ind,
+       g2.ind=g2.ind,
+       df0=df0,
+       df1=df1,
+       modtwo=modtwo)	
 }
-

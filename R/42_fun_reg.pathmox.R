@@ -103,10 +103,10 @@
 #' data(fibtelereg)
 #'
 #' #identify the segmentation variables  
-#' segvar= fibtelereg[1:50,3:4]
+#' segvar= fibtelereg[,3:4]
 #'
 #' #select the variables
-#' data.fib=fibtelereg[1:50,12:18]          
+#' data.fib=fibtelereg[,12:18]          
 #'
 #  #regression PATHMOX
 #' fib.reg.pathmox=reg.pathmox(Satisfact~.,data=data.fib,segvar,
@@ -222,7 +222,7 @@ reg.pathmox	<- function(formula,SVAR,signif,deep,method,size,data=NULL,...)
 	if(length(t@nodes)==1)
 	{
 		root=root.tree(t)
-		warning("No sognificative partition faunded")
+		warning("No significative partition faunded")
 		res=list(root=root, data=x, method=method)
 	}
 	else

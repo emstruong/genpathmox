@@ -10,15 +10,16 @@
 
 bin.levels	<-	function(variable,spl,...)
 {
-	new.lab = list()
-	for (i in 1:2)
-	{
-		mod = levels(variable)[spl==i]
-		for (i in 1:length(mod))
-		{
-			v.temp = paste(mod,collapse = '/')
-		}
-		new.lab[[length(new.lab)+1]] = v.temp
-		}
-	unlist(new.lab)
+  new.lab = list()
+  for (i in 1:2)
+  {
+    mod = levels(variable)[spl==i]
+    for (i in 1:length(mod))
+    {
+      v.temp = paste(mod,collapse = '/')
+    }
+    new.lab[[length(new.lab)+1]] = v.temp
+  }
+  unlist(new.lab)
 }
+

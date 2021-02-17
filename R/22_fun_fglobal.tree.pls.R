@@ -9,28 +9,28 @@
 
 fglobal.tree.pls	<-	function(tree,...)
 {
-	fglobal = list()
-	fgtable = NULL
-	
-	if (length(tree@nodes) > 1)
-	{
-		for (n in tree@nodes)
-		{
-			if (length(n@childs) > 0)
-			{
-				fglobal[[length(fglobal)+1]] = data.frame(n@id,n@info@fgstatistic,n@info@fpvalg,n@info@variable,t(n@info@level))
-			}
-		}
-	
-		for (i in 1:length(fglobal)) {fgtable = rbind(fgtable,fglobal[[i]])}
-	
-		colnames(fgtable)	=	c("node","fg.statistic","fg.pvalue","variable","g1.mod","g2.mod")
-	
-		Fg.r = fgtable
-	}
-	else
-	{
-		Fg.r = NULL
-	}
-	Fg.r
+  fglobal = list()
+  fgtable = NULL
+  
+  if (length(tree@nodes) > 1)
+  {
+    for (n in tree@nodes)
+    {
+      if (length(n@childs) > 0)
+      {
+        fglobal[[length(fglobal)+1]] = data.frame(n@id,n@info@fgstatistic,n@info@fpvalg,n@info@variable,t(n@info@level))
+      }
+    }
+    
+    for (i in 1:length(fglobal)) {fgtable = rbind(fgtable,fglobal[[i]])}
+    
+    colnames(fgtable)	=	c("node","fg.statistic","fg.pvalue","variable","g1.mod","g2.mod")
+    
+    Fg.r = fgtable
+  }
+  else
+  {
+    Fg.r = NULL
+  }
+  Fg.r
 }	

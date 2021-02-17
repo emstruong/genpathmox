@@ -8,5 +8,5 @@
 
 showDeepth=function(node)
 {
-	return (trunc(log2(node@id)))
+  return (trunc(log2(node@id)))
 }

@@ -9,14 +9,14 @@
 
 root.tree	<-	function(tree,...)
 {
-	root = NULL
-	
-	for (n in tree@nodes)
-	{
-		if (n@id == 1)
-		{
-			root=n@elements
-		}
-	}	
-	root
+  root = NULL
+  
+  for (n in tree@nodes)
+  {
+    if (n@id == 1)
+    {
+      root=n@elements
+    }
+  }	
+  root
 }	
