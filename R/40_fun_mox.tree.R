@@ -25,7 +25,7 @@ mox.tree	<-	function(tree,...)
 			}
 			if (length(n@childs)>0)
 			{
-				info.node[[length(info.node)+1]]=data.frame(n@info@variable,n@id,n@childs,n@info@modalidad)
+				info.node[[length(info.node)+1]]=data.frame(n@info@variable,n@id,n@childs)
 			}
 			if(length(n@childs)==0)
 			{

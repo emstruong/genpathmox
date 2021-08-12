@@ -1,7 +1,7 @@
 #' @title Summary function for the Pathmox Segmentation Trees: linaer regression and LAD
 #' 
 #' @description
-#' The function \code{summary.xtree.reg} returns the most important results obtained 
+#' The function \code{summarize.reg} returns the most important results obtained 
 #' by the function \code{reg.pathmox}. In order, it provides the parameters algorithm (
 #' threshold significance,node size limit,tree depth level and the method used for the 
 #' split partition), the basic characteristics of the tree (deep and number of terminal 
@@ -22,11 +22,9 @@
 #' @references Sanchez, G. (2009) \emph{PATHMOX Approach: Segmentation Trees in
 #' Partial Least Squares Path Modeling.} PhD Dissertation. 
 #'
-#' \code{\link{summary.xtree.pls}}, \code{\link{reg.pathmox}}.
+#' \code{\link{reg.pathmox}}.
 #'
-#' @method summary xtree.reg
-#' @S3method summary xtree.reg
-#' 
+#' @export
 #' @examples
 #'
 #'  \dontrun{
@@ -53,25 +51,10 @@
 #' fib.reg.pathmox = reg.pathmox(Satisfact~.,data=data.fib,segvar,
 #'		signif=0.05,deep=2,method="lm",size=0.15)
 #'
-#'  summary(fib.reg.pathmox)
+#'  summarize.reg(fib.reg.pathmox)
 #'
 #'}
-#'  
-#' data(fibtelereg)
-#'
-#' #identify the segmentation variables  
-#' segvar= fibtelereg[1:50,3:4]
-#'
-#' #select the variables
-#' data.fib=fibtelereg[1:50,12:18]          
-#'
-#  #regression PATHMOX
-#' fib.reg.pathmox=reg.pathmox(Satisfact~.,data=data.fib,segvar,
-#'		signif=0.05,deep=1,method="lm",size=0.15)
-#'
-#' summary(fib.reg.pathmox)
-#'
-summary.xtree.reg <- function(object, ...)
+summarize.reg <- function(object, ...)
 {
 	
 	info= object$model

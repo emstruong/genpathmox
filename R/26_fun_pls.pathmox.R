@@ -103,7 +103,7 @@
 #' @return \item{Fc.r}{A list of data frames containing the results of the F-coefficients test 
 #' for each node partition}
 #' @return \item{model}{Informations about the internal paramenters} 
-#' @return \item{hybrid}{a hybird categorical factor defined according to the final segments idenfied by pathmox} 
+#' @return \item{hybrid}{orginal dataset plus the hybird categorical factor defined according to the final segments idenfied by pathmox. Dataset is ordered by the hybird variable} 
 #' 
 #' @author Giuseppe Lamberti
 #' 
@@ -158,8 +158,9 @@
 #'                          deep=2,size=0.2,n.node=20)
 #'  
 #'  }
-#'
-#' library(genpathmox)
+#'  
+#'  ## example of PLS-PM in bank customer satisfaction
+#'  
 #' data(csibank)
 #' 
 #' # select manifest variables
@@ -190,8 +191,8 @@
 #' # Pathmox Analysis
 #' bank.pathmox=pls.pathmox(data.bank, inner.bank, outer.bank, modes.bank,SVAR=seg.bank,signif=0.05,
 #'                          deep=2,size=0.2,n.node=20)
-#'
-#'
+#'                          
+#'                          
 pls.pathmox = function(x,inner,outer,mode,scheme="path",scaling=NULL,scaled=TRUE,SVAR,signif=0.05,deep,method="lm",size,tree = TRUE,n.node=30,...)
 {
   
@@ -217,7 +218,8 @@ pls.pathmox = function(x,inner,outer,mode,scheme="path",scaling=NULL,scaled=TRUE
   
   if (any(is.na(x)))
   {
-    stop("Argument 'x' contains NA, please provide a complete dataset of indicators")
+    stop("Data contains NA: please imput or drop it")
+   
   }
   if (!is.data.frame(SVAR))
   {
@@ -225,7 +227,7 @@ pls.pathmox = function(x,inner,outer,mode,scheme="path",scaling=NULL,scaled=TRUE
   }
   if (any(is.na(SVAR)))
   {
-    stop("Argument 'SVAR' contains NA, please provide a complete dataset of categorical variables")
+    stop("Data contains NA: please imput or drop it")
   }             
   if (mode(signif) != "numeric" || length(signif) != 1 || signif <= 
       0 || signif >= 1) {
@@ -384,7 +386,7 @@ pls.pathmox = function(x,inner,outer,mode,scheme="path",scaling=NULL,scaled=TRUE
   if	(length(t@nodes)==1 )  
   {
     root = root.tree(t)
-    cat("No significative partition faunded")
+    cat("No sognificative partition faunded")
     res = list(root=root,model=model)
   }
   else
@@ -396,8 +398,17 @@ pls.pathmox = function(x,inner,outer,mode,scheme="path",scaling=NULL,scaled=TRUE
     candidates = candidates.tree(t)
     Fg.r = fglobal.tree.pls(t)
     Fc.r = fcoef.tree.pls(t)
-    for( i in 2: length(terminal))  
-      hybrid = c(hybrid, rep( i-1, length(terminal[[i]])))
+    
+    for( i in 2: length(terminal))  {
+      
+      data.node=cbind(x[terminal[[i]],],hybird.var=rep(paste(names(terminal)[i]),length(terminal[[i]])))
+      
+      hybrid=rbind(hybrid,data.node)
+      
+    }
+    
+    hybrid$hybird.var = factor(hybrid$hybird.var)
+    
     res = list(MOX=MOX,
                root=root,
                terminal=terminal,

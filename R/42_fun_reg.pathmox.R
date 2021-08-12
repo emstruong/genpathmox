@@ -99,18 +99,6 @@
 #'		signif=0.05,deep=2,method="lm",size=0.15)
 #'
 #'}
-#'  
-#' data(fibtelereg)
-#'
-#' #identify the segmentation variables  
-#' segvar= fibtelereg[,3:4]
-#'
-#' #select the variables
-#' data.fib=fibtelereg[,12:18]          
-#'
-#  #regression PATHMOX
-#' fib.reg.pathmox=reg.pathmox(Satisfact~.,data=data.fib,segvar,
-#'		signif=0.05,deep=1,method="lm",size=0.15)
 #'
 reg.pathmox	<- function(formula,SVAR,signif,deep,method,size,data=NULL,...)
 {

@@ -99,7 +99,7 @@ for each node partition}
 
 \item{model}{Informations about the internal paramenters}
 
-\item{hybrid}{a hybird categorical factor defined according to the final segments idenfied by pathmox}
+\item{hybrid}{orginal dataset plus the hybird categorical factor defined according to the final segments idenfied by pathmox. Dataset is ordered by the hybird variable}
 }
 \description{
 The function \code{pathmox.pls} calculates a binary segmentation tree in 
@@ -185,8 +185,9 @@ bank.pathmox=pls.pathmox(data.bank, inner.bank, outer.bank, modes.bank,SVAR=seg.
                          deep=2,size=0.2,n.node=20)
  
  }
-
-library(genpathmox)
+ 
+ ## example of PLS-PM in bank customer satisfaction
+ 
 data(csibank)
 
 # select manifest variables
@@ -217,8 +218,8 @@ seg.bank$Education = factor(seg.bank$Education, ordered=TRUE)
 # Pathmox Analysis
 bank.pathmox=pls.pathmox(data.bank, inner.bank, outer.bank, modes.bank,SVAR=seg.bank,signif=0.05,
                          deep=2,size=0.2,n.node=20)
-
-
+                         
+                         
 }
 \references{
 Lamberti, G. (2021) \emph{Hybrid multigroup partial least squares structural equation modelling: 

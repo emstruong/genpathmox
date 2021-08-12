@@ -1,5 +1,5 @@
-4cd707c25b731d9a3357cf181a4001db *DESCRIPTION
-89e6820a9066415860b5d7dcb1c16c2e *NAMESPACE
+2c40590816ada083e81ea7fe729788b6 *DESCRIPTION
+4b3e5a29a6ad2290bdf4aabf1ae01ead *NAMESPACE
 7fba79a4bc26f5cd8f83abfb51ef7069 *R/10_fun_partopt.pls.R
 e8cfb675fb7dd4de3b1d121c871d62e3 *R/11_fun_F.data.pls.R
 321b54e61b05e4387c77af599d170ffb *R/12_fun_Fg.test.pls.R
@@ -16,10 +16,9 @@ aac391b6da079c9bdac12a3580fe2fc9 *R/20_fun_nodes.tree.R
 7bb57f64371887f00c60f752fb34db89 *R/23_fun_fcoef.tree.pls.R
 f117b9a93a9f6bf103579b069ab729a8 *R/24_fun_mox.tree.pls.R
 7afe782bf259e75a342a22013e9b1387 *R/25_fun_info.mox.pls.R
-04aba36eba8f2cf4b2891e44b641100e *R/26_fun_pls.pathmox.R
+cda16f6f0e682807a21933622ae6780e *R/26_fun_pls.pathmox.R
 a8c167b22a2aeb33b2e4304f5513653f *R/27_fun_pls.treemodel.R
 bd3cfbc48990f13b4f39c41b434d76e9 *R/28_fun_pls.treenode.R
-8e3fa73e909f125ed0bc232c1871fa3e *R/29_fun_multigroup.R
 bb98940526bcd9bbcc7f03975d89ee96 *R/2_fun_comb.R
 e015e8ae9267862b72ff5154ea413cb6 *R/30_fun_splitopt.reg.R
 2c547442eb38ccd709f02e4589db5d56 *R/31_fun_all.part.reg.R
@@ -32,9 +31,9 @@ c2e5017bd47e7e7f8ac7b57c0f377fe0 *R/34_fun_Fg.test.reg.R
 738448fa68574b6364f2a62b62e92f90 *R/38_fun_fglobal.tree.R
 0e337668d6d55df3bb6fff8e6a8fd218 *R/39_fun_fcoef.tree.reg.R
 4f14c43ab8e5d08ecccc9de27d7d75ca *R/3_fun_partition.R
-d7690de48fb3e8158f9bee82a0c647d3 *R/40_fun_mox.tree.R
+b6236f0e3d3b8b0808695041ed7a9ae0 *R/40_fun_mox.tree.R
 4a56599d8805e3f9bba0613656325bbd *R/41_fun_info.mox.reg.R
-a3bed158880c254bdb2896f94e4d7f1f *R/42_fun_reg.pathmox.R
+33ac2a606de97afe58fff05d922a3e32 *R/42_fun_reg.pathmox.R
 162c3bf6b8401f3db9e65d26d9747178 *R/4_fun_build.block.R
 c6c4cfdf1f07235865cc13973c4ba487 *R/5_fun_bin.levels.R
 8c375381d3c03aef891a1a1fdde95615 *R/6_fun_element.R
@@ -55,8 +54,8 @@ fc6e03bd87db8c6e96868e48b53d8b2e *R/method1_xtree.pls.R
 9274a2bcf5d8f0184fe3e451f3ca4857 *R/method3_xtree.reg.R
 52447d286d238ee76c9176640b8f7ed2 *R/method4_treemodelreg.R
 eff0132147d81370d84b6ea6d8d7136a *R/plot_plot.xtree.pls.R
-c1e16853d0425c7aee705cbccf1f99d2 *R/summary_summary.xtree.pls.R
-a80036899e5ed615df1045de916d2ba5 *R/summary_summary.xtree.reg.R
+adcb0e23b9ebaeff8abcd2874e68ccba *R/summarize.mox.R
+3d94e1419029b0b4c00fbf1cbd1741d5 *R/summarize.reg.R
 9367a46819f809ff9e503f1ba8c7180d *data/csibank.rda
 992c14ca9a945dc9d95b5927bb1e2616 *data/fibtelereg.rda
 9b9a6eb26355d323a6a4efe28dd52d02 *man/F.data.pls.Rd
@@ -189,7 +188,6 @@ fcdf5eff2abe02cddfdace0c2130b8d2 *man/meanlist.Rd
 f45f78c2aad1b6c3f19f8c14eba4d2c3 *man/minlist.Rd
 1d85163f4d23e0d37a108903949ba781 *man/mox.tree.Rd
 212b7d7ad926d3c82eb524744cf50d71 *man/mox.tree.pls.Rd
-b0489e6bf615fd931f299272c30dff4e *man/multigroup.pls.Rd
 5cfbe38e074de5e544322d294fa83cc7 *man/node-class.Rd
 46cfccc4ae8f9583bee98b4c3cb1fd71 *man/node.reg_class.Rd
 852766244e951068246bd25dd407f15c *man/nodes.tree.Rd
@@ -199,12 +197,12 @@ d9b882837db921762b4ddcc17f3b3c01 *man/normalize.Rd
 878e2f3b208e06d26774fb43dd083654 *man/partopt.reg.Rd
 90924c7bd68779dd7d5756c9db1110ff *man/percent.node.Rd
 8339daa59bb6080cde822c2fabf229ce *man/plot.xtree.pls.Rd
-e514c167effef99eec7ac16117c28737 *man/pls.pathmox.Rd
+e4a96340ca1a85e9b59cb46d0797c35a *man/pls.pathmox.Rd
 4ef62e1db1b757cfcacc81c35679c560 *man/pls.treemodel.Rd
 17c4115b16b9c01d25ff2e5231b21e39 *man/plspm.Rd
 23315d936e4aa813fea29ee850c87d1b *man/printTree.Rd
 d32618f86a8ac308c637f16ac3b5d319 *man/prodlist.Rd
-cee198ab37592dcfcb3550d201e6d9a0 *man/reg.pathmox.Rd
+e5c09cb002278c300ac90d19bcb12d78 *man/reg.pathmox.Rd
 8968130585894db8d82b4c70a3a80d14 *man/root.tree.Rd
 16d303aada970ed2f0763b757bf3dcdd *man/same_class.Rd
 bacdbfbdefea1b4c1912309caafc0c2a *man/same_dim.Rd
@@ -216,8 +214,8 @@ ff12b8059b130283e25602ed85c9734c *man/same_type.Rd
 edf8f849f6661e511a4c246dc1e7570e *man/splitopt.pls.Rd
 82e41324a3ecf606f689dc8817fd2fbb *man/splitopt.reg.Rd
 bc2f3b85332995b5467d1707aee97d33 *man/sumlist.Rd
-65b3bbcdf038b81869f2691ad0edae8d *man/summary.xtree.pls.Rd
-9e9a82f63efe6493c0f9154f8fa340d3 *man/summary.xtree.reg.Rd
+34742cb5eb0eacf137ed377b3b99628f *man/summarize.mox.Rd
+11c1b676aec713708719b417df96a86d *man/summarize.reg.Rd
 bbe42c18e5c973e9e1cde96bc4063567 *man/terminal.tree.Rd
 6279d411fa93c1265b2f920963080611 *man/test.particion.reg.Rd
 0c1a4e098a24299d4ff731f1ad502ba5 *man/test.partition.pls.Rd

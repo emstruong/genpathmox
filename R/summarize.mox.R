@@ -1,7 +1,7 @@
 #' @title Summary function for the Pathmox Segmentation Trees: PLS-PM
 #' 
 #' @description
-#' The function \code{summary.xtree.pls} returns the most important results obtained 
+#' The function \code{summarize.mox} returns the most important results obtained 
 #' by the function \code{pls.pathmox}. In order, it provides the parameters algorithm (
 #' threshold significance, node size limit", tree depth level, and the method used for the 
 #' split partition), the essential characteristics of the tree (deep and number of terminals 
@@ -29,8 +29,7 @@
 #'
 #'
 #' \code{\link{pls.pathmox}}
-#' @method summary xtree.pls
-#' @S3method summary xtree.pls
+#' @export
 #' @examples
 #'  
 #' \dontrun{
@@ -66,45 +65,10 @@
 #' # Pathmox Analysis
 #' bank.pathmox=pls.pathmox(data.bank, inner.bank, outer.bank, modes.bank,SVAR=seg.bank,signif=0.05,
 #'                          deep=2,size=0.2,n.node=20)
-#' summary(bank.pathmox)
+#' summarize.mox(bank.pathmox)
 #'  
 #'  }
-#'
-#' library(genpathmox)
-#' data(csibank)
-#' 
-#' # select manifest variables
-#' data.bank <-csibank[,6:32]
-#' 
-#' # define inner model matrix
-#' Image 			  = rep(0,6)
-#' Expectation	  = c(1,0,0,0,0,0)
-#' Quality		    = c(0,1,0,0,0,0)
-#' Value			    = c(0,1,1,0,0,0)
-#' Satis			    = c(1,1,1,1,0,0)
-#' Loyalty       = c(1,0,0,0,1,0)
-#' inner.bank = rbind(Image,Expectation, Quality, Value, Satis,Loyalty)
-#' colnames(inner.bank) = rownames(inner.bank)
-#' 
-#' # blocks of indicators (outer model)
-#' outer.bank  = list(1:6,7:10,11:17,18:21,22:24,25:27)
-#' modes.bank = rep("A", 6)
-#' 
-#' 
-#' # re-ordering those segmentation variables with ordinal scale 
-#' seg.bank= csibank[,1:5]
-#' 
-#' seg.bank$Age = factor(seg.bank$Age, ordered=TRUE)
-#' seg.bank$Education = factor(seg.bank$Education, ordered=TRUE)
-#' 
-#' 
-#' # Pathmox Analysis
-#' bank.pathmox=pls.pathmox(data.bank, inner.bank, outer.bank, modes.bank,SVAR=seg.bank,signif=0.05,
-#'                          deep=2,size=0.2,n.node=20)
-#'
-#' summary(bank.pathmox)
-#'
-summary.xtree.pls <- function(x, ...) 
+summarize.mox <- function(x, ...) 
 {
   info=x$model
   
