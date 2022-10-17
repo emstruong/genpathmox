@@ -411,6 +411,10 @@ bar_terminal	<- function (x,LV,bycoef=FALSE,cex.names=1,cex.axis=1.2,cex.main=1,
 #'
 bar_impvar	<- function (x,cex.names=1,cex.axis=1.2,cex.main=1,...) 
 {	
+  grDevices::dev.new()
+  graphics::par(mai=c(1.4,0.82,0.82,0.42))
+  diagram::openplotmat()
+  
   imp = x$var_imp[,2]/sum(x$var_imp[,2])
   names(imp)=x$var_imp[,1]
   maxfac <- 1+(imp==max(imp))

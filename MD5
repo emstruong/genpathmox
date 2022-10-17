@@ -1,11 +1,11 @@
-ee69008f2fe7d31640d4e4314f1b774c *DESCRIPTION
+56fd6640200a74d84f6ff8b5ed67570e *DESCRIPTION
 a6f2e458a84f84e8e9a646ea7bb55541 *NAMESPACE
-137b9cbe9b910fa87880d950eb221038 *R/data.R
+02d095a7a33c85d58054ee6c5865e5b4 *R/data.R
 a993ea772b3c996ab84755641e5aad14 *R/get_class_and_method.R
 962a86edbc1bf941d0dd60ea6298b2be *R/get_internal_F_tests.R
 532d50b800548fd90a6d16e8890eef79 *R/get_internal_tree.R
 3081acdb24abfc1a759ca37393574c2d *R/get_pathmox_internal.R
-8fed3786d2c037f315f6046fba0ec106 *R/get_plots.R
+d964a186fcbfa2e4e0b0aafdc66da5fd *R/get_plots.R
 9b2a95f0ee54bc3edb29a407a0aea141 *R/get_pls.R
 56e1051b0d4e3de36590386c6e0c651e *R/get_print.R
 500077fe180f611f7ee708941b64d883 *R/get_summary.R
@@ -24,7 +24,7 @@ f3b24541984afb73fd27212a82f5ff7c *man/all_part.Rd
 b2bcf38d573c34f04210ae39b2d16720 *man/build.block.Rd
 258306e5b536804af42ba3ff9018f99f *man/candidates.tree.Rd
 9c247681fdf48e0704c9183da80b7638 *man/check_arg_mox.Rd
-c894cea3ec4b1bff9383cd6856185f63 *man/climate.Rd
+9dcbe196735546d8eb1ca6f2adb772c5 *man/climate.Rd
 a12ceddcf83ec844352e784ecae69db0 *man/comb.Rd
 0ae34796628482e0091b7ce43ff3c24c *man/csibank.Rd
 e517cb40bacb429a373675cab739e99e *man/element.Rd
