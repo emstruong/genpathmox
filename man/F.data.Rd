@@ -4,26 +4,26 @@
 \alias{F.data}
 \title{Data preprocessing for F-tests}
 \usage{
-F.data(x, inner, outer, mode, scheme, modtwo)
+F.data(x, inner, .model, .scheme, .consistent, modtwo)
 }
 \arguments{
 \item{x}{matrix or dataframe containing the data.}
 
-\item{inner}{a square (lower triangular) boolean matrix representing the inner model}
+\item{inner}{a square (lower triangular) boolean matrix representing the inner model.}
 
-\item{outer}{list of vectors with column indices indicating which manifest variables 
-correspond to each block}
+\item{.model}{A description of the user-specified model.}
 
-\item{mode}{character vector indicating the type of measurement for each
-block. Possible values are: \code{"A", "B"}}
-
-\item{scheme}{string indicating the type of inner weighting
+\item{.scheme}{string indicating the type of inner weighting
 scheme. Possible values are \code{"centroid"}, \code{"factorial"}, or \code{"path"}.}
 
-\item{modtwo}{vector indicating the binary partition}
+\item{.consistent}{Logical. Should composite/proxy correlations be disattenuated 
+to yield consistent loadings and path estimates if at least one of the construct 
+is modeled as a common factor. Defaults to TRUE.}
+
+\item{modtwo}{vector indicating the binary partition.}
 }
 \value{
-list containing matrices needed for the tests
+list containing matrices needed for the tests.
 }
 \description{
 ############################################################################################

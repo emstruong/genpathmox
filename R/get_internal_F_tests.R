@@ -3,23 +3,23 @@
 #' @details
 #' Internal function
 #' @param x matrix or dataframe containing the data.
-#' @param inner a square (lower triangular) boolean matrix representing the inner model
-#' @param outer list of vectors with column indices indicating which manifest variables 
-#' correspond to each block
-#' @param mode character vector indicating the type of measurement for each
-#' block. Possible values are: \code{"A", "B"}
-#' @param scheme string indicating the type of inner weighting
+#' @param inner a square (lower triangular) boolean matrix representing the inner model.
+#' @param .model A description of the user-specified model.
+#' @param .scheme string indicating the type of inner weighting
 #' scheme. Possible values are \code{"centroid"}, \code{"factorial"}, or \code{"path"}.
-#' @param modtwo vector indicating the binary partition
-#' @return list containing matrices needed for the tests
+#' @param .consistent Logical. Should composite/proxy correlations be disattenuated 
+#' to yield consistent loadings and path estimates if at least one of the construct 
+#' is modeled as a common factor. Defaults to TRUE.
+#' @param modtwo vector indicating the binary partition.
+#' @return list containing matrices needed for the tests.
 #' @keywords internal
 #' @export
 #' 
-F.data	<-	function(x,inner,outer,mode,scheme,modtwo)
+F.data	<-	function(x,inner,.model,.scheme,.consistent, modtwo)
 {
-  pls 		=	pls(x,inner,outer,mode,scheme)
+  pls 		=	cSEM::csem(x,.model,.PLS_weight_scheme_inner=.scheme,.disattenuate=.consistent)
   
-  LV      = pls$scores
+  LV      = pls$Estimates$Construct_scores
   
   path.name		=	element(inner)
   
@@ -90,12 +90,12 @@ Fg.test	<-	function(Y0,X0,Y1,X1)
 #' @details
 #' Internal function
 #' @param Y1 vector of the concatenate indipendent latent variables of H1 hypothesis 
-#' of the F-coefficient test
+#' of the F-coefficient test.
 #' @param X1 matrix of the concatenate predictor latent variables of H1 hypothesis 
-#' of the F-coefficient test
-#' @param path.name vector of path coefficients labels
-#' @param info.block list contaning information about the endogenous equations of the pls model
-#' @return a list containing the statistic and the p-value obtained by applying the F-coefficient 
+#' of the F-coefficient test.
+#' @param path.name vector of path coefficients labels.
+#' @param info.block list contaning information about the endogenous equations of the pls model.
+#' @return a list containing the statistic and the p-value obtained by applying the F-coefficient. 
 #' test
 #' @keywords internal
 #' @export
@@ -141,27 +141,27 @@ Fc.test	<-	function(Y1,X1,path.name,info.block)
 #' @title Cheking F-tests results 
 #' @details
 #' Internal function
-#' @param x matrix or dataframe containing the data
-#' @param inner a square (lower triangular) boolean matrix representing the inner model
-#' @param outer list of vectors with column indices indicating which manifest variables 
-#' correspond to each block
-#' @param mode character vector indicating the type of measurement for each
-#' block. Possible values are: \code{"A", "B"} 
-#' @param scheme string indicating the type of inner weighting
-#' scheme. Possible values are \code{"centroid"}, \code{"factorial"}, or \code{"path"}
-#' @param modtwo vector indicating the binary partition
-#' @param signific value indicating the threshold a stop condition
-#' @return list containing matrices needed for the comparison test
+#' @param x matrix or dataframe containing the data.
+#' @param inner a square (lower triangular) boolean matrix representing the inner model.
+#' @param .model A description of the user-specified model.
+#' @param .scheme string indicating the type of inner weighting
+#' scheme. Possible values are \code{"centroid"}, \code{"factorial"}, or \code{"path"}.
+#' @param .consistent Logical. Should composite/proxy correlations be disattenuated 
+#' to yield consistent loadings and path estimates if at least one of the construct 
+#' is modeled as a common factor. Defaults to TRUE.
+#' @param modtwo vector indicating the binary partition.
+#' @param alpha value indicating the threshold a stop condition.
+#' @return list containing matrices needed for the comparison test.
 #' @keywords internal
 #' @export
 #' 
-test.partition <- function(x,inner,outer,mode,scheme,modtwo,signif) 
+test.partition <- function(x,inner,.model,.scheme,.consistent,modtwo,alpha) 
 {
-  d.info	=	F.data(x,inner,outer,mode,scheme,modtwo)
+  d.info	=	F.data(x,inner,.model,.scheme,.consistent,modtwo)
   
   FG		  =	Fg.test(d.info$Y0,d.info$X0,d.info$Y1,d.info$X1)
   
-  if(FG$pvg > signif)
+  if(FG$pvg > alpha)
   {
     list(Fg=FG$Fg ,pvg=FG$pvg,Fc=list(),pvc=list())
   }

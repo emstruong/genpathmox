@@ -8,17 +8,17 @@ Fc.test(Y1, X1, path.name, info.block)
 }
 \arguments{
 \item{Y1}{vector of the concatenate indipendent latent variables of H1 hypothesis 
-of the F-coefficient test}
+of the F-coefficient test.}
 
 \item{X1}{matrix of the concatenate predictor latent variables of H1 hypothesis 
-of the F-coefficient test}
+of the F-coefficient test.}
 
-\item{path.name}{vector of path coefficients labels}
+\item{path.name}{vector of path coefficients labels.}
 
-\item{info.block}{list contaning information about the endogenous equations of the pls model}
+\item{info.block}{list contaning information about the endogenous equations of the pls model.}
 }
 \value{
-a list containing the statistic and the p-value obtained by applying the F-coefficient 
+a list containing the statistic and the p-value obtained by applying the F-coefficient. 
 test
 }
 \description{

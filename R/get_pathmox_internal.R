@@ -303,27 +303,25 @@ f.min	<-	function(x)
 #' @title Best partition for a specific segmentation variable
 #' @details
 #' Internal function
-#' @param x matrix or data frame containing the manifest variables
+#' @param x matrix or data frame containing the manifest variables.
 #' @param inner a square (lower triangular) boolean matrix representing 
 #' the inner model (i.e. the path relationships between latent variables)
-#' @param outer list of vectors with column indices or column names
-#' from \code{Data} indicating the sets of manifest variables forming 
-#' each block (i.e. which manifest variables correspond to each block)
-#' @param mode character vector indicating the type of measurement for each
-#' block. Possible values are: \code{"A", "B"} 
-#' The length of \code{modes} must be equal to the length of \code{blocks}
-#' @param scheme string indicating the type of inner weighting
+#' @param .model A description of the user-specified model.
+#' @param .scheme string indicating the type of inner weighting
 #' scheme. Possible values are \code{"centroid"}, \code{"factorial"}, or
-#' \code{"path"}
-#' @param splits vector indicating the binary partition
-#' @param fact vector indicating the categorical variable
-#' @param size_candidate number indicating the minimum threshold for a node
+#' \code{"path"}.
+#' @param .consistent Logical. Should composite/proxy correlations be disattenuated 
+#' to yield consistent loadings and path estimates if at least one of the construct 
+#' is modeled as a common factor. Defaults to TRUE.
+#' @param splits vector indicating the binary partition.
+#' @param fact vector indicating the categorical variable.
+#' @param size_candidate number indicating the minimum threshold for a node.
 #' @return a list containing information about the bets partition for a specific segmentation 
-#' variable
+#' variable.
 #' @keywords internal
 #' @export
 #' 
-splitopt <- function(x,inner, outer,mode,scheme,splits,fact,size_candidate) 
+splitopt <- function(x,inner, .model,.scheme,.consistent, splits,fact,size_candidate) 
 {	
   Fi				      =	NULL                                             	
   pval.split		  =	NULL                                     
@@ -337,9 +335,9 @@ splitopt <- function(x,inner, outer,mode,scheme,splits,fact,size_candidate)
   
   #H0
   
-  pls	=	pls(x,inner,outer,mode,scheme)
+  pls 		=	cSEM::csem(.data=x,.model,.PLS_weight_scheme_inner=.scheme, .disattenuate=.consistent)
   
-  LV = pls$scores
+  LV      = pls$Estimates$Construct_scores
   
   global	=	build.block(inner,latent=LV)
   
@@ -427,26 +425,24 @@ splitopt <- function(x,inner, outer,mode,scheme,splits,fact,size_candidate)
 #' @title Candidates to the bets partition for each of segmentation variables  
 #' @details
 #' Internal function
-#' @param x matrix or dataframe containing the dataset
+#' @param x matrix or dataframe containing the dataset.
 #' @param y matrix or dataframe or vector of the segmentation variables
 #' @param inner a square (lower triangular) boolean matrix representing 
 #' the inner model (i.e. the path relationships between latent variables)
-#' @param outer list of vectors with column indices or column names
-#' from \code{Data} indicating the sets of manifest variables forming 
-#' each block (i.e. which manifest variables correspond to each block)
-#' @param mode character vector indicating the type of measurement for each
-#' block. Possible values are: \code{"A", "B"} 
-#' The length of \code{modes} must be equal to the length of \code{blocks}
-#' @param scheme string indicating the type of inner weighting
+#' @param .model A description of the user-specified model.
+#' @param .scheme string indicating the type of inner weighting
 #' scheme. Possible values are \code{"centroid"}, \code{"factorial"}, or
-#' \code{"path"}
-#' @param size_candidate number indicating the minimum threshold for a node
+#' \code{"path"}.
+#' @param .consistent Logical. Should composite/proxy correlations be disattenuated 
+#' to yield consistent loadings and path estimates if at least one of the construct 
+#' is modeled as a common factor. Defaults to TRUE.
+#' @param size_candidate number indicating the minimum threshold for a node.
 #' @return a list containing information of the candidates to the optimum partition 
 #' for each of segmentation variables  
 #' @keywords internal
 #' @export
 #' 
-all_part<- function(x,y,inner,outer,mode,scheme,size_candidate,...) 
+all_part<- function(x,y,inner,.model,.scheme,.consistent,size_candidate,...) 
 {
   part			=	partition(y)
   
@@ -467,7 +463,7 @@ all_part<- function(x,y,inner,outer,mode,scheme,size_candidate,...)
   {                              
     if (is.null(part$split[[j]])) next
     
-    jpart	=	splitopt(x,inner,outer,mode,scheme,splits=part$split[[j]],
+    jpart	=	splitopt(x,inner,.model,.scheme,.consistent,splits=part$split[[j]],
                      fact=y[,j],size_candidate) 
     
     if (is.null(jpart$pval)) next
@@ -503,24 +499,22 @@ all_part<- function(x,y,inner,outer,mode,scheme,size_candidate,...)
 #' @param y matrix or dataframe or vector of the segmentation variables
 #' @param inner a square (lower triangular) boolean matrix representing 
 #' the inner model (i.e. the path relationships between latent variables)
-#' @param outer list of vectors with column indices or column names
-#' from \code{Data} indicating the sets of manifest variables forming 
-#' each block (i.e. which manifest variables correspond to each block)
-#' @param mode character vector indicating the type of measurement for each
-#' block. Possible values are: \code{"A", "B"} 
-#' The length of \code{modes} must be equal to the length of \code{blocks}
-#' @param scheme string indicating the type of inner weighting
+#' @param .model A description of the user-specified model.
+#' @param .scheme string indicating the type of inner weighting
 #' scheme. Possible values are \code{"centroid"}, \code{"factorial"}, or
-#' \code{"path"}
+#' \code{"path"}.
+#' @param .consistent Logical. Should composite/proxy correlations be disattenuated 
+#' to yield consistent loadings and path estimates if at least one of the construct 
+#' is modeled as a common factor. Defaults to TRUE.
 #' @param size_candidate number indicating the minimum threshold for a node
 #' @return a list containing information of the best partition given a set of 
 #' segmentation variables
 #' @keywords internal
 #' @export
 #' 
-partopt	<-	function(x,y,inner,outer,mode,scheme,size_candidate)
+partopt	<-	function(x,y,inner,.model,.scheme,.consistent,size_candidate)
 {
-  a.p	=	all_part(x,y,inner,outer,mode,scheme,size_candidate)
+  a.p	=	all_part(x,y,inner,.model,.scheme,.consistent,size_candidate)
   
   if (any(!is.null(a.p$pvl))){
     
@@ -636,61 +630,172 @@ var_imp_mox = function(x,y){
   var_imp
 }
 #' ############################################################################################
+#' @title Check consistence 
+#' @details
+#' Internal function
+#' @param .model a model in lavaan model syntax
+#' @param .data a data.frame or a matrix of indicators
+#' @return a logical value
+#' @keywords internal
+#' @export
+#'
+check_const = function(.model,.data){
+  
+  ck_const = cSEM::csem( .data=.data, .model=.model)
+  
+  x1 <- ck_const$Information
+  x2 <- ck_const$Estimates  
+  
+  stat <- c("1" = FALSE, "2" = FALSE, "3" = FALSE, "4" = FALSE, "5" = FALSE)
+  
+  if(!(is.null(x1$Weight_info$Convergence_status) || x1$Weight_info$Convergence_status)) {
+    stat["1"] <- TRUE
+  }
+  
+  if(max(abs(x2$Loading_estimates)) > 1) {
+    stat["2"] <- TRUE
+  }
+  
+  if(!matrixcalc::is.positive.semi.definite(x2$Construct_VCV)) {
+    stat["3"] <- TRUE
+  }
+  
+  if(max(x2$Reliabilities) > 1) {
+    stat["4"] <- TRUE
+  }
+  
+  check = any(stat)==TRUE
+  return(check)
+  
+}
+#' ############################################################################################
 #' @title Checks arguments  
 #' @details
 #' Internal function
-#' @param x matrix or dataframe containing the data
-#' @param y vector or dataframe containing the categorical variables
-#' @param signif minimum threshold of f-test p-value 
-#' @param size minimum threshold size node
-#' @param deep minimum threshold of deep tree
+#' @param .model a model in lavaan model syntax
+#' @param .data a data.frame or a matrix of indicators
+#' @param .catvar a vector or dataframe containing the categorical variables
+#' @param .scheme Character string. Approach used to obtain composite weights
+#' @param .consistent Logical. Should composite/proxy correlations be disattenuated
+#' @param .alpha minimum threshold of f-test p-value
+#' @param .deep  minimum threshold of deep tree
+#' @param .size minimum threshold size node
+#' @param .size_candidate minimum size_candidate node threshold
+#' @param .tree Logical.Should the tree plot printed
 #' @return a list checked arguments
 #' @keywords internal
 #' @export
 #' 
-check_arg_mox = function(x,y,signif,size,deep){
-  if (!is.null(x)) {
-    if (!is.matrix(x) && !is.data.frame(x)) 
-      stop("Invalid object 'x'. Must be a x frame.")
-    if (nrow(x) != nrow(y)) 
-      stop("Arguments '.data' and '.catvar' are incompatible. Different number of rows")
-  }
-  else {
-    if (is.null(x)) {
-      stop("Argument '.data' is missing. No xset available.")
-    }
-  }
-  for (j in 1:ncol(y)) if (!is.factor(y[, j])) 
-    stop("One or more columns in '.catvar' are not factors")
+check_arg_mox = function(.model, .data, .catvar, .scheme, .consistent, .alpha, .deep, .size,
+                         .size_candidate, .tree)
   
-  if (any(is.na(x)))
-  {
-    stop("Argument '.data' contains NA: please imput or drop it")
+{
+  
+  if (is.null(.catvar)) {
+    stop("Argument '.catvar' is missing. No categorical variables have been provided.")
   }
-  if (any(is.na(y)))
+  
+  if(is.null(ncol(.catvar))==TRUE || ncol(.catvar)==1){
+    
+    cl <-match.call()
+    cl2=substr(cl,0,nchar(cl))
+    .catvar=data.frame(seg=factor(1),.catvar)
+    names(.catvar)[2]=cl2[4]
+    .catvar
+  }
+  
+  if (is.null(.model)) {
+    stop("Argument '.model' is missing with no default.")
+  }
+  
+  if (is.null(.data)) {
+    stop("Argument '.data' is missing. No dataset has been provided.")
+  }
+  if (!is.null(.data)) {
+    if (!is.matrix(.data) && !is.data.frame(.data)) 
+      stop("Invalid object '.data'. Must be a '.data' dataframe or a matrix.")
+  }
+  if (length(grep("\\.", colnames(.data))) > 0) {
+    stop("At least one variable name in your dataset contain a `.` (dot).", 
+         " Dots are a reserved special character in 'pls.pathmox' Please rename these variables 
+         in your data and in the model description.")
+  }
+  if (any(is.na(.data)))
   {
-    stop("Argument '.catvar' contains NA: please imput or drop it")
+    stop("Argument '.data' contains NA: please imput or drop it.")
+  }
+  if (any(is.na(.catvar)))
+  {
+    stop("Argument '.catvar' contains NA: please imput or drop it.")
   }             
-  if (mode(signif) != "numeric" || length(signif) != 1 || signif <= 
-      0 || signif >= 1) {
-    warning("NOTICE: Invalid argument '.signif'. Default value 0.05 was used", 
-            "\n")
-    signif <- 0.05
+  if (nrow(.data) != nrow(.catvar)) 
+    stop("Arguments '.data' and '.catvar' are incompatible. Different number of rows.")
+  
+  for (j in 1:ncol(.catvar)) if (!is.factor(.catvar[, j])) 
+    stop("One or more columns in '.catvar' are not factors.")
+ 
+   if (!.scheme %in% c("path", "centroid", "factorial"))
+   {
+     warning("NOTICE: Invalid argument '.scheme'. Default value 'path' was used.", 
+             "\n") 
+     .scheme = "path"
+   } 
+  if(!.consistent %in% c("FALSE", "TRUE")){
+      warning("NOTICE: Invalid argument '.consistent'.It must be logical value. Default value 'TRUE' was used.", 
+          "\n") 
+     .consistent = TRUE
   }
-  if (mode(size) != "numeric" || length(size) != 1 || size <= 
-      0) {
-    warning("NOTICE: Invalid argument '.size'. Default value 0.10 was used", 
-            "\n")
-    size <- 0.1
+  if(check_const(.data  = .data, .model = .model)== TRUE)
+  {
+      warning("NOTICE: Results exhibiting one of the following defects are deemed inadmissible: 
+                non-convergence of the algorithm used to obtain weights, loadings and/or (congeneric) 
+                reliabilities larger than 1, a construct variance-covariance (VCV) and/or model-implied VCV 
+                matrix that is not positive semi-definite. Clasical PLS-SEM algorithm was used.",
+                "\n") 
+      .consistent = FALSE
   }
-  if (mode(deep) != "numeric" ||  deep < 
-      1 || (deep%%1) != 0) {
-    warning("NOTICE: Invalid argument '.deep'. Default value 1 was used", 
-            "\n")
-    deep <- 1
+  
+  if (mode(.alpha) != "numeric" || length(.alpha) != 1 || .alpha <= 
+     0 || .alpha >= 1) 
+  {
+      warning("NOTICE: Invalid argument '.alpha'. Default value 0.05 was used.", 
+          "\n")
+      .alpha <- 0.05
   }
-  res = list(x=x,y=y,signif=signif,size=size,deep=deep)
+  if (mode(.size) != "numeric" || length(.size) !=1 || .size <= 
+    0 || .size >=1) 
+  {
+      warning("NOTICE: Invalid argument '.size'. Default value 0.10 was used.", 
+          "\n")
+    .size <- 0.1
+  }
+  if (mode(.deep) != "numeric" ||  .deep < 
+    1 || (.deep%%1) != 0) 
+  {
+      warning("NOTICE: Invalid argument '.deep'. Default value 2 was used.", 
+          "\n")
+    .deep <- 2
+  }
+  if (mode(.size_candidate) != "numeric" || .size_candidate > nrow(.data) || .size_candidate <= 
+    0) 
+  {
+      warning("NOTICE: Invalid argument '.size_candidate'. Default value 50 was used.", 
+          "\n")
+    .size_candidate <- 50
+  }
+  res = list(model=.model, data=.data, catvar=.catvar, scheme=.scheme, consistent=.consistent, alpha =.alpha, 
+             deep = .deep, size = .size, size_candidate = .size_candidate, tree = .tree)
   return(res)
 }
 
 
+
+
+
+
+
+
+
+
+  
+  

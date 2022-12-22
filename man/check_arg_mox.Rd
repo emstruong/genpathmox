@@ -4,18 +4,39 @@
 \alias{check_arg_mox}
 \title{Checks arguments}
 \usage{
-check_arg_mox(x, y, signif, size, deep)
+check_arg_mox(
+  .model,
+  .data,
+  .catvar,
+  .scheme,
+  .consistent,
+  .alpha,
+  .deep,
+  .size,
+  .size_candidate,
+  .tree
+)
 }
 \arguments{
-\item{x}{matrix or dataframe containing the data}
+\item{.model}{a model in lavaan model syntax}
 
-\item{y}{vector or dataframe containing the categorical variables}
+\item{.data}{a data.frame or a matrix of indicators}
 
-\item{signif}{minimum threshold of f-test p-value}
+\item{.catvar}{a vector or dataframe containing the categorical variables}
 
-\item{size}{minimum threshold size node}
+\item{.scheme}{Character string. Approach used to obtain composite weights}
 
-\item{deep}{minimum threshold of deep tree}
+\item{.consistent}{Logical. Should composite/proxy correlations be disattenuated}
+
+\item{.alpha}{minimum threshold of f-test p-value}
+
+\item{.deep}{minimum threshold of deep tree}
+
+\item{.size}{minimum threshold size node}
+
+\item{.size_candidate}{minimum size_candidate node threshold}
+
+\item{.tree}{Logical.Should the tree plot printed}
 }
 \value{
 a list checked arguments

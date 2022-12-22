@@ -4,35 +4,33 @@
 \alias{splitopt}
 \title{Best partition for a specific segmentation variable}
 \usage{
-splitopt(x, inner, outer, mode, scheme, splits, fact, size_candidate)
+splitopt(x, inner, .model, .scheme, .consistent, splits, fact, size_candidate)
 }
 \arguments{
-\item{x}{matrix or data frame containing the manifest variables}
+\item{x}{matrix or data frame containing the manifest variables.}
 
 \item{inner}{a square (lower triangular) boolean matrix representing 
 the inner model (i.e. the path relationships between latent variables)}
 
-\item{outer}{list of vectors with column indices or column names
-from \code{Data} indicating the sets of manifest variables forming 
-each block (i.e. which manifest variables correspond to each block)}
+\item{.model}{A description of the user-specified model.}
 
-\item{mode}{character vector indicating the type of measurement for each
-block. Possible values are: \code{"A", "B"} 
-The length of \code{modes} must be equal to the length of \code{blocks}}
-
-\item{scheme}{string indicating the type of inner weighting
+\item{.scheme}{string indicating the type of inner weighting
 scheme. Possible values are \code{"centroid"}, \code{"factorial"}, or
-\code{"path"}}
+\code{"path"}.}
 
-\item{splits}{vector indicating the binary partition}
+\item{.consistent}{Logical. Should composite/proxy correlations be disattenuated 
+to yield consistent loadings and path estimates if at least one of the construct 
+is modeled as a common factor. Defaults to TRUE.}
 
-\item{fact}{vector indicating the categorical variable}
+\item{splits}{vector indicating the binary partition.}
 
-\item{size_candidate}{number indicating the minimum threshold for a node}
+\item{fact}{vector indicating the categorical variable.}
+
+\item{size_candidate}{number indicating the minimum threshold for a node.}
 }
 \value{
 a list containing information about the bets partition for a specific segmentation 
-variable
+variable.
 }
 \description{
 ############################################################################################

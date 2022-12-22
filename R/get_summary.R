@@ -14,18 +14,22 @@
 #' @author Giuseppe Lamberti
 #'  
 #' @references Lamberti, G. (2021). Hybrid multigroup partial least squares structural equation
-#'  modelling: an application to bank employee satisfaction and loyalty. \emph{Quality and Quantity},
-#'  doi: 10.1007/s11135-021-01096-9.  
+#' modelling: an application to bank employee satisfaction and loyalty. \emph{Quality and Quantity},
+#' \doi{10.1007/s11135-021-01096-9}
 #'
-#' @references Lamberti, G. et al. (2017). The Pathmox approach for PLS path modeling: discovering 
-#' which constructs differentiate segments.\emph{Applied Stochastic Models in Business and Industry}, 
-#' doi: 10.1002/asmb.2270.
+#' @references Lamberti, G., Aluja, T. B., and Sanchez, G. (2017). The Pathmox approach for PLS path 
+#' modeling: Discovering which constructs differentiate segments. \emph{Applied Stochastic Models in 
+#' Business and Industry}, \bold{33}(6), 674-689. \doi{10.1007/s11135-021-01096-9}
 #' 
-#' @references Lamberti, G. et al. (2016). The Pathmox approach for PLS path modeling segmentation. 
-#' \emph{Applied Stochastic Models in Business and Industry}, doi: 10.1002/asmb.2168. 
-#'               
+#' @references Lamberti, G., Aluja, T. B., and Sanchez, G. (2016). The Pathmox approach for PLS path 
+#' modeling segmentation. \emph{Applied Stochastic Models in Business and Industry}, \bold{32}(4), 453-468.
+#' \doi{10.1002/asmb.2168}
+#' 
 #' @references Lamberti, G. (2015). \emph{Modeling with Heterogeneity}, PhD Dissertation.
-#'
+#' 
+#' @references Sanchez, G. (2009). \emph{PATHMOX Approach: Segmentation Trees in
+#' Partial Least Squares Path Modeling}, PhD Dissertation.
+#' 
 #' @seealso \code{\link{print.plstree}}, \code{\link{pls.pathmox}},  
 #' \code{\link{bar_terminal}}, \code{\link{bar_impvar}} and \code{\link{plot.plstree}}
 #' 
@@ -34,9 +38,9 @@
 #'  \dontrun{
 #' # Example of PATHMOX approach in customer satisfaction analysis 
 #' # (Spanish financial company).
-#' # Model with 5 LVs (4 reflective: Image (IMAG), Value (VAL), 
-#' # Satisfaction (SAT), and Loyalty (LOY); and 1 formative construct: 
-#' # Quality (QUAL))
+#' # Model with 5 LVs (4 common factor: Image (IMAG), Value (VAL), 
+#' # Satisfaction (SAT), and Loyalty (LOY); and 1 composite construct: 
+#' # Quality (QUAL)
 #' 
 #' # load library and dataset csibank
 #' library(genpathmx)
@@ -52,14 +56,14 @@
 #' LOY  ~ IMAG + SAT
 #'
 #' # Measurement model
-#' # Formative
+#' # Composite
 #' QUAL <~ qual1 + qual2 + qual3 + qual4 + qual5 + qual6 + qual7 
 #'      
-#' # Reflective
-#' IMAG <~ imag1 + imag2 + imag3 + imag4 + imag5 + imag6 
-#' VAL  <~ val1  + val2  + val3  + val4
+#' # common factor
+#' IMAG =~ imag1 + imag2 + imag3 + imag4 + imag5 + imag6 
+#' VAL  =~ val1  + val2  + val3  + val4
 #' SAT  =~ sat1  + sat2  + sat3           
-#' LOY  =~ loy1  + loy2  + loy3          
+#' LOY  =~ loy1  + loy2  + loy3           
 #'
 #' "
 #'
@@ -67,15 +71,15 @@
 #' age = csibank[,2]
 #' 
 #' # Transform age into an ordered factor
-#' age = factor(age, levels=c("<=25", "26-35", "36-45", "46-55",
-#'                                       "56-65", ">=66"),ordered=T)
+#' age = factor(age, levels = c("<=25", "26-35", "36-45", "46-55",
+#'                                       "56-65", ">=66"),ordered = T)
 #'                                       
 #' csi.pathmox.age = pls.pathmox(
 #'  .model = CSImodel ,
 #'  .data  = csibank,
 #'  .catvar= age,
-#'  .signif = 0.05,
-#'  .deep=1
+#'  .alpha = 0.05,
+#'  .deep = 1
 #' )  
 #' 
 #' # Visualize the Pathmox results
@@ -83,8 +87,8 @@
 #'
 #' }
 #'
-summary.plstree <- function(object, ...){
-  info=object$other$par_mode
+summary.plstree = function(object, ...){
+  .info=object$other$par_mode
   
   cat("\n")
   cat("PLS-SEM PATHMOX ANALYSIS","\n")
@@ -92,26 +96,26 @@ summary.plstree <- function(object, ...){
   cat("---------------------------------------------")
   cat("\n")
   cat("Info parameters algorithm:","\n")
-  info.value = rbind(info[[1]],info[[2]],info[[3]])
-  dimnames(info.value) = NULL
-  info.name = c("threshold signif","node size limit(%)","tree depth level")
-  info.tree = data.frame(info.name,info.value)
-  names(info.tree) = c("parameters algorithm", "value")
-  print(info.tree)
+  .info.value = rbind(.info[[1]],.info[[2]],.info[[3]])
+  dimnames(.info.value) = NULL
+  .info.name = c("threshold signif","node size limit(%)","tree depth level")
+  .info.tree = data.frame(.info.name,.info.value)
+  names(.info.tree) = c("parameters algorithm", "value")
+  print(.info.tree)
   cat("---------------------------------------------")
   cat("\n")
   cat("Info tree:","\n")
-  tree = object$MOX
-  info.value = rbind(max(tree[,3]),sum(length(which(tree[,5]=="yes"))))
-  dimnames(info.value) = NULL
-  info.name = c("deep tree","number terminal nodes")
-  info.tree = data.frame(info.name,info.value)
-  names(info.tree) = c("parameters tree", "value")
-  print(info.tree)
+  .tree = object$MOX
+  .info.value = rbind(max(.tree[,3]),sum(length(which(.tree[,5]=="yes"))))
+  dimnames(.info.value) = NULL
+  .info.name = c("deep tree","number terminal nodes")
+  .info.tree = data.frame(.info.name,.info.value)
+  names(.info.tree) = c("parameters tree", "value")
+  print(.info.tree)
   cat("---------------------------------------------")
   cat("\n")
   cat("Info nodes:","\n")
-  print(tree)
+  print(.tree)
   cat("---------------------------------------------")
   cat("\n")
   cat("Info splits:","\n")
@@ -119,10 +123,10 @@ summary.plstree <- function(object, ...){
   cat("Variable:","\n")
   print(object$Fg.r[,c(1,4,5,6)])
   cat("\n")
-  cat("Info F-global test results (global differerences):","\n")
+  cat("Info F-global test results (global differences):","\n")
   printCoefmat(object$Fg.r[,c(1,2,3)], P.values=TRUE, has.Pvalue=TRUE)
   cat("\n")
-  cat("Info F-coefficient test results (coefficents differerences) :","\n")
+  cat("Info F-coefficient test results (coefficent differences) :","\n")
   for (i in 1:length(object$Fc.r))
   {
     cat("\n")

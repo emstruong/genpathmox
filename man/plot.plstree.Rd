@@ -6,55 +6,55 @@
 \usage{
 \method{plot}{plstree}(
   x,
-  root.col = "#CCFFFF",
-  node.col = "#99CCCC",
-  leaf.col = "#009999",
-  shadow.size = 0.003,
-  node.shadow = "#669999",
-  leaf.shadow = "#006666",
-  cex = 0.7,
-  seg.col = "#003333",
-  lwd = 1,
-  show.pval = TRUE,
-  pval.col = "#009999",
-  main = NULL,
-  cex.main = 1,
+  .root.col = "#CCFFFF",
+  .node.col = "#99CCCC",
+  .leaf.col = "#009999",
+  .shadow.size = 0.003,
+  .node.shadow = "#669999",
+  .leaf.shadow = "#006666",
+  .cex = 0.7,
+  .seg.col = "#003333",
+  .lwd = 1,
+  .show.pval = TRUE,
+  .pval.col = "#009999",
+  .main = NULL,
+  .cex.main = 1,
   ...
 )
 }
 \arguments{
-\item{x}{An object of the class \code{"plstree"}}
+\item{x}{An object of the class \code{"plstree"}.}
 
-\item{root.col}{Fill color of root node}
+\item{.root.col}{Fill color of root node.}
 
-\item{node.col}{Fill color of child nodes}
+\item{.node.col}{Fill color of child nodes.}
 
-\item{leaf.col}{Fill color of leaf}
+\item{.leaf.col}{Fill color of leaf.}
 
-\item{shadow.size}{Relative size of shadows.}
+\item{.shadow.size}{Relative size of shadows.}
 
-\item{node.shadow}{Color of shadow of child nodes}
+\item{.node.shadow}{Color of shadow of child nodes.}
 
-\item{leaf.shadow}{Color of shadow of leaf nodes}
+\item{.leaf.shadow}{Color of shadow of leaf nodes.}
 
-\item{cex}{A numerical value indicating the magnification to be used for
-plotting text}
+\item{.cex}{A numerical value indicating the magnification to be used for
+plotting text.}
 
-\item{seg.col}{The color to be used for the labels of the segmentation
-variables}
+\item{.seg.col}{The color to be used for the labels of the segmentation
+variables.}
 
-\item{lwd}{The line width, a positive number, defaulting to 1}
+\item{.lwd}{The line width, a positive number, defaulting to 1.}
 
-\item{show.pval}{Logical value indicating whether the p-values should be
-plotted}
+\item{.show.pval}{Logical value indicating whether the p-values should be
+plotted.}
 
-\item{pval.col}{The color to be used for the labels of the p-values}
+\item{.pval.col}{The color to be used for the labels of the p-values.}
 
-\item{main}{A main title for the plot}
+\item{.main}{A main title for the plot.}
 
-\item{cex.main}{The magnification to be used for the main title}
+\item{.cex.main}{The magnification to be used for the main title.}
 
-\item{\dots}{Further arguments passed on to \code{\link{plot.plstree}}}
+\item{\dots}{Further arguments passed on to \code{\link{plot.plstree}}.}
 }
 \description{
 The function \code{plot.plstree} allows to drow PATHMOX tree
@@ -63,9 +63,9 @@ The function \code{plot.plstree} allows to drow PATHMOX tree
  \dontrun{
 # Example of PATHMOX approach in customer satisfaction analysis 
 # (Spanish financial company).
-# Model with 5 LVs (4 reflective: Image (IMAG), Value (VAL), 
-# Satisfaction (SAT), and Loyalty (LOY); and 1 formative construct: 
-# Quality (QUAL))
+# Model with 5 LVs (4 common factor: Image (IMAG), Value (VAL), 
+# Satisfaction (SAT), and Loyalty (LOY); and 1 composite construct: 
+# Quality (QUAL)
 
 # load library and dataset csibank
 library(genpathmx)
@@ -81,37 +81,41 @@ SAT  ~ IMAG  + QUAL + VAL
 LOY  ~ IMAG + SAT
 
 # Measurement model
-# Formative
+# Composite
 QUAL <~ qual1 + qual2 + qual3 + qual4 + qual5 + qual6 + qual7 
      
-# Reflective
-IMAG <~ imag1 + imag2 + imag3 + imag4 + imag5 + imag6 
-VAL  <~ val1  + val2  + val3  + val4
+# Common factor
+IMAG =~ imag1 + imag2 + imag3 + imag4 + imag5 + imag6 
+VAL  =~ val1  + val2  + val3  + val4
 SAT  =~ sat1  + sat2  + sat3           
-LOY  =~ loy1  + loy2  + loy3          
+LOY  =~ loy1  + loy2  + loy3           
 
 "
+
+# Identify the categorical variable to be used as input variables 
+in the split process
+CSIcatvar = csibank[,1:5]
 
 # Check if variables are well specified (they have to be factors 
 # and/or ordered factors)
 str(CSIcatvar)
 
 # Transform age and education into ordered factors
-CSIcatvar$Age = factor(CSIcatvar$Age, levels=c("<=25", 
+CSIcatvar$Age = factor(CSIcatvar$Age, levels = c("<=25", 
                                      "26-35", "36-45", "46-55", 
-                                     "56-65", ">=66"),ordered=T)
+                                     "56-65", ">=66"),ordered = T)
 
 CSIcatvar$Education = factor(CSIcatvar$Education, 
-                            levels=c("Unfinished","Elementary", "Highschool",
-                            "Undergrad", "Graduated"),ordered=T)
+                            levels = c("Unfinished","Elementary", "Highschool",
+                            "Undergrad", "Graduated"),ordered = T)
        
 # Run Pathmox analysis (Lamberti et al., 2016; 2017)
 csi.pathmox = pls.pathmox(
  .model = CSImodel ,
  .data  = csibank,
  .catvar= CSIcatvar,
- .signif = 0.05,
- .deep=2
+ .alpha = 0.05,
+ .deep = 2
 )                     
 
 Visualize the tree
@@ -121,11 +125,14 @@ plot(csi.pathmox)
 
 }
 \references{
-Lamberti, G. et al. (2016). The Pathmox approach for PLS path modeling 
-segmentation. \emph{Applied Stochastic Models in Business and Industry}, 
-doi: 10.1002/asmb.2168.
+Lamberti, G., Aluja, T. B., and Sanchez, G. (2016). The Pathmox approach for PLS path 
+modeling segmentation. \emph{Applied Stochastic Models in Business and Industry}, \bold{32}(4), 453-468.
+\doi{10.1002/asmb.2168}
 
 Lamberti, G. (2015). \emph{Modeling with Heterogeneity}, PhD Dissertation.
+
+Sanchez, G. (2009). \emph{PATHMOX Approach: Segmentation Trees in
+Partial Least Squares Path Modeling}, PhD Dissertation.
 }
 \seealso{
 \code{\link{summary.plstree}}, \code{\link{print.plstree}}, \code{\link{pls.pathmox}},  

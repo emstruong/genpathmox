@@ -9,29 +9,35 @@
 #' @author Giuseppe Lamberti
 #'  
 #' @references Lamberti, G. (2021). Hybrid multigroup partial least squares structural equation
-#'  modelling: an application to bank employee satisfaction and loyalty. \emph{Quality and Quantity},
-#'  doi: 10.1007/s11135-021-01096-9.  
+#' modelling: an application to bank employee satisfaction and loyalty. \emph{Quality and Quantity},
+#' \doi{10.1007/s11135-021-01096-9}
 #'
-#' @references Lamberti, G. et al. (2017). The Pathmox approach for PLS path modeling: discovering 
-#' which constructs differentiate segments.\emph{Applied Stochastic Models in Business and Industry}, 
-#' doi: 10.1002/asmb.2270.
+#' @references Lamberti, G., Aluja, T. B., and Sanchez, G. (2017). The Pathmox approach for PLS path 
+#' modeling: Discovering which constructs differentiate segments. \emph{Applied Stochastic Models in 
+#' Business and Industry}, \bold{33}(6), 674-689. \doi{10.1007/s11135-021-01096-9}
 #' 
-#' @references Lamberti, G. et al. (2016). The Pathmox approach for PLS path modeling segmentation. 
-#' \emph{Applied Stochastic Models in Business and Industry}, doi: 10.1002/asmb.2168.  
-#'               
+#' @references Lamberti, G., Aluja, T. B., and Sanchez, G. (2016). The Pathmox approach for PLS path 
+#' modeling segmentation. \emph{Applied Stochastic Models in Business and Industry}, \bold{32}(4), 453-468.
+#' \doi{10.1002/asmb.2168}
+#' 
 #' @references Lamberti, G. (2015). \emph{Modeling with Heterogeneity}, PhD Dissertation.
+#' 
+#' @references Sanchez, G. (2009). \emph{PATHMOX Approach: Segmentation Trees in
+#' Partial Least Squares Path Modeling}, PhD Dissertation.
 #' 
 #' @seealso \code{\link{summary.plstree}}, \code{\link{pls.pathmox}},  
 #' \code{\link{bar_terminal}}, \code{\link{bar_impvar}} and \code{\link{plot.plstree}}
+#' 
+#' 
 #'
 #'@exportS3Method print plstree
 #' @examples
 #'  \dontrun{
 #' # Example of PATHMOX approach in customer satisfaction analysis 
 #' # (Spanish financial company).
-#' # Model with 5 LVs (4 reflective: Image (IMAG), Value (VAL), 
-#' # Satisfaction (SAT), and Loyalty (LOY); and 1 formative construct: 
-#' # Quality (QUAL))
+#' # Model with 5 LVs (4 common factor: Image (IMAG), Value (VAL), 
+#' # Satisfaction (SAT), and Loyalty (LOY); and 1 composite construct: 
+#' # Quality (QUAL)
 #' 
 #' # load library and dataset csibank
 #' library(genpathmx)
@@ -47,14 +53,14 @@
 #' LOY  ~ IMAG + SAT
 #'
 #' # Measurement model
-#' # Formative
+#' # Composite
 #' QUAL <~ qual1 + qual2 + qual3 + qual4 + qual5 + qual6 + qual7 
 #'      
-#' # Reflective
-#' IMAG <~ imag1 + imag2 + imag3 + imag4 + imag5 + imag6 
-#' VAL  <~ val1  + val2  + val3  + val4
+#' # Common factor
+#' IMAG =~ imag1 + imag2 + imag3 + imag4 + imag5 + imag6 
+#' VAL  =~ val1  + val2  + val3  + val4
 #' SAT  =~ sat1  + sat2  + sat3           
-#' LOY  =~ loy1  + loy2  + loy3          
+#' LOY  =~ loy1  + loy2  + loy3           
 #'
 #' "
 #'
@@ -62,15 +68,15 @@
 #' age = csibank[,2]
 #' 
 #' # Transform age into an ordered factor
-#' age = factor(age, levels=c("<=25", "26-35", "36-45", "46-55",
-#'                                       "56-65", ">=66"),ordered=T)
+#' age = factor(age, levels = c("<=25", "26-35", "36-45", "46-55",
+#'                                       "56-65", ">=66"),ordered = T)
 #'                                       
 #' csi.pathmox.age = pls.pathmox(
 #'  .model = CSImodel ,
 #'  .data  = csibank,
 #'  .catvar= age,
-#'  .signif = 0.05,
-#'  .deep=1
+#'  .alpha = 0.05,
+#'  .deep = 1
 #' )  
 #' 
 #' # Visualize the Pathmox results
@@ -78,7 +84,7 @@
 #'
 #' }
 #'
-print.plstree <- function(x, ...)
+print.plstree = function(x, ...)
 {
   cat("------------------------------------------------------------------------------------")
   cat("\n")

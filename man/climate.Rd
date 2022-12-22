@@ -6,13 +6,13 @@
 \title{climate}
 \format{
 climate data refers to the younger emplyees (<=30) of an international bank organizational study. It 
-consists of 35 variables for 669 employees divided into 3 qualitative variables and 33 indicator (or manifest) 
+consists of 32 variables for 669 employees divided into 3 qualitative variables and 29 indicator (or manifest) 
 variables. The 3 categorical variables, reflecting specific employee characteristics  
 as potential observed sources of heterogeneity, gender, job level, 
-and seniority. The 37 indicator (or manifest) 
+and seniority. The 31 indicator (or manifest) 
 variables were loyalty (3 indicators), satisfaction (6 indicators), 
-and the 5 work climate constructs of empowerment (6 indicators), 
-company reputation (5 indicators), pay (4 indicators), work conditions (3 indicators), 
+and the 5 work climate constructs of empowerment (5 indicators), 
+company reputation (3 indicators), pay (4 indicators), work conditions (3 indicators), 
 leadership (5 indicators)
 
 
@@ -30,17 +30,14 @@ Latent variable description
 
 Manifest variables description
 \itemize{
-\item{\code{Emp1}: }{Recognition of work performed}
-\item{\code{Emp2}: }{Employee treatment as responsible}
-\item{\code{Emp3}: }{Teamwork is empowered}
-\item{\code{Emp4}: }{Autonomy is favored}
-\item{\code{Emp5}: }{Confidence in performed tasks}
-\item{\code{EMP6}: }{Creativity and initiative are endorsed}
+\item{\code{Emp1}: }{Employee treatment as responsible}
+\item{\code{Emp2}: }{Teamwork is empowered}
+\item{\code{Emp3}: }{Autonomy is favored}
+\item{\code{Emp4}: }{Confidence in performed tasks}
+\item{\code{Emp5}: }{Creativity and initiative are endorsed}
 \item{\code{Imag1}: }{Organization’s reputation}
 \item{\code{Imag2}: }{Organization’s values}
 \item{\code{Imag3}: }{Organization’s customer relationships}
-\item{\code{Imag4}: }{Organization’s internal relationships}
-\item{\code{Imag5}: }{Organization’s external projection}
 \item{\code{Pay1}: }{Salary}
 \item{\code{Pay2}: }{Social benefits}
 \item{\code{Pay3}: }{My salary corresponds to my duties}

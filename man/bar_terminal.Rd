@@ -6,31 +6,31 @@
 \usage{
 bar_terminal(
   x,
-  LV,
-  bycoef = FALSE,
-  cex.names = 1,
-  cex.axis = 1.2,
-  cex.main = 1,
+  .LV,
+  .bycoef = FALSE,
+  .cex.names = 1,
+  .cex.axis = 1.2,
+  .cex.main = 1,
   ...
 )
 }
 \arguments{
-\item{x}{An object of the class \code{"plstree"}}
+\item{x}{An object of the class \code{"plstree"}.}
 
-\item{LV}{A string indicating the name of the endogenous latent variable. The label
-must be the same as used to define the structural model in the (lavaan syntax)}
+\item{.LV}{A string indicating the name of the dependent  latent variable. The label
+must be the same as used to define the structural model in the (lavaan syntax).}
 
-\item{bycoef}{Logical value indicating if the comparison is done by nodes or by path
+\item{.bycoef}{Logical value indicating if the comparison is done by nodes or by path
 coefficients. By default, \code{FALSE} means that the comparison is done 
-by nodes}
+by nodes.}
 
-\item{cex.names}{Expansion factor for axis names (bar labels)}
+\item{.cex.names}{Expansion factor for axis names (bar labels).}
 
-\item{cex.axis}{Expansion factor for numeric axis labels}
+\item{.cex.axis}{Expansion factor for numeric axis labels.}
 
-\item{cex.main}{Allows fixing the size of the main. It is equal to 1 to default}
+\item{.cex.main}{Allows fixing the size of the main. It is equal to 1 to default.}
 
-\item{\dots}{Further arguments are ignored}
+\item{\dots}{Further arguments are ignored.}
 }
 \description{
 \code{bar_terminal} returns the path coefficient bar plots of the Pathmox terminal 
@@ -38,9 +38,9 @@ nodes.
 }
 \details{
 This function aims to visualize, using bar plots, the path coefficients of
-the endogenous latent variables associated with the terminal nodes. 
-The user indicates the endogenous latent variable they want to visualize. 
-This is done using the same label as used in the structural model definition.
+the dependnet latent construct associated with the terminal nodes. 
+The user indicates the dependnet latent construct they want to visualize. 
+This is done using the same label as used in the structural model definition
 (lavaan syntax). The comparison is done by analyzing the path coefficient 
 values for each node, or the values estimated in each node for each path coefficient. 
 In the former, the plot also returns the R^2. In the latter, the bar corresponding to the 
@@ -51,9 +51,9 @@ By default the comparison is done by analyzing the path coefficient values for e
  \dontrun{
 # Example of PATHMOX approach in customer satisfaction analysis 
 # (Spanish financial company).
-# Model with 5 LVs (4 reflective: Image (IMAG), Value (VAL), 
-# Satisfaction (SAT), and Loyalty (LOY); and 1 formative construct: 
-# Quality (QUAL))
+# Model with 5 LVs (4 common factor: Image (IMAG), Value (VAL), 
+# Satisfaction (SAT), and Loyalty (LOY); and 1 composite construct: 
+# Quality (QUAL)
 
 # load library and dataset csibank
 library(genpathmx)
@@ -69,14 +69,14 @@ SAT  ~ IMAG  + QUAL + VAL
 LOY  ~ IMAG + SAT
 
 # Measurement model
-# Formative
+# Composite
 QUAL <~ qual1 + qual2 + qual3 + qual4 + qual5 + qual6 + qual7 
      
-# Reflective
-IMAG <~ imag1 + imag2 + imag3 + imag4 + imag5 + imag6 
-VAL  <~ val1  + val2  + val3  + val4
+# Common factor
+IMAG =~ imag1 + imag2 + imag3 + imag4 + imag5 + imag6 
+VAL  =~ val1  + val2  + val3  + val4
 SAT  =~ sat1  + sat2  + sat3           
-LOY  =~ loy1  + loy2  + loy3          
+LOY  =~ loy1  + loy2  + loy3           
 
 "
 
@@ -84,32 +84,35 @@ LOY  =~ loy1  + loy2  + loy3
 age = csibank[,2]
 
 # Transform age into an ordered factor
-age = factor(age, levels=c("<=25", "26-35", "36-45", "46-55",
-                                      "56-65", ">=66"),ordered=T)
+age = factor(age, levels = c("<=25", "26-35", "36-45", "46-55",
+                                      "56-65", ">=66"),ordered = T)
                                      
 csi.pathmox.age = pls.pathmox(
  .model = CSImodel ,
  .data  = csibank,
  .catvar= age,
- .signif = 0.05,
- .deep=1
+ .alpha = 0.05,
+ .deep = 1
 )  
 
 # Visualize the bar plot by comparing the nodes
-bar_terminal(csi.pathmox.age,LV="SAT")
+bar_terminal(csi.pathmox.age, .LV = "SAT")
 
 # Visualize the bar plot by comparing path coefficients
-bar_terminal(csi.pathmox.age,LV="SAT",bycoef=TRUE)
+bar_terminal(csi.pathmox.age, .LV = "SAT", .bycoef = TRUE)
 
 }
 
 }
 \references{
-Lamberti, G. et al. (2016). The Pathmox approach for PLS path modeling 
-segmentation. \emph{Applied Stochastic Models in Business and Industry}, 
-doi: 10.1002/asmb.2168.
+Lamberti, G., Aluja, T. B., and Sanchez, G. (2016). The Pathmox approach for PLS path 
+modeling segmentation. \emph{Applied Stochastic Models in Business and Industry}, \bold{32}(4), 453-468.
+\doi{10.1002/asmb.2168}
 
 Lamberti, G. (2015). \emph{Modeling with Heterogeneity}, PhD Dissertation.
+
+Sanchez, G. (2009). \emph{PATHMOX Approach: Segmentation Trees in
+Partial Least Squares Path Modeling}, PhD Dissertation.
 }
 \seealso{
 \code{\link{summary.plstree}}, \code{\link{print.plstree}}, \code{\link{pls.pathmox}},  

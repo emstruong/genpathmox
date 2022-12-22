@@ -4,7 +4,7 @@
 \alias{partopt}
 \title{Best partition given a set of segmentation variables}
 \usage{
-partopt(x, y, inner, outer, mode, scheme, size_candidate)
+partopt(x, y, inner, .model, .scheme, .consistent, size_candidate)
 }
 \arguments{
 \item{x}{matrix or dataframe containing the dataset}
@@ -14,17 +14,15 @@ partopt(x, y, inner, outer, mode, scheme, size_candidate)
 \item{inner}{a square (lower triangular) boolean matrix representing 
 the inner model (i.e. the path relationships between latent variables)}
 
-\item{outer}{list of vectors with column indices or column names
-from \code{Data} indicating the sets of manifest variables forming 
-each block (i.e. which manifest variables correspond to each block)}
+\item{.model}{A description of the user-specified model.}
 
-\item{mode}{character vector indicating the type of measurement for each
-block. Possible values are: \code{"A", "B"} 
-The length of \code{modes} must be equal to the length of \code{blocks}}
-
-\item{scheme}{string indicating the type of inner weighting
+\item{.scheme}{string indicating the type of inner weighting
 scheme. Possible values are \code{"centroid"}, \code{"factorial"}, or
-\code{"path"}}
+\code{"path"}.}
+
+\item{.consistent}{Logical. Should composite/proxy correlations be disattenuated 
+to yield consistent loadings and path estimates if at least one of the construct 
+is modeled as a common factor. Defaults to TRUE.}
 
 \item{size_candidate}{number indicating the minimum threshold for a node}
 }

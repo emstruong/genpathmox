@@ -28,8 +28,8 @@ Manifest variables description:
 \item{\code{imag1}: }{Bank's reputation}
 \item{\code{imag2}: }{Trustworthiness}
 \item{\code{imag3}: }{Bank's solidity}
-\item{\code{imag4}: }{Bank's emphasis on public affairs}
-\item{\code{imag5}: }{Fifth MV of the block Image}
+\item{\code{imag4}: }{Innovation and forward looking}
+\item{\code{imag5}: }{Bank's emphasis on public affairs}
 \item{\code{imag6}: }{Caring about the customer’s needs}
 \item{\code{expe1}: }{Providing products and services to meet the customer's needs}
 \item{\code{expe2}: }{Providing customer service}

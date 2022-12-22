@@ -4,16 +4,16 @@
 \alias{bar_impvar}
 \title{Bar Plot of a ranking of categorical variables by importance}
 \usage{
-bar_impvar(x, cex.names = 1, cex.axis = 1.2, cex.main = 1, ...)
+bar_impvar(x, .cex.names = 1, .cex.axis = 1.2, .cex.main = 1, ...)
 }
 \arguments{
 \item{x}{An object of the class \code{"plstree"}}
 
-\item{cex.names}{Expansion factor for axis names (bar labels)}
+\item{.cex.names}{Expansion factor for axis names (bar labels)}
 
-\item{cex.axis}{Expansion factor for numeric axis labels}
+\item{.cex.axis}{Expansion factor for numeric axis labels}
 
-\item{cex.main}{Allows fixing the size of the main. Equal to 1 to default}
+\item{.cex.main}{Allows fixing the size of the main. Equal to 1 to default}
 
 \item{\dots}{Further arguments are ignored}
 }
@@ -29,9 +29,9 @@ calculated for the variable in each split node of Pathmox.
  \dontrun{
 # Example of PATHMOX approach in customer satisfaction analysis 
 # (Spanish financial company).
-# Model with 5 LVs (4 reflective: Image (IMAG), Value (VAL), 
-# Satisfaction (SAT), and Loyalty (LOY); and 1 formative construct: 
-# Quality (QUAL))
+# Model with 5 LVs (4 common factor: Image (IMAG), Value (VAL), 
+# Satisfaction (SAT), and Loyalty (LOY); and 1 composite construct: 
+# Quality (QUAL)
 
 # load library and dataset csibank
 library(genpathmx)
@@ -47,37 +47,41 @@ SAT  ~ IMAG  + QUAL + VAL
 LOY  ~ IMAG + SAT
 
 # Measurement model
-# Formative
+# Composite
 QUAL <~ qual1 + qual2 + qual3 + qual4 + qual5 + qual6 + qual7 
      
-# Reflective
-IMAG <~ imag1 + imag2 + imag3 + imag4 + imag5 + imag6 
-VAL  <~ val1  + val2  + val3  + val4
+# Common factor
+IMAG =~ imag1 + imag2 + imag3 + imag4 + imag5 + imag6 
+VAL  =~ val1  + val2  + val3  + val4
 SAT  =~ sat1  + sat2  + sat3           
-LOY  =~ loy1  + loy2  + loy3          
+LOY  =~ loy1  + loy2  + loy3           
 
 "
+
+# Identify the categorical variable to be used as input variables 
+in the split process
+CSIcatvar = csibank[,1:5]
 
 # Check if variables are well specified (they have to be factors 
 # and/or ordered factors)
 str(CSIcatvar)
 
 # Transform age and education into ordered factors
-CSIcatvar$Age = factor(CSIcatvar$Age, levels=c("<=25", 
+CSIcatvar$Age = factor(CSIcatvar$Age, levels = c("<=25", 
                                      "26-35", "36-45", "46-55", 
-                                     "56-65", ">=66"),ordered=T)
+                                     "56-65", ">=66"),ordered = T)
 
 CSIcatvar$Education = factor(CSIcatvar$Education, 
-                            levels=c("Unfinished","Elementary", "Highschool",
-                            "Undergrad", "Graduated"),ordered=T)
+                            levels = c("Unfinished","Elementary", "Highschool",
+                            "Undergrad", "Graduated"),ordered = T)
        
 # Run Pathmox analysis (Lamberti et al., 2016; 2017)
 csi.pathmox = pls.pathmox(
  .model = CSImodel ,
  .data  = csibank,
  .catvar= CSIcatvar,
- .signif = 0.05,
- .deep=2
+ .alpha = 0.05,
+ .deep = 2
 )                     
  
 bar_impvar(csi.pathmox)
@@ -86,11 +90,14 @@ bar_impvar(csi.pathmox)
 
 }
 \references{
-Lamberti, G. et al. (2016). The Pathmox approach for PLS path modeling 
-segmentation. \emph{Applied Stochastic Models in Business and Industry}, 
-doi: 10.1002/asmb.2168.
+Lamberti, G., Aluja, T. B., and Sanchez, G. (2016). The Pathmox approach for PLS path 
+modeling segmentation. \emph{Applied Stochastic Models in Business and Industry}, \bold{32}(4), 453-468.
+\doi{10.1002/asmb.2168}
 
 Lamberti, G. (2015). \emph{Modeling with Heterogeneity}, PhD Dissertation.
+
+Sanchez, G. (2009). \emph{PATHMOX Approach: Segmentation Trees in
+Partial Least Squares Path Modeling}, PhD Dissertation.
 }
 \seealso{
 \code{\link{summary.plstree}}, \code{\link{print.plstree}}, \code{\link{pls.pathmox}},  
