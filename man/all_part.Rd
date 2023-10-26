@@ -11,7 +11,7 @@ all_part(x, y, inner, .model, .scheme, .consistent, size_candidate, ...)
 
 \item{y}{matrix or dataframe or vector of the segmentation variables}
 
-\item{inner}{a square (lower triangular) boolean matrix representing 
+\item{inner}{a square (lower triangular) boolean matrix representing
 the inner model (i.e. the path relationships between latent variables)}
 
 \item{.model}{A description of the user-specified model.}
@@ -20,14 +20,14 @@ the inner model (i.e. the path relationships between latent variables)}
 scheme. Possible values are \code{"centroid"}, \code{"factorial"}, or
 \code{"path"}.}
 
-\item{.consistent}{Logical. Should composite/proxy correlations be disattenuated 
-to yield consistent loadings and path estimates if at least one of the construct 
+\item{.consistent}{Logical. Should composite/proxy correlations be disattenuated
+to yield consistent loadings and path estimates if at least one of the construct
 is modeled as a common factor. Defaults to TRUE.}
 
 \item{size_candidate}{number indicating the minimum threshold for a node.}
 }
 \value{
-a list containing information of the candidates to the optimum partition 
+a list containing information of the candidates to the optimum partition
 for each of segmentation variables
 }
 \description{

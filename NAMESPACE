@@ -3,6 +3,7 @@
 S3method(plot,plstree)
 S3method(print,plstree)
 S3method(summary,plstree)
+export(.path)
 export(F.data)
 export(Fc.test)
 export(Fg.test)

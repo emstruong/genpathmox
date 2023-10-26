@@ -384,8 +384,8 @@ pls.pathmox = function(.model,
     for(i in 2:length(.terminal))
     {
       .dt_terminal=.data[.terminal[[i]],]
-      .pls_path = as.matrix(cSEM::csem(.dt_terminal, .model,.PLS_weight_scheme_inner = .scheme,
-                                       .disattenuate = .consistent)$Estimates$Path_estimates[which(.inner==1)])
+      .pls_path = as.matrix(.path(cSEM::csem(.dt_terminal, .model,.PLS_weight_scheme_inner = .scheme,
+                                       .disattenuate = .consistent)$Estimates$Path_estimates))
       rownames(.pls_path)=element(.inner)
       .pls_R2 = as.matrix(cSEM::csem(.dt_terminal, .model,.PLS_weight_scheme_inner = .scheme,
                                      .disattenuate = .consistent)$Estimates$R2)

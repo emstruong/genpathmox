@@ -10,7 +10,7 @@ f.min(x)
 \item{x}{vector of values}
 }
 \value{
-a list containing minimun value, the position of the minimun and the 
+a list containing minimun value, the position of the minimun and the
 values different from NA of a vactor
 }
 \description{

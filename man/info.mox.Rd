@@ -13,7 +13,7 @@ info.mox(signif, size, deep, y)
 
 \item{deep}{stop condition 3: maximum tree depth level}
 
-\item{y:}{set of segmentation variables}
+\item{y}{set of segmentation variables}
 }
 \description{
 ############################################################################################

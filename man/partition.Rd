@@ -10,7 +10,7 @@ partition(x)
 \item{x}{single factor or a data.frame of segmenation variables.}
 }
 \value{
-a list of matrices containing  all possibiles binary partions given a 
+a list of matrices containing  all possibiles binary partions given a
 segmenation variable
 }
 \description{

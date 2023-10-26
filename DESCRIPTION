@@ -1,6 +1,6 @@
 Package: genpathmox
 Title: Pathmox Approach Segmentation Tree Analysis
-Version: 1.0
+Version: 1.1
 Authors@R: person("Giuseppe", "Lamberti", email = "giuseppelamb@hotmail.com",
     role = c("aut", "cre"))
 Description: It provides an interesting solution for handling a high number 
@@ -18,8 +18,8 @@ LazyData: true
 Encoding: UTF-8
 RoxygenNote: 7.1.1
 NeedsCompilation: no
-Packaged: 2022-12-22 10:41:26 UTC; giuseppelamberti
+Packaged: 2023-10-26 08:58:56 UTC; giuseppelamberti
 Author: Giuseppe Lamberti [aut, cre]
 Maintainer: Giuseppe Lamberti <giuseppelamb@hotmail.com>
 Repository: CRAN
-Date/Publication: 2022-12-22 11:00:12 UTC
+Date/Publication: 2023-10-26 09:20:03 UTC

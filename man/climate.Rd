@@ -5,31 +5,30 @@
 \alias{climate}
 \title{climate}
 \format{
-climate data refers to the younger emplyees (<=30) of an international bank organizational study. It 
-consists of 32 variables for 669 employees divided into 3 qualitative variables and 29 indicator (or manifest) 
-variables. The 3 categorical variables, reflecting specific employee characteristics  
-as potential observed sources of heterogeneity, gender, job level, 
-and seniority. The 31 indicator (or manifest) 
-variables were loyalty (3 indicators), satisfaction (6 indicators), 
-and the 5 work climate constructs of empowerment (5 indicators), 
-company reputation (3 indicators), pay (4 indicators), work conditions (3 indicators), 
+climate data refers to the younger emplyees (<=30) of an international bank organizational study. It
+consists of 32 variables for 669 employees divided into 3 qualitative variables and 29 indicator (or manifest)
+variables. The 3 categorical variables, reflecting specific employee characteristics
+as potential observed sources of heterogeneity, gender, job level,
+and seniority. The 31 indicator (or manifest)
+variables were loyalty (3 indicators), satisfaction (6 indicators),
+and the 5 work climate constructs of empowerment (5 indicators),
+company reputation (3 indicators), pay (4 indicators), work conditions (3 indicators),
 leadership (5 indicators)
 
 
 Latent variable description
-\itemize{
-     \item{\code{Loyalty}}: Employee commitment to the organization \cr  
-     \item{\code{Satisfaction}}: Employee contentedness with their job and aspects such as kind of work, supervision, etc \cr
-     \item{\code{Empowerment}}: Employee perceptions of management vision (vertical or horizontal) \cr
-     \item{\code{Reputation}}: Employee perceptions of the company’s reputation \cr
-     \item{\code{Leadership}}: Employee perceptions of leadership practices such as feedback and appraisal \cr
-     \item{\code{Pay}}: Employee perceptions of pay and of its equity \cr
-     \item{\code{Conditions}}: Employee perceptions regarding the conditions in which they perform their work \cr
-     
+\describe{
+     \item{\code{Loyalty}: }{Employee commitment to the organization}
+     \item{\code{Satisfaction}: }{Employee contentedness with their job and aspects such as kind of work, supervision, etc}
+     \item{\code{Empowerment}: }{Employee perceptions of management vision (vertical or horizontal)}
+     \item{\code{Reputation}: }{Employee perceptions of the company’s reputation}
+     \item{\code{Leadership}: }{Employee perceptions of leadership practices such as feedback and appraisal}
+     \item{\code{Pay}: }{Employee perceptions of pay and of its equity}
+     \item{\code{Conditions}: }{Employee perceptions regarding the conditions in which they perform their work}
 }
 
 Manifest variables description
-\itemize{
+\describe{
 \item{\code{Emp1}: }{Employee treatment as responsible}
 \item{\code{Emp2}: }{Teamwork is empowered}
 \item{\code{Emp3}: }{Autonomy is favored}
@@ -61,8 +60,8 @@ Manifest variables description
 \item{\code{Loy3}: }{I trust in the proper direction of the management}
 }
 
-Segmentation variables description 
-\itemize{
+Segmentation variables description
+\describe{
 \item{\code{Gender}: }{Gender of the employees, a factor with levels: \code{male} and \code{female}}
 \item{\code{Level}: }{Level of the employees, a factor with levels: \code{low}, \code{medium}, and \code{high}}
 \item{\code{Seniority}: }{Time working in the bank, a factor with levels: \code{<5y} and \code{15-5y}}
@@ -75,8 +74,8 @@ climate
 climate
 }
 \references{
-Lamberti, G., Aluja Banet, T., & Rialp Criado, J. (2020). 
-Work climate drivers and employee heterogeneity. 
+Lamberti, G., Aluja Banet, T., & Rialp Criado, J. (2020).
+Work climate drivers and employee heterogeneity.
 \emph{The International Journal of Human Resource Management}, 1-33.
 doi: 10.1080/09585192.2020.1711798.
 

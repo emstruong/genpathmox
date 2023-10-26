@@ -6,25 +6,25 @@
 \title{csibank}
 \format{
 csibank data refers to a 2008 marketing research study of a
-leading Spanish firm providing retail financial services. For confidentiality reasons, 
-the complete details of the survey-based study will not be provided, only a description 
+leading Spanish firm providing retail financial services. For confidentiality reasons,
+the complete details of the survey-based study will not be provided, only a description
 of the variables. The data include a total of 32 variables, measured for
-1707 clients. The 32 variables are divided into two groups: a group 
-formed of 27 indicator variables for the structural model, and a group 
+1707 clients. The 32 variables are divided into two groups: a group
+formed of 27 indicator variables for the structural model, and a group
 formed of 5 categorical variables. Each block of indicators refers to a specific construct.
 
 Latent variable description:
-\itemize{
-     \item{\code{IMAG}}: Includes variables such as reputation, trustworthiness, seriousness, solidness, and caring about customer's needs \cr
-     \item{\code{EXPE}}: Includes variables such as products and services provided, customer service, solution provision, and expectations for overall quality \cr
-     \item{\code{QUAL}}: Includes variables such as reliable products and services, range of products and services, personal advice, and overall perceived quality \cr
-     \item{\code{VAL}}: Includes variables such as beneficial services and products, valuable investments, quality relative to price, and price relative to quality \cr
-     \item{\code{SAT}}: Includes variables such as overall satisfaction rating, fulfillment of expectations, satisfaction relative to other banks, and performance relative to an ideal bank \cr
-     \item{\code{LOY}}: Includes variables such as likelihood of choosing the same bank again,  likelihood of switching to another bank, intention to recommend the bank to friends, and feeling of loyalty \cr
+\describe{
+     \item{\code{IMAG}: }{Includes variables such as reputation, trustworthiness, seriousness, solidness, and caring about customer's needs}
+     \item{\code{EXPE}: }{Includes variables such as products and services provided, customer service, solution provision, and expectations for overall quality}
+     \item{\code{QUAL}: }{Includes variables such as reliable products and services, range of products and services, personal advice, and overall perceived quality}
+     \item{\code{VAL}: }{Includes variables such as beneficial services and products, valuable investments, quality relative to price, and price relative to quality}
+     \item{\code{SAT}: }{Includes variables such as overall satisfaction rating, fulfillment of expectations, satisfaction relative to other banks, and performance relative to an ideal bank}
+     \item{\code{LOY}: }{Includes variables such as likelihood of choosing the same bank again,  likelihood of switching to another bank, intention to recommend the bank to friends, and feeling of loyalty}
 }
 
 Manifest variables description:
-\itemize{
+\describe{
 \item{\code{imag1}: }{Bank's reputation}
 \item{\code{imag2}: }{Trustworthiness}
 \item{\code{imag3}: }{Bank's solidity}
@@ -54,8 +54,8 @@ Manifest variables description:
 \item{\code{loy3}: }{Customer's intention to recommend the bank to friends or colleagues}
 }
 
-Categorical variables description: 
-\itemize{
+Categorical variables description:
+\describe{
 \item{\code{Gender}: }{Gender of the customers, a factor with levels: \code{Female} and \code{Male}}
 \item{\code{Age}: }{Age of the customers, a factor with levels: \code{<=25}, \code{26-35}, \code{36-45}, \code{46-55}, \code{56-65}, and \code{>=66}}
 \item{\code{Education}: }{Education of the customers, a factor with levels: \code{Elementary}, \code{Graduated}, \code{Highschool}, \code{Undergrad}, and \code{Unfinished}}
@@ -64,7 +64,7 @@ Categorical variables description:
 }
 }
 \source{
-Laboratory of Information Analysis and Modeling (LIAM). 
+Laboratory of Information Analysis and Modeling (LIAM).
    Facultat de Informatica de Barcelona, Universitat Politecnica de Catalunya.
 }
 \usage{
@@ -74,8 +74,8 @@ csibank
 csibank
 }
 \references{
-Lamberti, G. et al. (2017). The Pathmox approach for PLS path modeling: discovering 
-which constructs differentiate segments.\emph{Applied Stochastic Models in Business and Industry}, 
+Lamberti, G. et al. (2017). The Pathmox approach for PLS path modeling: discovering
+which constructs differentiate segments.\emph{Applied Stochastic Models in Business and Industry},
 doi: 10.1002/asmb.2270.
 
 Lamberti, G. (2014) \emph{Modeling with Heterogeneity.} PhD Dissertation.

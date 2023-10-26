@@ -1,28 +1,28 @@
 #' csibank
-#' 
+#'
 #' @docType data
 #' @name csibank
 #' @usage csibank
 #' @format csibank data refers to a 2008 marketing research study of a
-#' leading Spanish firm providing retail financial services. For confidentiality reasons, 
-#' the complete details of the survey-based study will not be provided, only a description 
+#' leading Spanish firm providing retail financial services. For confidentiality reasons,
+#' the complete details of the survey-based study will not be provided, only a description
 #' of the variables. The data include a total of 32 variables, measured for
-#' 1707 clients. The 32 variables are divided into two groups: a group 
-#' formed of 27 indicator variables for the structural model, and a group 
+#' 1707 clients. The 32 variables are divided into two groups: a group
+#' formed of 27 indicator variables for the structural model, and a group
 #' formed of 5 categorical variables. Each block of indicators refers to a specific construct.
-#' 
+#'
 #' Latent variable description:
-#' \itemize{
-#'      \item{\code{IMAG}}: Includes variables such as reputation, trustworthiness, seriousness, solidness, and caring about customer's needs \cr
-#'      \item{\code{EXPE}}: Includes variables such as products and services provided, customer service, solution provision, and expectations for overall quality \cr
-#'      \item{\code{QUAL}}: Includes variables such as reliable products and services, range of products and services, personal advice, and overall perceived quality \cr
-#'      \item{\code{VAL}}: Includes variables such as beneficial services and products, valuable investments, quality relative to price, and price relative to quality \cr
-#'      \item{\code{SAT}}: Includes variables such as overall satisfaction rating, fulfillment of expectations, satisfaction relative to other banks, and performance relative to an ideal bank \cr
-#'      \item{\code{LOY}}: Includes variables such as likelihood of choosing the same bank again,  likelihood of switching to another bank, intention to recommend the bank to friends, and feeling of loyalty \cr
+#' \describe{
+#'      \item{\code{IMAG}: }{Includes variables such as reputation, trustworthiness, seriousness, solidness, and caring about customer's needs}
+#'      \item{\code{EXPE}: }{Includes variables such as products and services provided, customer service, solution provision, and expectations for overall quality}
+#'      \item{\code{QUAL}: }{Includes variables such as reliable products and services, range of products and services, personal advice, and overall perceived quality}
+#'      \item{\code{VAL}: }{Includes variables such as beneficial services and products, valuable investments, quality relative to price, and price relative to quality}
+#'      \item{\code{SAT}: }{Includes variables such as overall satisfaction rating, fulfillment of expectations, satisfaction relative to other banks, and performance relative to an ideal bank}
+#'      \item{\code{LOY}: }{Includes variables such as likelihood of choosing the same bank again,  likelihood of switching to another bank, intention to recommend the bank to friends, and feeling of loyalty}
 #' }
 #'
 #' Manifest variables description:
-#'\itemize{
+#'\describe{
 #'\item{\code{imag1}: }{Bank's reputation}
 #'\item{\code{imag2}: }{Trustworthiness}
 #'\item{\code{imag3}: }{Bank's solidity}
@@ -51,9 +51,9 @@
 #'\item{\code{loy2}: }{Propensity to switch to other banks if they offered better terms}
 #'\item{\code{loy3}: }{Customer's intention to recommend the bank to friends or colleagues}
 #'}
-#' 
-#' Categorical variables description: 
-#'\itemize{
+#'
+#' Categorical variables description:
+#'\describe{
 #'\item{\code{Gender}: }{Gender of the customers, a factor with levels: \code{Female} and \code{Male}}
 #'\item{\code{Age}: }{Age of the customers, a factor with levels: \code{<=25}, \code{26-35}, \code{36-45}, \code{46-55}, \code{56-65}, and \code{>=66}}
 #'\item{\code{Education}: }{Education of the customers, a factor with levels: \code{Elementary}, \code{Graduated}, \code{Highschool}, \code{Undergrad}, and \code{Unfinished}}
@@ -63,42 +63,42 @@
 #'
 #'
 #'
-#'@references Lamberti, G. et al. (2017). The Pathmox approach for PLS path modeling: discovering 
-#' which constructs differentiate segments.\emph{Applied Stochastic Models in Business and Industry}, 
+#'@references Lamberti, G. et al. (2017). The Pathmox approach for PLS path modeling: discovering
+#' which constructs differentiate segments.\emph{Applied Stochastic Models in Business and Industry},
 #' doi: 10.1002/asmb.2270.
-#' 
+#'
 #'@references Lamberti, G. (2014) \emph{Modeling with Heterogeneity.} PhD Dissertation.
 #'
-#' @source Laboratory of Information Analysis and Modeling (LIAM). 
+#' @source Laboratory of Information Analysis and Modeling (LIAM).
 #'    Facultat de Informatica de Barcelona, Universitat Politecnica de Catalunya.
 #' @keywords datasets
 NULL
 #'
 #' footdata
-#' 
+#'
 #' @docType data
 #' @name footdata
 #' @usage footdata
 #' @format footdata data refers to a marketing research study from 2018 concerning
-#' the experience of watching a football match in the stadium of a top Spanish football club. 
-#' For confidentiality reasons, 
-#' the complete details of the survey-based study will not be provided. Only the description 
+#' the experience of watching a football match in the stadium of a top Spanish football club.
+#' For confidentiality reasons,
+#' the complete details of the survey-based study will not be provided. Only the description
 #' of the variables is given. The data consist of a total of 20 variables, measured for
-#' 362 spectators. The 20 variables are divided into two groups. One group is 
-#' formed of 15 indicator variables for the structural model, and the other group 
+#' 362 spectators. The 20 variables are divided into two groups. One group is
+#' formed of 15 indicator variables for the structural model, and the other group
 #' is formed of 5 categorical variables. Each block of indicator refers to a specific construct.
-#' 
-#' 
+#'
+#'
 #' Latent variable description
-#' \itemize{
-#'      \item{\code{QUA}}: Spectators’ perception of service performance, based on evaluations of service dimensions \cr
-#'      \item{\code{IMA}}: Spectators’ perception of the attributes, players, management and condition of the club \cr
-#'      \item{\code{SAT}}: Spectators’ evaluation of the perceived benefits of attending a match \cr
-#'      \item{\code{LOY}}: Spectators’ deeply held commitment to repeat and recommend assisting a match \cr
+#' \describe{
+#'      \item{\code{QUA}: }{Spectators’ perception of service performance, based on evaluations of service dimensions}
+#'      \item{\code{IMA}: }{Spectators’ perception of the attributes, players, management and condition of the club}
+#'      \item{\code{SAT}: }{Spectators’ evaluation of the perceived benefits of attending a match}
+#'      \item{\code{LOY}: }{Spectators’ deeply held commitment to repeat and recommend assisting a match}
 ##' }
 #'
 #' Manifest variables description
-#'\itemize{
+#'\describe{
 #'\item{\code{QUA1}: }{Tickets (availability, information, and staff attitudes)}
 #'\item{\code{QUA2}: }{Accessibility (accessibility, signposting, queue safety, and admission organization)}
 #'\item{\code{QUA3}: }{Facilities (shops, restrooms, seating, restaurants)}
@@ -115,9 +115,9 @@ NULL
 #'\item{\code{LOY1}: }{I would recommend the experience at this stadium}
 #'\item{\code{LOY2}: }{I intend to repeat the experience at this stadium}
 #'}
-#' 
-#' Categorical Variables description 
-#'\itemize{
+#'
+#' Categorical Variables description
+#'\describe{
 #'\item{\code{gender}: }{Gender of the spectators, a factor with levels: \code{FEMALE} and \code{MALE}}
 #'\item{\code{age}: }{Age of the spectators, a factor with levels \code{<=30}, \code{31-45}, and \code{>=46}}
 #'\item{\code{tourist}: }{Whether the spectator was a tourist or not, a factor with levels: \code{YES} or \code{NO}}
@@ -127,46 +127,45 @@ NULL
 #'
 #'
 #'
-#'@references Lamberti, G., Rialp, J., and Simon, A. (2021). Antecedents of satisfaction and 
-#'loyalty in different spectator tribes in a football context. 
+#'@references Lamberti, G., Rialp, J., and Simon, A. (2021). Antecedents of satisfaction and
+#'loyalty in different spectator tribes in a football context.
 #'\emph{International Journal of Sports Marketing and Sponsorship},
-#' doi: 10.1108/IJSMS-12-2020-0210; 
-#' 
-#' @source Universitat Autonoma of Barcelona . 
+#' doi: 10.1108/IJSMS-12-2020-0210;
+#'
+#' @source Universitat Autonoma of Barcelona .
 #'    Business departament, Universitat Autonoma de Barcelona.
 #' @keywords datasets
 NULL
-#' 
+#'
 #' climate
-#' 
+#'
 #' @docType data
 #' @name climate
 #' @usage climate
-#' @format climate data refers to the younger emplyees (<=30) of an international bank organizational study. It 
-#' consists of 32 variables for 669 employees divided into 3 qualitative variables and 29 indicator (or manifest) 
-#' variables. The 3 categorical variables, reflecting specific employee characteristics  
-#' as potential observed sources of heterogeneity, gender, job level, 
-#' and seniority. The 31 indicator (or manifest) 
-#' variables were loyalty (3 indicators), satisfaction (6 indicators), 
-#' and the 5 work climate constructs of empowerment (5 indicators), 
-#' company reputation (3 indicators), pay (4 indicators), work conditions (3 indicators), 
+#' @format climate data refers to the younger emplyees (<=30) of an international bank organizational study. It
+#' consists of 32 variables for 669 employees divided into 3 qualitative variables and 29 indicator (or manifest)
+#' variables. The 3 categorical variables, reflecting specific employee characteristics
+#' as potential observed sources of heterogeneity, gender, job level,
+#' and seniority. The 31 indicator (or manifest)
+#' variables were loyalty (3 indicators), satisfaction (6 indicators),
+#' and the 5 work climate constructs of empowerment (5 indicators),
+#' company reputation (3 indicators), pay (4 indicators), work conditions (3 indicators),
 #' leadership (5 indicators)
-#' 
-#' 
+#'
+#'
 #' Latent variable description
-#' \itemize{
-#'      \item{\code{Loyalty}}: Employee commitment to the organization \cr  
-#'      \item{\code{Satisfaction}}: Employee contentedness with their job and aspects such as kind of work, supervision, etc \cr
-#'      \item{\code{Empowerment}}: Employee perceptions of management vision (vertical or horizontal) \cr
-#'      \item{\code{Reputation}}: Employee perceptions of the company’s reputation \cr
-#'      \item{\code{Leadership}}: Employee perceptions of leadership practices such as feedback and appraisal \cr
-#'      \item{\code{Pay}}: Employee perceptions of pay and of its equity \cr
-#'      \item{\code{Conditions}}: Employee perceptions regarding the conditions in which they perform their work \cr
-#'      
-##' }
+#' \describe{
+#'      \item{\code{Loyalty}: }{Employee commitment to the organization}
+#'      \item{\code{Satisfaction}: }{Employee contentedness with their job and aspects such as kind of work, supervision, etc}
+#'      \item{\code{Empowerment}: }{Employee perceptions of management vision (vertical or horizontal)}
+#'      \item{\code{Reputation}: }{Employee perceptions of the company’s reputation}
+#'      \item{\code{Leadership}: }{Employee perceptions of leadership practices such as feedback and appraisal}
+#'      \item{\code{Pay}: }{Employee perceptions of pay and of its equity}
+#'      \item{\code{Conditions}: }{Employee perceptions regarding the conditions in which they perform their work}
+#' }
 #'
 #' Manifest variables description
-#'\itemize{
+#'\describe{
 #'\item{\code{Emp1}: }{Employee treatment as responsible}
 #'\item{\code{Emp2}: }{Teamwork is empowered}
 #'\item{\code{Emp3}: }{Autonomy is favored}
@@ -197,9 +196,9 @@ NULL
 #'\item{\code{Loy2}: }{I am committed to the institution}
 #'\item{\code{Loy3}: }{I trust in the proper direction of the management}
 #'}
-#' 
-#' Segmentation variables description 
-#'\itemize{
+#'
+#' Segmentation variables description
+#'\describe{
 #'\item{\code{Gender}: }{Gender of the employees, a factor with levels: \code{male} and \code{female}}
 #'\item{\code{Level}: }{Level of the employees, a factor with levels: \code{low}, \code{medium}, and \code{high}}
 #'\item{\code{Seniority}: }{Time working in the bank, a factor with levels: \code{<5y} and \code{15-5y}}
@@ -207,15 +206,15 @@ NULL
 #'
 #'
 #'
-#'@references Lamberti, G., Aluja Banet, T., & Rialp Criado, J. (2020). 
-#'Work climate drivers and employee heterogeneity. 
+#'@references Lamberti, G., Aluja Banet, T., & Rialp Criado, J. (2020).
+#'Work climate drivers and employee heterogeneity.
 #'\emph{The International Journal of Human Resource Management}, 1-33.
 #' doi: 10.1080/09585192.2020.1711798.
-#' 
+#'
 #' @references Lamberti, G. (2021). Hybrid multigroup partial least squares structural equation
 #'  modelling: an application to bank employee satisfaction and loyalty. \emph{Quality and Quantity},
 #'  doi: 10.1007/s11135-021-01096-9.
-#' 
+#'
 #' @keywords datasets
 NULL
 

@@ -6,25 +6,25 @@
 \title{footdata}
 \format{
 footdata data refers to a marketing research study from 2018 concerning
-the experience of watching a football match in the stadium of a top Spanish football club. 
-For confidentiality reasons, 
-the complete details of the survey-based study will not be provided. Only the description 
+the experience of watching a football match in the stadium of a top Spanish football club.
+For confidentiality reasons,
+the complete details of the survey-based study will not be provided. Only the description
 of the variables is given. The data consist of a total of 20 variables, measured for
-362 spectators. The 20 variables are divided into two groups. One group is 
-formed of 15 indicator variables for the structural model, and the other group 
+362 spectators. The 20 variables are divided into two groups. One group is
+formed of 15 indicator variables for the structural model, and the other group
 is formed of 5 categorical variables. Each block of indicator refers to a specific construct.
 
 
 Latent variable description
-\itemize{
-     \item{\code{QUA}}: Spectators’ perception of service performance, based on evaluations of service dimensions \cr
-     \item{\code{IMA}}: Spectators’ perception of the attributes, players, management and condition of the club \cr
-     \item{\code{SAT}}: Spectators’ evaluation of the perceived benefits of attending a match \cr
-     \item{\code{LOY}}: Spectators’ deeply held commitment to repeat and recommend assisting a match \cr
+\describe{
+     \item{\code{QUA}: }{Spectators’ perception of service performance, based on evaluations of service dimensions}
+     \item{\code{IMA}: }{Spectators’ perception of the attributes, players, management and condition of the club}
+     \item{\code{SAT}: }{Spectators’ evaluation of the perceived benefits of attending a match}
+     \item{\code{LOY}: }{Spectators’ deeply held commitment to repeat and recommend assisting a match}
 }
 
 Manifest variables description
-\itemize{
+\describe{
 \item{\code{QUA1}: }{Tickets (availability, information, and staff attitudes)}
 \item{\code{QUA2}: }{Accessibility (accessibility, signposting, queue safety, and admission organization)}
 \item{\code{QUA3}: }{Facilities (shops, restrooms, seating, restaurants)}
@@ -42,8 +42,8 @@ Manifest variables description
 \item{\code{LOY2}: }{I intend to repeat the experience at this stadium}
 }
 
-Categorical Variables description 
-\itemize{
+Categorical Variables description
+\describe{
 \item{\code{gender}: }{Gender of the spectators, a factor with levels: \code{FEMALE} and \code{MALE}}
 \item{\code{age}: }{Age of the spectators, a factor with levels \code{<=30}, \code{31-45}, and \code{>=46}}
 \item{\code{tourist}: }{Whether the spectator was a tourist or not, a factor with levels: \code{YES} or \code{NO}}
@@ -52,7 +52,7 @@ Categorical Variables description
 }
 }
 \source{
-Universitat Autonoma of Barcelona . 
+Universitat Autonoma of Barcelona .
    Business departament, Universitat Autonoma de Barcelona.
 }
 \usage{
@@ -62,8 +62,8 @@ footdata
 footdata
 }
 \references{
-Lamberti, G., Rialp, J., and Simon, A. (2021). Antecedents of satisfaction and 
-loyalty in different spectator tribes in a football context. 
+Lamberti, G., Rialp, J., and Simon, A. (2021). Antecedents of satisfaction and
+loyalty in different spectator tribes in a football context.
 \emph{International Journal of Sports Marketing and Sponsorship},
 doi: 10.1108/IJSMS-12-2020-0210;
 }

@@ -7,13 +7,13 @@
 build.block(inner, latent)
 }
 \arguments{
-\item{inner}{a square (lower triangular) boolean matrix representing 
+\item{inner}{a square (lower triangular) boolean matrix representing
 the inner model (i.e. the path relationships between latent variables)}
 
 \item{latent}{matrix of the latent score}
 }
 \value{
-a list of matrices containing for each endogenous latent variable the 
+a list of matrices containing for each endogenous latent variable the
 the own predictors
 }
 \description{

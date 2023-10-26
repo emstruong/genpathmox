@@ -9,7 +9,7 @@ splitopt(x, inner, .model, .scheme, .consistent, splits, fact, size_candidate)
 \arguments{
 \item{x}{matrix or data frame containing the manifest variables.}
 
-\item{inner}{a square (lower triangular) boolean matrix representing 
+\item{inner}{a square (lower triangular) boolean matrix representing
 the inner model (i.e. the path relationships between latent variables)}
 
 \item{.model}{A description of the user-specified model.}
@@ -18,8 +18,8 @@ the inner model (i.e. the path relationships between latent variables)}
 scheme. Possible values are \code{"centroid"}, \code{"factorial"}, or
 \code{"path"}.}
 
-\item{.consistent}{Logical. Should composite/proxy correlations be disattenuated 
-to yield consistent loadings and path estimates if at least one of the construct 
+\item{.consistent}{Logical. Should composite/proxy correlations be disattenuated
+to yield consistent loadings and path estimates if at least one of the construct
 is modeled as a common factor. Defaults to TRUE.}
 
 \item{splits}{vector indicating the binary partition.}
@@ -29,7 +29,7 @@ is modeled as a common factor. Defaults to TRUE.}
 \item{size_candidate}{number indicating the minimum threshold for a node.}
 }
 \value{
-a list containing information about the bets partition for a specific segmentation 
+a list containing information about the bets partition for a specific segmentation
 variable.
 }
 \description{

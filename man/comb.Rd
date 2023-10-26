@@ -13,10 +13,10 @@ comb(n, r, v = 1:n, set = TRUE, repeats.allowed = FALSE)
 
 \item{v}{source vector. Defaults to 1:n}
 
-\item{set}{logical flag indicating whether duplicates should be removed from the 
+\item{set}{logical flag indicating whether duplicates should be removed from the
 source vector v}
 
-\item{repeats.allowed}{logical flag indicating whether the constructed vectors may include 
+\item{repeats.allowed}{logical flag indicating whether the constructed vectors may include
 duplicated values}
 }
 \value{
