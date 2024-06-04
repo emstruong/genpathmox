@@ -46,7 +46,7 @@
 #' # Quality (QUAL)
 #' 
 #' # load library and dataset csibank
-#' library(genpathmx)
+#' library(genpathmox)
 #' data("csibank")
 #' 
 #' # Define the model using the lavaan syntax. Use a set of regression formulas to define
@@ -70,8 +70,8 @@
 #'
 #' "
 #'
-#' # Identify the categorical variable to be used as input variables 
-#' in the split process
+#' # Identify the categorical variable to be used as input variables in the split
+#' # process
 #' CSIcatvar = csibank[,1:5]
 #' 
 #' # Check if variables are well specified (they have to be factors 
@@ -96,7 +96,7 @@
 #'  .deep = 2
 #' )                     
 #'
-#' Visualize the tree
+#' # Visualize the tree
 #' plot(csi.pathmox)
 #'
 #' }
